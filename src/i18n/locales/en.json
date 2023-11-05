@@ -25,7 +25,7 @@
   },
   "settings": {
     "settings": "Settings",
-    "logout_button": "Logout"
+    "logout_button": "Log out"
   },
   "404": {
     "this_screen_doesnt_exist": "This screen doesn't exist.",

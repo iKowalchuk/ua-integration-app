@@ -7,7 +7,10 @@ import {
   ButtonText,
   Heading,
   Text,
+  Box,
+  VStack,
 } from '@gluestack-ui/themed';
+import { nativeApplicationVersion } from 'expo-application';
 import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
@@ -64,24 +67,33 @@ const SettingsScreen = () => {
   }
 
   return (
-    <Center flex={1}>
-      <Avatar bg="$green500" size="xl">
-        <AvatarFallbackText>{user?.descr}</AvatarFallbackText>
-      </Avatar>
-      <Center mt="$4">
-        <Heading size="md">{user?.descr || '-'}</Heading>
-        <Text fontSize="$sm">{user?.nameHouse || '-'}</Text>
+    <Box flex={1} padding="$4">
+      <Center flex={1}>
+        <Avatar bg="$green500" size="xl">
+          <AvatarFallbackText>{user?.descr}</AvatarFallbackText>
+        </Avatar>
+        <Center mt="$2">
+          <Heading size="lg">{user?.descr || '-'}</Heading>
+          <Text fontSize="$sm">{user?.nameHouse || '-'}</Text>
+        </Center>
       </Center>
-      <Button
-        variant="outline"
-        onPress={handleLogout}
-        mt="$4"
-        isDisabled={isLogout}
-      >
-        {isLogout && <ButtonSpinner mr="$1" />}
-        <ButtonText>{i18n.t('settings.logout_button')}</ButtonText>
-      </Button>
-    </Center>
+      <VStack space="md">
+        <Button
+          mt="$4"
+          size="md"
+          variant="outline"
+          action="negative"
+          onPress={handleLogout}
+          isDisabled={isLogout}
+        >
+          {isLogout && <ButtonSpinner mr="$1" />}
+          <ButtonText>{i18n.t('settings.logout_button')}</ButtonText>
+        </Button>
+        <Text fontSize="$xs" textAlign="center">
+          v{nativeApplicationVersion}
+        </Text>
+      </VStack>
+    </Box>
   );
 };
 
