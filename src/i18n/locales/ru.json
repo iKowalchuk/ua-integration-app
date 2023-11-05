@@ -1,0 +1,34 @@
+{
+  "common": {
+    "login_screen": "Авторизация",
+    "control_screen": "Управление",
+    "projects_screen": "Проекты",
+    "settings_screen": "Настройки",
+    "not_found_screen": "Ой!"
+  },
+  "login": {
+    "loading_label": "Загрузка",
+    "welcome_title": "Добро пожаловать",
+    "sign_in_to_continue_subtitle": "Войдите, чтобы продолжить!",
+    "login_label": "Логин",
+    "login_is_required_error": "Введите логин",
+    "password_label": "Пароль",
+    "password_is_required_error": "Введите пароль",
+    "login_button": "Войти",
+    "incorrect_login_or_password_error": "Введен неверный логин или пароль"
+  },
+  "projects": {
+    "projects_title": "Проекты",
+    "select_to_continue_subtitle": "Выберите, чтобы продолжить!",
+    "my_label": "Мои",
+    "other_label": "Другие"
+  },
+  "settings": {
+    "settings": "Настройки",
+    "logout_button": "Выйти"
+  },
+  "404": {
+    "this_screen_doesnt_exist": "Этого экрана не существует.",
+    "go_to_home_screen": "Перейти на главный экран!"
+  }
+}

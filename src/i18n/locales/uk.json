@@ -1,0 +1,34 @@
+{
+  "common": {
+    "login_screen": "Авторизація",
+    "control_screen": "Управління",
+    "projects_screen": "Проекти",
+    "settings_screen": "Налаштування",
+    "not_found_screen": "Ой!"
+  },
+  "login": {
+    "loading_label": "Завантаження",
+    "welcome_title": "Ласкаво просимо",
+    "sign_in_to_continue_subtitle": "Увійдіть, щоб продовжити!",
+    "login_label": "Логін",
+    "login_is_required_error": "Введіть логін",
+    "password_label": "Пароль",
+    "password_is_required_error": "Введіть пароль",
+    "login_button": "Увійти",
+    "incorrect_login_or_password_error": "Введено неправильний логін або пароль"
+  },
+  "projects": {
+    "projects_title": "Проекти",
+    "select_to_continue_subtitle": "Виберіть, щоб продовжити!",
+    "my_label": "Мої",
+    "other_label": "Інші"
+  },
+  "settings": {
+    "settings": "Налаштування",
+    "logout_button": "Вийти"
+  },
+  "404": {
+    "this_screen_doesnt_exist": "Цей екран не існує.",
+    "go_to_home_screen": "Перейти до головного екрану!"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "common": {
+    "login_screen": "Login",
+    "control_screen": "Control",
+    "projects_screen": "Projects",
+    "settings_screen": "Settings",
+    "not_found_screen": "Oops!"
+  },
+  "login": {
+    "loading_label": "Loading",
+    "welcome_title": "Welcome",
+    "sign_in_to_continue_subtitle": "Sign in to continue!",
+    "login_label": "Login",
+    "login_is_required_error": "Login is required",
+    "password_label": "Password",
+    "password_is_required_error": "Password is required",
+    "login_button": "Login",
+    "incorrect_login_or_password_error": "Incorrect login or password"
+  },
+  "projects": {
+    "projects_title": "Projects",
+    "select_to_continue_subtitle": "Select to continue!",
+    "my_label": "My",
+    "other_label": "Other"
+  },
+  "settings": {
+    "settings": "Settings",
+    "logout_button": "Logout"
+  },
+  "404": {
+    "this_screen_doesnt_exist": "This screen doesn't exist.",
+    "go_to_home_screen": "Go to home screen!"
+  }
+}
