@@ -27,6 +27,13 @@
     "settings": "Налаштування",
     "logout_button": "Вийти"
   },
+  "status": {
+    "online": "Онлайн",
+    "offline": "Офлайн"
+  },
+  "button": {
+    "open": "Відкрити"
+  },
   "404": {
     "this_screen_doesnt_exist": "Цей екран не існує.",
     "go_to_home_screen": "Перейти до головного екрану!"

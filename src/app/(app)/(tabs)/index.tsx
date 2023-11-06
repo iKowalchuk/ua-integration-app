@@ -1,4 +1,4 @@
-import ControlScreen from '@/screens/ControlScreen';
+import ControlScreen from '@/screens/Control/ControlScreen';
 
 const TabControl = () => {
   return <ControlScreen />;

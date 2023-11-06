@@ -1,16 +1,11 @@
-import {
-  Center,
-  Button,
-  ButtonSpinner,
-  ButtonText,
-  Heading,
-} from '@gluestack-ui/themed';
+import { Center, Heading } from '@gluestack-ui/themed';
 import React, { useEffect, useMemo, useState } from 'react';
 import { SectionList } from 'react-native';
 
 import getMenu, { Menu } from '@/api/getMenu';
 import runCommand from '@/api/runCommand';
 import { useAuthContext } from '@/hooks/useAuth';
+import ControlItem from '@/screens/Control/ControlItem';
 
 const ControlScreen = () => {
   const { auth } = useAuthContext();
@@ -70,23 +65,22 @@ const ControlScreen = () => {
 
   return (
     <SectionList
+      contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
       sections={sectionMenu}
       renderItem={({ item }) => (
-        <Button
-          mx="$4"
-          mb="$2"
-          onPress={() => handleClick(item.pCmdIn)}
+        <ControlItem
+          label={item.descr}
+          status="online"
+          onOpenPress={() => handleClick(item.pCmdIn)}
+          onVideoPress={() => {}}
+          onMorePress={() => {}}
           isDisabled={isRunCommand[item.pCmdIn]}
-        >
-          {isRunCommand[item.pCmdIn] && <ButtonSpinner mr="$1" />}
-          <ButtonText>{item.descr}</ButtonText>
-        </Button>
+          isRunCommand={isRunCommand[item.pCmdIn]}
+        />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Center>
-          <Heading size="xl" my="$4">
-            {title}
-          </Heading>
+          <Heading size="xl">{title}</Heading>
         </Center>
       )}
       keyExtractor={(item) => item.pCmdIn}
