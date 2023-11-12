@@ -74,7 +74,7 @@ const SettingsScreen = () => {
         </Avatar>
         <Center mt="$2">
           <Heading size="lg">{user?.descr || '-'}</Heading>
-          <Text fontSize="$sm">{user?.nameHouse || '-'}</Text>
+          <Text size="sm">{user?.nameHouse || '-'}</Text>
         </Center>
       </Center>
       <VStack space="md">
@@ -89,7 +89,7 @@ const SettingsScreen = () => {
           {isLogout && <ButtonSpinner mr="$1" />}
           <ButtonText>{i18n.t('settings.logout_button')}</ButtonText>
         </Button>
-        <Text fontSize="$xs" textAlign="center">
+        <Text size="xs" textAlign="center">
           v{nativeApplicationVersion}
         </Text>
       </VStack>

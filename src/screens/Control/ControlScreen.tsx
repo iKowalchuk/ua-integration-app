@@ -65,7 +65,10 @@ const ControlScreen = () => {
 
   return (
     <SectionList
-      contentContainerStyle={{ gap: 16, paddingHorizontal: 16 }}
+      contentContainerStyle={{
+        gap: 16,
+        padding: 16,
+      }}
       sections={sectionMenu}
       renderItem={({ item }) => (
         <ControlItem

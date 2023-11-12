@@ -39,13 +39,13 @@ const ControlItem = ({
           <Box>
             <Text
               color={status === 'online' ? '$green500' : '$red500'}
-              fontSize="$sm"
+              size="sm"
             >
               {status === 'online'
                 ? i18n.t('status.online')
                 : i18n.t('status.offline')}
             </Text>
-            <Text fontSize="$md" fontWeight="$bold">
+            <Text size="md" fontWeight="$bold">
               {label}
             </Text>
           </Box>

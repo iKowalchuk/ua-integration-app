@@ -53,13 +53,11 @@ const RootLayout = () => {
   }
 
   return (
-    <GluestackUIProvider config={config}>
-      <ProjectsProvider>
-        <AuthProvider>
-          <RootLayoutNav />
-        </AuthProvider>
-      </ProjectsProvider>
-    </GluestackUIProvider>
+    <ProjectsProvider>
+      <AuthProvider>
+        <RootLayoutNav />
+      </AuthProvider>
+    </ProjectsProvider>
   );
 };
 
@@ -67,13 +65,18 @@ const RootLayoutNav = () => {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(app)" options={{ headerShown: false }} />
-      </Stack>
-    </ThemeProvider>
+    <GluestackUIProvider
+      config={config}
+      colorMode={colorScheme === 'dark' ? 'dark' : 'light'}
+    >
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(app)" options={{ headerShown: false }} />
+        </Stack>
+      </ThemeProvider>
+    </GluestackUIProvider>
   );
 };
 
