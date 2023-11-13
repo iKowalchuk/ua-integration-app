@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { SectionList } from 'react-native';
 
 import getMenu, { Menu } from '@/api/getMenu';
-import runCommand from '@/api/runCommand';
 import { useAuthContext } from '@/hooks/useAuth';
 import ControlItem from '@/screens/Control/ControlItem';
 
@@ -12,9 +11,6 @@ const ControlScreen = () => {
 
   const [menu, setMenu] = useState<Menu[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isRunCommand, setIsRunCommand] = useState<{ [key: string]: boolean }>(
-    {}
-  );
 
   useEffect(() => {
     getMenuRequest();
@@ -31,19 +27,6 @@ const ControlScreen = () => {
       setMenu(data);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const handleClick = async (command: string) => {
-    if (auth.type !== 'authorized') {
-      return;
-    }
-
-    try {
-      setIsRunCommand((state) => ({ ...state, [command]: true }));
-      await runCommand({ token: auth.token, command });
-    } finally {
-      setIsRunCommand((state) => ({ ...state, [command]: false }));
     }
   };
 
@@ -71,15 +54,7 @@ const ControlScreen = () => {
       }}
       sections={sectionMenu}
       renderItem={({ item }) => (
-        <ControlItem
-          label={item.descr}
-          status="online"
-          onOpenPress={() => handleClick(item.pCmdIn)}
-          onVideoPress={() => {}}
-          onMorePress={() => {}}
-          isDisabled={isRunCommand[item.pCmdIn]}
-          isRunCommand={isRunCommand[item.pCmdIn]}
-        />
+        <ControlItem label={item.descr} command={item.pCmdIn} />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Center>
