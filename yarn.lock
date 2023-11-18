@@ -1629,10 +1629,10 @@
   resolved "https://registry.yarnpkg.com/@gluestack-style/legend-motion-animation-driver/-/legend-motion-animation-driver-1.0.2.tgz#051c26b0d501e03b12e4dbfe01b292eee5c29c8f"
   integrity sha512-rB5HIhVzpgPQ9C1JJvY30a1bP0sQRWWFgUHVaiefH8dA/XRAQpmAIMF48JDctrvoBi/tKp5xN10mLE5CtnDRHg==
 
-"@gluestack-style/react@^1.0.15":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@gluestack-style/react/-/react-1.0.15.tgz#fa0a450bda000172dbcdb8b3f567e2085ec6bc25"
-  integrity sha512-/gpHcQNAG88ZvMcPtE2ZHUxC9u4W6ToGkAgbrOe01IL1I2YBBlo7y1HLooJIofOGLQY2AjtoU/A5w3LrwFFjHA==
+"@gluestack-style/react@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@gluestack-style/react/-/react-1.0.16.tgz#6b4f80d52a2326beb6ec3ae3980683fcf080f194"
+  integrity sha512-Bfbb4/v0CHm+xqkdTQ4+PwArBfL4tTM90/Zpyl28EO/1mRBm0MXJqvGm5++wmabca+aaK8TUQ6vXdvlKWTuzIw==
   dependencies:
     inline-style-prefixer "^6.0.1"
     normalize-css-color "^1.0.2"
@@ -1697,11 +1697,6 @@
     "@react-native-aria/utils" "^0.2.10"
     "@react-stately/checkbox" "^3.4.2"
 
-"@gluestack-ui/config@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@gluestack-ui/config/-/config-1.0.1.tgz#c748f579be6930e0cdd67e0edfac01fbe84f2b67"
-  integrity sha512-QyrxfkYn8QPiYjefjgwaMNbo8ojL7k0838F3G96DDJbWsl6RBG8PjhT6DiAmRhDe7k4zzixKKlaRHFfXHEo3FA==
-
 "@gluestack-ui/config@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@gluestack-ui/config/-/config-1.0.3.tgz#27cb2d6dc9a738146fa47937d2b41e7217ef55d2"
@@ -1734,19 +1729,19 @@
   resolved "https://registry.yarnpkg.com/@gluestack-ui/hooks/-/hooks-0.1.10.tgz#96cb9277fe65ce37bd7204662f53267cc8829fae"
   integrity sha512-/FCvXn/YeKztXgaad38xeHqApEqqFaFPFQdGrNdcM2b8GfMb55wwEyOVGs3qEhpZIFlfLPw3gC/ZdWMdBdsZ8Q==
 
-"@gluestack-ui/icon@^0.1.18":
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/@gluestack-ui/icon/-/icon-0.1.18.tgz#db97760a8616a54f5a8924f1c189046aa02c1e98"
-  integrity sha512-X35k3U2JHilpH24dPi5rxlniQWf+xIVLqhzHy4khLP08WZpBOzkKLTdnbmP76iArev5urXJtZtzs2eOJ8/Ow3A==
+"@gluestack-ui/icon@^0.1.20":
+  version "0.1.20"
+  resolved "https://registry.yarnpkg.com/@gluestack-ui/icon/-/icon-0.1.20.tgz#4140b5e94efeeb953ddc2c828800b27e103f7bfa"
+  integrity sha512-f/+DGR3139LU9NbMMvoumZWIwqy4B4e+xc02kAAubiv7p7aqGDV5KPm2JN5vVmCwiDRxX5u0F3SxodSQhEoQZA==
   dependencies:
     "@gluestack-ui/provider" "^0.1.6"
     "@gluestack-ui/utils" "^0.1.12"
     "@react-native-aria/focus" "^0.2.9"
 
-"@gluestack-ui/image@^0.1.6":
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/@gluestack-ui/image/-/image-0.1.6.tgz#dfda76b984e7eeedf41f9ce8b7c84c18a565211c"
-  integrity sha512-b6WK1tCnlA1Es040H1k5WZsIlzzmoXNaapQ5j2EuX5dOrZOopBuiFLFqAEPiMdqUr8RjUC4nomBHm6taqP389A==
+"@gluestack-ui/image@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@gluestack-ui/image/-/image-0.1.7.tgz#0cb2be72fd16a6a5d10aa850b9506f308330a901"
+  integrity sha512-ITfDX7gyxab+w0EMmJdITgG7EB2oF/3MfYgsFBV//VmIlu3OJg2xvnwvYzq3kNdGqr5Nt/5ZEG2ime7Kx2Wmxw==
   dependencies:
     "@gluestack-ui/utils" "^0.1.12"
     "@react-native-aria/focus" "^0.2.9"
@@ -1930,10 +1925,10 @@
     "@gluestack-ui/utils" "^0.1.12"
     "@react-native-aria/focus" "^0.2.9"
 
-"@gluestack-ui/themed@^1.0.13":
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/@gluestack-ui/themed/-/themed-1.0.13.tgz#3c0499f2301a89e17c45ca5b894b0bd72fc9c2b9"
-  integrity sha512-2TWRlSoJKkVah9apN3s31u9czlk7tdmznM2/ap/mH5fozpmVY2/vQc1xwjFx/b+1Pe9GGV5smjrKHrPD8/+KDw==
+"@gluestack-ui/themed@^1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@gluestack-ui/themed/-/themed-1.0.16.tgz#144025f8067087b1552e72d96a4bc58e7941dea2"
+  integrity sha512-TxdZ2JYa9Ft8Zlfg1DkvRGnPJdU8TyU9K7oKlPIaxudis8WsknwE9hG+MV/20IFCehTT9tFRulvS4C/wnfD3bA==
   dependencies:
     "@expo/html-elements" latest
     "@gluestack-style/animation-resolver" "^1.0.2"
@@ -1944,12 +1939,12 @@
     "@gluestack-ui/avatar" "^0.1.15"
     "@gluestack-ui/button" "^0.1.33"
     "@gluestack-ui/checkbox" "^0.1.22"
-    "@gluestack-ui/config" "1.0.1"
+    "@gluestack-ui/config" "^1.0.3"
     "@gluestack-ui/divider" "^0.1.8"
     "@gluestack-ui/fab" "^0.1.17"
     "@gluestack-ui/form-control" "^0.1.15"
-    "@gluestack-ui/icon" "^0.1.18"
-    "@gluestack-ui/image" "^0.1.6"
+    "@gluestack-ui/icon" "^0.1.20"
+    "@gluestack-ui/image" "^0.1.7"
     "@gluestack-ui/input" "^0.1.23"
     "@gluestack-ui/linear-gradient" "^0.1.2"
     "@gluestack-ui/link" "^0.1.15"
