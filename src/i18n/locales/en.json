@@ -32,7 +32,8 @@
     "offline": "Offline"
   },
   "button": {
-    "open": "Open"
+    "open": "Open",
+    "cancel": "Cancel"
   },
   "404": {
     "this_screen_doesnt_exist": "This screen doesn't exist.",

@@ -4,7 +4,7 @@ import { SectionList } from 'react-native';
 
 import getMenu, { Menu } from '@/api/getMenu';
 import { useAuthContext } from '@/hooks/useAuth';
-import ControlItem from '@/screens/Control/ControlItem';
+import ControlCard from '@/screens/Control/ControlCard';
 
 const ControlScreen = () => {
   const { auth } = useAuthContext();
@@ -54,7 +54,7 @@ const ControlScreen = () => {
       }}
       sections={sectionMenu}
       renderItem={({ item }) => (
-        <ControlItem label={item.descr} command={item.pCmdIn} />
+        <ControlCard label={item.descr} command={item.pCmdIn} />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Center>

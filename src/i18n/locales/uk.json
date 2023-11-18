@@ -32,7 +32,8 @@
     "offline": "Офлайн"
   },
   "button": {
-    "open": "Відкрити"
+    "open": "Відкрити",
+    "cancel": "Скасувати"
   },
   "404": {
     "this_screen_doesnt_exist": "Цей екран не існує.",

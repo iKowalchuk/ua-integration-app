@@ -2,28 +2,18 @@ import {
   Box,
   Button,
   ButtonIcon,
-  ButtonSpinner,
   ButtonText,
   HStack,
   Text,
-  Modal,
-  ModalBackdrop,
-  ModalContent,
-  ModalHeader,
-  Heading,
-  ModalCloseButton,
-  Icon,
-  CloseIcon,
-  ModalBody,
-  ModalFooter,
 } from '@gluestack-ui/themed';
 import i18n from 'i18n-js';
-import { Video, MoreHorizontal } from 'lucide-react-native';
+import { MoreHorizontal, Video } from 'lucide-react-native';
 import { useState } from 'react';
 
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import { useAuthContext } from '@/hooks/useAuth';
+import OpenConfirmModal from '@/screens/Control/OpenConfirmModal';
 
 type Status = 'online' | 'offline';
 
@@ -32,7 +22,7 @@ type ControlItemProps = {
   command: string;
 };
 
-const ControlItem = ({ label, command }: ControlItemProps) => {
+const ControlCard = ({ label, command }: ControlItemProps) => {
   const { auth } = useAuthContext();
 
   const status: Status = 'online';
@@ -60,52 +50,18 @@ const ControlItem = ({ label, command }: ControlItemProps) => {
 
   return (
     <>
-      <Modal
+      <OpenConfirmModal
+        title={label}
         isOpen={showModal}
-        closeOnOverlayClick={!isRunCommand}
         onClose={() => {
           setShowModal(false);
         }}
-      >
-        <ModalBackdrop />
-        <ModalContent>
-          <ModalHeader>
-            <Heading size="lg">{label}</Heading>
-            <ModalCloseButton disabled={isRunCommand}>
-              <Icon as={CloseIcon} />
-            </ModalCloseButton>
-          </ModalHeader>
-          <ModalBody />
-          <ModalFooter>
-            <Button
-              flex={1}
-              variant="outline"
-              size="sm"
-              action="secondary"
-              mr="$3"
-              onPress={() => {
-                setShowModal(false);
-              }}
-              isDisabled={isRunCommand}
-            >
-              <ButtonText>Скасувати</ButtonText>
-            </Button>
-            <Button
-              flex={1}
-              size="sm"
-              action="positive"
-              borderWidth="$0"
-              onPress={() => {
-                handleRunCommand();
-              }}
-              isDisabled={isRunCommand}
-            >
-              {isRunCommand && <ButtonSpinner mr="$1" />}
-              <ButtonText>Відкрити</ButtonText>
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+        onConfirm={() => {
+          handleRunCommand();
+        }}
+        isLoading={isRunCommand}
+      />
+
       <Card>
         <Box padding="$4">
           <Box mb="$3">
@@ -156,4 +112,4 @@ const ControlItem = ({ label, command }: ControlItemProps) => {
   );
 };
 
-export default ControlItem;
+export default ControlCard;
