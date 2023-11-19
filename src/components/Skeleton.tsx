@@ -1,4 +1,4 @@
-import { useToken } from '@gluestack-style/react';
+import { useColorMode, useToken } from '@gluestack-style/react';
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 
@@ -9,8 +9,14 @@ type SkeletonProps = {
 };
 
 const Skeleton = ({ width, height, borderRadius }: SkeletonProps) => {
-  const firstColor = useToken('colors', 'trueGray100');
-  const secondColor = useToken('colors', 'trueGray200');
+  const colorMode = useColorMode();
+
+  console.log(colorMode);
+
+  const firstLightColor = useToken('colors', 'secondary50');
+  const secondLightColor = useToken('colors', 'secondary100');
+  const firstDarkColor = useToken('colors', 'secondary900');
+  const secondDarkColor = useToken('colors', 'secondary950');
 
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -33,7 +39,10 @@ const Skeleton = ({ width, height, borderRadius }: SkeletonProps) => {
 
   const animatedColor = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [firstColor, secondColor],
+    outputRange: [
+      colorMode === 'light' ? firstLightColor : firstDarkColor,
+      colorMode === 'light' ? secondLightColor : secondDarkColor,
+    ],
   });
 
   return (
