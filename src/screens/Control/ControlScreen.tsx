@@ -1,8 +1,8 @@
 import { Center, Heading } from '@gluestack-ui/themed';
 import React, { useEffect, useMemo, useState } from 'react';
-import { SectionList } from 'react-native';
 
 import getMenu, { Menu } from '@/api/getMenu';
+import IOSectionList from '@/components/IOSectionList';
 import { useAuthContext } from '@/hooks/useAuth';
 import ControlCard from '@/screens/Control/ControlCard';
 
@@ -47,7 +47,7 @@ const ControlScreen = () => {
   }
 
   return (
-    <SectionList
+    <IOSectionList
       contentContainerStyle={{
         gap: 16,
         padding: 16,
