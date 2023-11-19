@@ -5,6 +5,7 @@ import {
   ButtonText,
   HStack,
   Text,
+  VStack,
 } from '@gluestack-ui/themed';
 import i18n from 'i18n-js';
 import { MoreHorizontal, Video } from 'lucide-react-native';
@@ -14,6 +15,8 @@ import { InView } from 'react-native-intersection-observer';
 import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
+import Skeleton from '@/components/Skeleton';
+import useAppState from '@/hooks/useAppState';
 import { useAuthContext } from '@/hooks/useAuth';
 import OpenConfirmModal from '@/screens/Control/OpenConfirmModal';
 
@@ -27,6 +30,8 @@ type ControlItemProps = {
 
 const ControlCard = ({ label, command }: ControlItemProps) => {
   const { auth } = useAuthContext();
+
+  const { appState } = useAppState();
 
   const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
   const [inView, setInView] = useState(false);
@@ -64,7 +69,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
   };
 
   useEffect(() => {
-    if (inView) {
+    if (appState === 'active' && inView) {
       getButtonStatusRequest();
       intervalRef.current = setInterval(getButtonStatusRequest, 3000);
     }
@@ -73,7 +78,33 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [inView]);
+  }, [appState, inView]);
+
+  if (buttonStatus === null) {
+    return (
+      <InView onChange={setInView}>
+        <Card>
+          <VStack padding="$4" space="md">
+            <HStack
+              space="md"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <VStack space="xs">
+                <Skeleton width={64} height={20} borderRadius={5} />
+                <Skeleton width={124} height={22} borderRadius={5} />
+              </VStack>
+              <HStack space="3xl">
+                <Skeleton width={24} height={24} borderRadius={5} />
+                <Skeleton width={24} height={24} borderRadius={5} />
+              </HStack>
+            </HStack>
+            <Skeleton width="100%" height={40} borderRadius={5} />
+          </VStack>
+        </Card>
+      </InView>
+    );
+  }
 
   return (
     <>
@@ -91,14 +122,14 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
 
       <InView onChange={setInView}>
         <Card>
-          <Box padding="$4">
-            <Box mb="$3">
-              <HStack
-                space="md"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box>
+          <VStack padding="$4" space="md">
+            <HStack
+              space="md"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <VStack>
+                <Box h="$6">
                   <Text
                     color={
                       buttonStatus === 'online' || buttonStatus === 'open'
@@ -111,32 +142,32 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                       ? i18n.t('status.online')
                       : i18n.t('status.offline')}
                   </Text>
-                  <Text size="md" fontWeight="$bold">
-                    {label}
-                  </Text>
                 </Box>
-                <HStack space="3xl">
-                  <Button
-                    size="md"
-                    variant="link"
-                    action="primary"
-                    onPress={handleVideoPress}
-                    isDisabled={!showVideoButton}
-                  >
-                    <ButtonIcon as={Video} size="xl" />
-                  </Button>
-                  <Button
-                    size="md"
-                    variant="link"
-                    action="primary"
-                    onPress={handeMorePress}
-                    isDisabled={!showMoreButton}
-                  >
-                    <ButtonIcon as={MoreHorizontal} size="xl" />
-                  </Button>
-                </HStack>
+                <Text size="md" fontWeight="$bold">
+                  {label}
+                </Text>
+              </VStack>
+              <HStack space="3xl">
+                <Button
+                  size="md"
+                  variant="link"
+                  action="primary"
+                  onPress={handleVideoPress}
+                  isDisabled={!showVideoButton}
+                >
+                  <ButtonIcon as={Video} size="xl" />
+                </Button>
+                <Button
+                  size="md"
+                  variant="link"
+                  action="primary"
+                  onPress={handeMorePress}
+                  isDisabled={!showMoreButton}
+                >
+                  <ButtonIcon as={MoreHorizontal} size="xl" />
+                </Button>
               </HStack>
-            </Box>
+            </HStack>
             <Button
               action={buttonStatus === 'offline' ? 'secondary' : 'primary'}
               onPress={() => {
@@ -150,7 +181,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                   : i18n.t('button.open')}
               </ButtonText>
             </Button>
-          </Box>
+          </VStack>
         </Card>
       </InView>
     </>
