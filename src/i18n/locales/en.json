@@ -33,6 +33,7 @@
   },
   "button": {
     "open": "Open",
+    "opened": "Opened",
     "cancel": "Cancel"
   },
   "404": {

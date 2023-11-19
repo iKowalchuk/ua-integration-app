@@ -8,14 +8,16 @@ import {
 } from '@gluestack-ui/themed';
 import i18n from 'i18n-js';
 import { MoreHorizontal, Video } from 'lucide-react-native';
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
+import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import { useAuthContext } from '@/hooks/useAuth';
 import OpenConfirmModal from '@/screens/Control/OpenConfirmModal';
 
-type Status = 'online' | 'offline';
+const showVideoButton = false;
+const showMoreButton = false;
 
 type ControlItemProps = {
   label: string;
@@ -25,10 +27,11 @@ type ControlItemProps = {
 const ControlCard = ({ label, command }: ControlItemProps) => {
   const { auth } = useAuthContext();
 
-  const status: Status = 'online';
-
+  const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [isRunCommand, setIsRunCommand] = useState(false);
+
+  const intervalRef = useRef<NodeJS.Timeout>();
 
   const handleRunCommand = async () => {
     if (auth.type !== 'authorized') {
@@ -38,6 +41,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
     try {
       setIsRunCommand(true);
       await runCommand({ token: auth.token, command });
+      setButtonStatus('open');
       setShowModal(false);
     } finally {
       setIsRunCommand(false);
@@ -47,6 +51,25 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
   const handleVideoPress = () => {};
 
   const handeMorePress = () => {};
+
+  const getButtonStatusRequest = async () => {
+    if (auth.type !== 'authorized') {
+      return;
+    }
+
+    const data = await getButtonStatus({ command, token: auth.token });
+    setButtonStatus(data);
+  };
+
+  useEffect(() => {
+    getButtonStatusRequest();
+    intervalRef.current = setInterval(getButtonStatusRequest, 3000);
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -72,10 +95,14 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
             >
               <Box>
                 <Text
-                  color={status === 'online' ? '$green500' : '$red500'}
+                  color={
+                    buttonStatus === 'online' || buttonStatus === 'open'
+                      ? '$green500'
+                      : '$red500'
+                  }
                   size="sm"
                 >
-                  {status === 'online'
+                  {buttonStatus === 'online' || buttonStatus === 'open'
                     ? i18n.t('status.online')
                     : i18n.t('status.offline')}
                 </Text>
@@ -89,6 +116,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                   variant="link"
                   action="primary"
                   onPress={handleVideoPress}
+                  isDisabled={!showVideoButton}
                 >
                   <ButtonIcon as={Video} size="xl" />
                 </Button>
@@ -97,14 +125,25 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                   variant="link"
                   action="primary"
                   onPress={handeMorePress}
+                  isDisabled={!showMoreButton}
                 >
                   <ButtonIcon as={MoreHorizontal} size="xl" />
                 </Button>
               </HStack>
             </HStack>
           </Box>
-          <Button onPress={() => setShowModal(true)}>
-            <ButtonText>{i18n.t('button.open')}</ButtonText>
+          <Button
+            action={buttonStatus === 'offline' ? 'secondary' : 'primary'}
+            onPress={() => {
+              setShowModal(true);
+            }}
+            isDisabled={buttonStatus !== 'online'}
+          >
+            <ButtonText>
+              {buttonStatus === 'open'
+                ? i18n.t('button.opened')
+                : i18n.t('button.open')}
+            </ButtonText>
           </Button>
         </Box>
       </Card>

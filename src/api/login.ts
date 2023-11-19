@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import api from './api';
 import isEmpty from '../utils/isEmpty';
-import isObject from '../utils/isObject';
+import isValidObject from '../utils/isValidObject';
 import toCamelCaseKeys from '../utils/toCamelCaseKeys';
 
 type Login = {
@@ -45,7 +45,7 @@ const login = async ({
     { baseURL }
   );
 
-  if (!isObject(data)) {
+  if (!isValidObject(data)) {
     throw new Error();
   }
 

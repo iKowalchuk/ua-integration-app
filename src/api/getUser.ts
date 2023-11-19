@@ -1,6 +1,6 @@
 import api from './api';
-import isObject from '../utils/isObject';
-import toCamelCaseKeys from '../utils/toCamelCaseKeys';
+
+import validateAndConvertResponse from '@/utils/validateAndConvertResponse';
 
 export type User = {
   access: number;
@@ -24,11 +24,7 @@ const getUser = async ({ token }: { token: string }): Promise<User> => {
     token,
   });
 
-  if (!isObject(data)) {
-    throw new Error();
-  }
-
-  const res = toCamelCaseKeys(data);
+  const res = validateAndConvertResponse(data);
 
   return res.detailUser;
 };

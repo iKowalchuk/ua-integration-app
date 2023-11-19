@@ -1,6 +1,6 @@
 import api from './api';
-import isObject from '../utils/isObject';
-import toCamelCaseKeys from '../utils/toCamelCaseKeys';
+
+import validateAndConvertResponse from '@/utils/validateAndConvertResponse';
 
 export type Project = {
   id: number;
@@ -25,11 +25,7 @@ const getProjects = async (): Promise<Project[]> => {
     cmd: 'get_all_projects',
   });
 
-  if (!isObject(data)) {
-    throw new Error();
-  }
-
-  const res = toCamelCaseKeys(data);
+  const res = validateAndConvertResponse(data);
 
   return res.cmdResult;
 };
