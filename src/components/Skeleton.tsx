@@ -11,8 +11,6 @@ type SkeletonProps = {
 const Skeleton = ({ width, height, borderRadius }: SkeletonProps) => {
   const colorMode = useColorMode();
 
-  console.log(colorMode);
-
   const firstLightColor = useToken('colors', 'secondary50');
   const secondLightColor = useToken('colors', 'secondary100');
   const firstDarkColor = useToken('colors', 'secondary900');

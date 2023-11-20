@@ -9,7 +9,7 @@ const Card = ({ children }: CardProps) => {
   return (
     <Box
       bg="$white"
-      borderRadius="$lg"
+      borderRadius="$md"
       overflow="hidden"
       sx={{
         _dark: {

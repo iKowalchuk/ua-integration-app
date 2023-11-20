@@ -128,7 +128,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
               justifyContent="space-between"
               alignItems="center"
             >
-              <VStack>
+              <VStack flex={1}>
                 <Box h="$6">
                   <Text
                     color={
@@ -143,7 +143,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                       : i18n.t('status.offline')}
                   </Text>
                 </Box>
-                <Text size="md" fontWeight="$bold">
+                <Text size="md" fontWeight="$bold" numberOfLines={1}>
                   {label}
                 </Text>
               </VStack>

@@ -3,7 +3,7 @@
     "name": "ua-integration-app",
     "slug": "ua-integration-app",
     "owner": "ua-integration",
-    "version": "1.4.0",
+    "version": "1.4.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ua-integration",
-      "buildNumber": "5"
+      "buildNumber": "7"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.ua.integration",
-      "versionCode": 5
+      "versionCode": 7
     },
     "web": {
       "bundler": "metro",

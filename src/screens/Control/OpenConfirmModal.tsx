@@ -42,7 +42,9 @@ const OpenConfirmModal = ({
       ) : (
         <>
           <ModalHeader>
-            <Heading size="lg">{title}</Heading>
+            <Heading flex={1} size="lg" numberOfLines={1}>
+              {title}
+            </Heading>
             <ModalCloseButton disabled={isLoading}>
               <Icon as={CloseIcon} />
             </ModalCloseButton>

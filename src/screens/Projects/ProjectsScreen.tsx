@@ -1,15 +1,15 @@
-import { Box, Button, ButtonText, Heading } from '@gluestack-ui/themed';
+import { Box, Heading } from '@gluestack-ui/themed';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useRouter } from 'expo-router';
 import i18n from 'i18n-js';
 import { partition } from 'lodash';
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getProjects, { Project } from '@/api/getProjects';
 import { useAuthContext } from '@/hooks/useAuth';
 import { useProjectsContext } from '@/hooks/useProjects';
+import ProjectsList from '@/screens/Projects/ProjectsList';
 
 const Projects = () => {
   const router = useRouter();
@@ -34,7 +34,7 @@ const Projects = () => {
     }
   };
 
-  const handleClick = async (project: Project) => {
+  const handleClick = (project: Project) => {
     const projectStringify = JSON.stringify(project);
 
     if (auth.type === 'unauthorized') {
@@ -62,71 +62,34 @@ const Projects = () => {
   }
 
   if (authProjectsData.length === 0) {
-    return (
-      <FlatList
-        data={projects}
-        renderItem={({ item }) => (
-          <Button
-            mx="$4"
-            mb="$2"
-            onPress={() => handleClick(item)}
-            isDisabled={item.id === project?.id}
-          >
-            <ButtonText>{item.descr}</ButtonText>
-          </Button>
-        )}
-        keyExtractor={(item) => item.descr + item.id}
-      />
-    );
+    return <ProjectsList data={projects} onPress={handleClick} />;
   }
 
   const AuthProjectsComponent = () => (
-    <FlatList
-      style={{ marginTop: 20 }}
-      data={authProjectsData}
-      renderItem={({ item }) => (
-        <Button
-          mx="$4"
-          mb="$2"
-          onPress={() => handleClick(item)}
-          isDisabled={item.id === project?.id}
-        >
-          <ButtonText>{item.descr}</ButtonText>
-        </Button>
-      )}
-      keyExtractor={(item) => item.descr + item.id}
-    />
+    <Box mt="$6">
+      <ProjectsList data={authProjectsData} onPress={handleClick} />
+    </Box>
   );
 
   const NoAuthProjectsComponent = () => (
-    <FlatList
-      style={{ marginTop: 20 }}
-      data={noAuthProjectsData}
-      renderItem={({ item }) => (
-        <Button
-          mx="$4"
-          mb="$2"
-          onPress={() => handleClick(item)}
-          isDisabled={item.id === project?.id}
-        >
-          <ButtonText>{item.descr}</ButtonText>
-        </Button>
-      )}
-      keyExtractor={(item) => item.descr + item.id}
-    />
+    <Box mt="$6">
+      <ProjectsList data={noAuthProjectsData} onPress={handleClick} />
+    </Box>
   );
 
   const Tab = createMaterialTopTabNavigator();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="my">
       <Tab.Screen
-        name={i18n.t('projects.my_label')}
+        name="my"
         component={AuthProjectsComponent}
+        options={{ tabBarLabel: i18n.t('projects.my_label') }}
       />
       <Tab.Screen
-        name={i18n.t('projects.other_label')}
+        name="other"
         component={NoAuthProjectsComponent}
+        options={{ tabBarLabel: i18n.t('projects.other_label') }}
       />
     </Tab.Navigator>
   );
