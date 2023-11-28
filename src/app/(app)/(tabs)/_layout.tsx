@@ -5,7 +5,6 @@ import React from 'react';
 import { useColorScheme } from 'react-native';
 
 import Colors from '@/constants/Colors';
-import { useProjectsContext } from '@/hooks/useProjects';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -20,8 +19,6 @@ const TabBarIcon = (props: {
 const TabLayout = () => {
   const colorScheme = useColorScheme();
 
-  const { project } = useProjectsContext();
-
   return (
     <Tabs
       screenOptions={{
@@ -32,7 +29,7 @@ const TabLayout = () => {
         name="index"
         options={{
           title: i18n.t('common.control_screen'),
-          headerTitle: project?.descr ?? i18n.t('common.control_screen'),
+          headerTitle: i18n.t('common.control_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-key-outline" color={color} />
           ),

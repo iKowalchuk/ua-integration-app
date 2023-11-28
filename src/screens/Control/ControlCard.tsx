@@ -16,8 +16,8 @@ import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
+import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
-import { useAuthContext } from '@/hooks/useAuth';
 import OpenConfirmModal from '@/screens/Control/OpenConfirmModal';
 
 const showVideoButton = false;
@@ -29,7 +29,7 @@ type ControlItemProps = {
 };
 
 const ControlCard = ({ label, command }: ControlItemProps) => {
-  const { auth } = useAuthContext();
+  const { authState } = useAuthContext();
 
   const { appState } = useAppState();
 
@@ -41,13 +41,17 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
   const intervalRef = useRef<NodeJS.Timeout>();
 
   const handleRunCommand = async () => {
-    if (auth.type !== 'authorized') {
+    if (authState.type !== 'authenticated') {
       return;
     }
 
     try {
       setIsRunCommand(true);
-      await runCommand({ token: auth.token, command });
+      await runCommand({
+        apiURL: authState.apiURL,
+        token: authState.token,
+        command,
+      });
       setButtonStatus('open');
       setShowModal(false);
     } finally {
@@ -59,16 +63,20 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
 
   const handeMorePress = () => {};
 
-  const getButtonStatusRequest = async () => {
-    if (auth.type !== 'authorized') {
-      return;
-    }
-
-    const data = await getButtonStatus({ command, token: auth.token });
-    setButtonStatus(data);
-  };
-
   useEffect(() => {
+    const getButtonStatusRequest = async () => {
+      if (authState.type !== 'authenticated') {
+        return;
+      }
+
+      const data = await getButtonStatus({
+        apiURL: authState.apiURL,
+        token: authState.token,
+        command,
+      });
+      setButtonStatus(data);
+    };
+
     if (appState === 'active' && inView) {
       getButtonStatusRequest();
       intervalRef.current = setInterval(getButtonStatusRequest, 3000);
@@ -78,7 +86,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
         clearInterval(intervalRef.current);
       }
     };
-  }, [appState, inView]);
+  }, [authState, appState, inView]);
 
   if (buttonStatus === null) {
     return (

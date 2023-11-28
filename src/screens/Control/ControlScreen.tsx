@@ -3,32 +3,35 @@ import React, { useEffect, useMemo, useState } from 'react';
 
 import getMenu, { Menu } from '@/api/getMenu';
 import IOSectionList from '@/components/IOSectionList';
-import { useAuthContext } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import ControlCard from '@/screens/Control/ControlCard';
 
 const ControlScreen = () => {
-  const { auth } = useAuthContext();
+  const { authState } = useAuthContext();
 
   const [menu, setMenu] = useState<Menu[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    const getMenuRequest = async () => {
+      if (authState.type !== 'authenticated') {
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        const data = await getMenu({
+          apiURL: authState.apiURL,
+          token: authState.token,
+        });
+        setMenu(data);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getMenuRequest();
-  }, []);
-
-  const getMenuRequest = async () => {
-    if (auth.type !== 'authorized') {
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      const data = await getMenu({ token: auth.token });
-      setMenu(data);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [authState]);
 
   const sectionMenu = useMemo(() => {
     return Object.entries(

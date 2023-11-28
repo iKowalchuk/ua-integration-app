@@ -5,9 +5,9 @@ const useAppState = () => {
   const [appState, setAppState] = useState(AppState.currentState);
 
   useEffect(() => {
-    function handleAppStateChange(nextAppState: AppStateStatus) {
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
       setAppState(nextAppState);
-    }
+    };
 
     const appState = AppState.addEventListener('change', handleAppStateChange);
 

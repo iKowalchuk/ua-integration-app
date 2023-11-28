@@ -18,11 +18,21 @@ export type User = {
   room: number;
 };
 
-const getUser = async ({ token }: { token: string }): Promise<User> => {
-  const { data } = await api.post('/api/ios.php', {
-    cmd: 'user_get_key',
-    token,
-  });
+const getUser = async ({
+  apiURL,
+  token,
+}: {
+  apiURL: string;
+  token: string;
+}): Promise<User> => {
+  const { data } = await api.post(
+    '/api/ios.php',
+    {
+      cmd: 'user_get_key',
+      token,
+    },
+    { baseURL: apiURL }
+  );
 
   const res = validateAndConvertResponse(data);
 

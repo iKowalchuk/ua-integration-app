@@ -15,48 +15,41 @@ import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
 import getUser, { User } from '@/api/getUser';
-import logout from '@/api/logout';
-import { useAuthContext } from '@/hooks/useAuth';
-import { useProjectsContext } from '@/hooks/useProjects';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 const SettingsScreen = () => {
-  const { removeProject } = useProjectsContext();
-  const { auth, removeAuth } = useAuthContext();
+  const { authState, onLogout } = useAuthContext();
 
   const [user, setUser] = useState<User>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLogout, setIsLogout] = useState<boolean>(false);
 
   useEffect(() => {
+    const getUserRequest = async () => {
+      if (authState.type !== 'authenticated') {
+        return;
+      }
+
+      try {
+        setIsLoading(true);
+        const data = await getUser({
+          apiURL: authState.apiURL,
+          token: authState.token,
+        });
+        setUser(data);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getUserRequest();
-  }, []);
-
-  const getUserRequest = async () => {
-    if (auth.type !== 'authorized') {
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      const data = await getUser({ token: auth.token });
-      setUser(data);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  }, [authState]);
 
   const handleLogout = async () => {
-    if (auth.type !== 'authorized') {
-      return;
-    }
-
     try {
       setIsLogout(true);
 
-      await logout({ token: auth.token });
-
-      await removeProject();
-      await removeAuth();
+      await onLogout();
     } finally {
       setIsLogout(false);
     }

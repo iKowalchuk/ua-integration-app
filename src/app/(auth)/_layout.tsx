@@ -2,19 +2,19 @@ import { Redirect, Stack, useGlobalSearchParams } from 'expo-router';
 import i18n from 'i18n-js';
 import React from 'react';
 
-import { useAuthContext } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import LoadingScreen from '@/screens/LoadingScreen';
 
 const OperatorLayout = () => {
   const { project } = useGlobalSearchParams<{ project?: string }>();
 
-  const { auth } = useAuthContext();
+  const { authState } = useAuthContext();
 
-  if (auth.type === 'initial') {
+  if (authState.type === 'initial') {
     return <LoadingScreen />;
   }
 
-  if (auth.type === 'authorized') {
+  if (authState.type === 'authenticated') {
     return <Redirect href="/(app)/(tabs)" />;
   }
 

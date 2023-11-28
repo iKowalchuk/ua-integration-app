@@ -23,9 +23,7 @@ import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import { Project } from '@/api/getProjects';
-import login from '@/api/login';
-import { useAuthContext } from '@/hooks/useAuth';
-import { useProjectsContext } from '@/hooks/useProjects';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 type LoginScreenProps = {
   project: Project;
@@ -36,8 +34,7 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
 
   const toast = useToast();
 
-  const { setProject } = useProjectsContext();
-  const { setAuth } = useAuthContext();
+  const { onLogin } = useAuthContext();
 
   const [formData, setFormData] = useState<{ login: string; password: string }>(
     {
@@ -58,14 +55,12 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
     try {
       setIsLoading(true);
 
-      const { token } = await login({
-        baseURL: project.urlSite,
+      await onLogin({
+        apiURL: project.urlSite,
+        projectId: project.id,
         login: formData.login,
         password: formData.password,
       });
-
-      await setProject(project);
-      await setAuth(token);
 
       router.replace('/');
     } catch {

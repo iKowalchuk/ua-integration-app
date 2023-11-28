@@ -3,7 +3,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 
 import { Project } from '@/api/getProjects';
-import { useProjectsContext } from '@/hooks/useProjects';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 type ProjectsListProps = {
   data: Project[];
@@ -11,7 +11,7 @@ type ProjectsListProps = {
 };
 
 const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
-  const { project } = useProjectsContext();
+  const { authState } = useAuthContext();
 
   return (
     <ScrollView contentContainerStyle={{ gap: 4 }}>
@@ -21,7 +21,10 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
           mx="$4"
           mb="$2"
           onPress={() => onPress(item)}
-          isDisabled={item.id === project?.id}
+          isDisabled={
+            authState.type === 'authenticated' &&
+            authState.projectId === item.id
+          }
         >
           <ButtonText>{item.descr}</ButtonText>
         </Button>

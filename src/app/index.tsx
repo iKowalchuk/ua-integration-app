@@ -1,17 +1,17 @@
 import { Redirect } from 'expo-router';
 import React from 'react';
 
-import { useAuthContext } from '@/hooks/useAuth';
+import { useAuthContext } from '@/contexts/AuthContext';
 import LoadingScreen from '@/screens/LoadingScreen';
 
 const App = () => {
-  const { auth } = useAuthContext();
+  const { authState } = useAuthContext();
 
-  if (auth.type === 'unauthorized') {
+  if (authState.type === 'unauthenticated') {
     return <Redirect href="/(auth)/projects" />;
   }
 
-  if (auth.type === 'authorized') {
+  if (authState.type === 'authenticated') {
     return <Redirect href="/(app)/(tabs)" />;
   }
 

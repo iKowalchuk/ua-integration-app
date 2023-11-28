@@ -27,17 +27,23 @@ const transformButtonStatus = (data: { status: string }): ButtonStatus => {
 };
 
 const getButtonStatus = async ({
-  command,
+  apiURL,
   token,
+  command,
 }: {
-  command: string;
+  apiURL: string;
   token: string;
+  command: string;
 }): Promise<ButtonStatus> => {
-  const { data } = await api.post('/api/ios.php', {
-    cmd: 'get_status_button',
-    p_cmd_in: command,
-    token,
-  });
+  const { data } = await api.post(
+    '/api/ios.php',
+    {
+      cmd: 'get_status_button',
+      p_cmd_in: command,
+      token,
+    },
+    { baseURL: apiURL }
+  );
 
   const res = validateAndConvertResponse(data);
 

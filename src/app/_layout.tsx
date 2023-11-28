@@ -13,8 +13,7 @@ import { useColorScheme } from 'react-native';
 
 import { config } from '../../gluestack-ui.config';
 
-import { AuthProvider } from '@/hooks/useAuth';
-import { ProjectsProvider } from '@/hooks/useProjects';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 import '../i18n';
 
@@ -53,11 +52,9 @@ const RootLayout = () => {
   }
 
   return (
-    <ProjectsProvider>
-      <AuthProvider>
-        <RootLayoutNav />
-      </AuthProvider>
-    </ProjectsProvider>
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
   );
 };
 

@@ -24,11 +24,21 @@ export type Menu = {
   sort: number;
 };
 
-const getMenu = async ({ token }: { token: string }): Promise<Menu[]> => {
-  const { data } = await api.post('/api/ios.php', {
-    cmd: 'get_my_menu',
-    token,
-  });
+const getMenu = async ({
+  apiURL,
+  token,
+}: {
+  apiURL: string;
+  token: string;
+}): Promise<Menu[]> => {
+  const { data } = await api.post(
+    '/api/ios.php',
+    {
+      cmd: 'get_my_menu',
+      token,
+    },
+    { baseURL: apiURL }
+  );
 
   const res = validateAndConvertResponse(data);
 

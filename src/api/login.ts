@@ -25,11 +25,11 @@ type Login = {
 };
 
 const login = async ({
-  baseURL,
+  apiURL,
   login,
   password,
 }: {
-  baseURL: string;
+  apiURL: string;
   login: string;
   password: string;
 }): Promise<Login> => {
@@ -42,7 +42,7 @@ const login = async ({
       password,
       token,
     },
-    { baseURL }
+    { baseURL: apiURL }
   );
 
   if (!isValidObject(data)) {

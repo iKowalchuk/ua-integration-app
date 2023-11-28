@@ -7,54 +7,33 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getProjects, { Project } from '@/api/getProjects';
-import { useAuthContext } from '@/hooks/useAuth';
-import { useProjectsContext } from '@/hooks/useProjects';
+import { useAuthContext } from '@/contexts/AuthContext';
 import ProjectsList from '@/screens/Projects/ProjectsList';
 
 const Projects = () => {
   const router = useRouter();
 
-  const { project } = useProjectsContext();
-  const { auth } = useAuthContext();
+  const { sessions, onSessionChange } = useAuthContext();
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    const getProjectsRequest = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getProjects();
+        setProjects(data);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     getProjectsRequest();
   }, []);
 
-  const getProjectsRequest = async () => {
-    try {
-      setIsLoading(true);
-      const data = await getProjects();
-      setProjects(data);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleClick = (project: Project) => {
-    const projectStringify = JSON.stringify(project);
-
-    if (auth.type === 'unauthorized') {
-      router.push({
-        pathname: '/(auth)/login',
-        params: { project: projectStringify },
-      });
-    }
-
-    if (auth.type === 'authorized') {
-      router.push({
-        pathname: '/(app)/login',
-        params: { project: projectStringify },
-      });
-    }
-  };
-
-  const [authProjectsData, noAuthProjectsData] = partition(
-    projects,
-    (item) => item.id === project?.id
+  const [authProjectsData, noAuthProjectsData] = partition(projects, (item) =>
+    sessions.map((item) => item.projectId).includes(item.id)
   );
 
   if (isLoading) {
@@ -62,18 +41,41 @@ const Projects = () => {
   }
 
   if (authProjectsData.length === 0) {
-    return <ProjectsList data={projects} onPress={handleClick} />;
+    return (
+      <ProjectsList
+        data={projects}
+        onPress={(project) => {
+          router.push({
+            pathname: '/(auth)/login',
+            params: { project: JSON.stringify(project) },
+          });
+        }}
+      />
+    );
   }
 
   const AuthProjectsComponent = () => (
     <Box mt="$6">
-      <ProjectsList data={authProjectsData} onPress={handleClick} />
+      <ProjectsList
+        data={authProjectsData}
+        onPress={(project) => {
+          onSessionChange(project.id);
+        }}
+      />
     </Box>
   );
 
   const NoAuthProjectsComponent = () => (
     <Box mt="$6">
-      <ProjectsList data={noAuthProjectsData} onPress={handleClick} />
+      <ProjectsList
+        data={noAuthProjectsData}
+        onPress={(project) => {
+          router.push({
+            pathname: '/(app)/login',
+            params: { project: JSON.stringify(project) },
+          });
+        }}
+      />
     </Box>
   );
 
@@ -96,9 +98,9 @@ const Projects = () => {
 };
 
 const ProjectsScreen = () => {
-  const { auth } = useAuthContext();
+  const { authState } = useAuthContext();
 
-  if (auth.type === 'authorized') {
+  if (authState.type === 'authenticated') {
     return <Projects />;
   }
 
