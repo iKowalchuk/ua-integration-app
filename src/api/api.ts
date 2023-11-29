@@ -5,7 +5,7 @@ import { API_URL } from '@/constants/App';
 const instance = axios.create();
 
 instance.interceptors.request.use(
-  async (config) => {
+  (config) => {
     return {
       ...config,
       baseURL: config.baseURL || API_URL,

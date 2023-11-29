@@ -1,6 +1,8 @@
 import constate from 'constate';
+import { isEmpty } from 'lodash';
 import { useEffect, useState } from 'react';
 
+import api from '@/api/api';
 import login from '@/api/login';
 import logout from '@/api/logout';
 import { PROJECT_ID_KEY, SESSIONS_KEY } from '@/constants/App';
@@ -88,6 +90,7 @@ const useAuth = (): AuthContextProps => {
   };
 
   const onLogout = async () => {
+    console.log(authState.type);
     if (authState.type !== 'authenticated') {
       return;
     }
@@ -154,6 +157,31 @@ const useAuth = (): AuthContextProps => {
 
     loadAuthState();
   }, []);
+
+  useEffect(() => {
+    if (authState.type !== 'authenticated') {
+      return;
+    }
+
+    const interceptorId = api.interceptors.response.use(
+      async (response) => {
+        if (
+          response.data &&
+          response.data.hasOwnProperty('AUTH') &&
+          isEmpty(response.data['AUTH'])
+        ) {
+          await onLogout();
+        }
+
+        return response;
+      },
+      (error) => Promise.reject(error)
+    );
+
+    return () => {
+      api.interceptors.response.eject(interceptorId);
+    };
+  }, [authState]);
 
   return { authState, sessions, onLogin, onLogout, onSessionChange };
 };
