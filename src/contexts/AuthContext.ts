@@ -102,7 +102,7 @@ const useAuth = (): AuthContextProps => {
     } finally {
       setSessions((prevSessions) => {
         const newSessions = prevSessions.filter(
-          (session) => session.token !== authState.session.token
+          (session) => session.projectId !== authState.session.projectId
         );
 
         storage.save(SESSIONS_KEY, newSessions);
