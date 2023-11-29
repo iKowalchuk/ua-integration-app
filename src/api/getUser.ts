@@ -1,21 +1,8 @@
 import api from './api';
 
-import validateAndConvertResponse from '@/utils/validateAndConvertResponse';
-
 export type User = {
-  access: number;
-  accessMenu: number;
-  carNumber: string;
-  descr: string;
-  disabled: number;
-  idHouse: number;
-  idUsers: number;
-  isDelete: number;
-  login: string;
-  nameHouse: string;
-  phone: string;
-  pinkod: string;
-  room: number;
+  name: string;
+  houseName: string;
 };
 
 const getUser = async ({
@@ -34,9 +21,12 @@ const getUser = async ({
     { baseURL: apiURL }
   );
 
-  const res = validateAndConvertResponse(data);
+  const res = data.DETAIL_USER;
 
-  return res.detailUser;
+  return {
+    name: res.descr,
+    houseName: res.name_house,
+  };
 };
 
 export default getUser;

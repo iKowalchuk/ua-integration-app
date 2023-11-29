@@ -26,7 +26,7 @@ const OperatorLayout = () => {
       <Stack.Screen
         name="login"
         options={{
-          title: projectObject?.descr ?? i18n.t('common.login_screen'),
+          title: projectObject?.name ?? i18n.t('common.login_screen'),
         }}
       />
     </Stack>

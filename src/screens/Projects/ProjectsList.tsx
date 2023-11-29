@@ -26,7 +26,7 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
             authState.session.projectId === item.id
           }
         >
-          <ButtonText>{item.descr}</ButtonText>
+          <ButtonText>{item.name}</ButtonText>
         </Button>
       ))}
     </ScrollView>

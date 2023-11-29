@@ -1,5 +1,6 @@
 import 'react-native-get-random-values';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { config } from '@gluestack-ui/config';
 import { GluestackUIProvider } from '@gluestack-ui/themed';
 import {
   DarkTheme,
@@ -10,8 +11,6 @@ import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useColorScheme } from 'react-native';
-
-import { config } from '../../gluestack-ui.config';
 
 import { AuthProvider } from '@/contexts/AuthContext';
 

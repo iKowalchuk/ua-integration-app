@@ -1,7 +1,5 @@
 import api from './api';
 
-import validateAndConvertResponse from '@/utils/validateAndConvertResponse';
-
 export type ButtonStatus = 'online' | 'offline' | 'open';
 
 const parseStatus = (status: string): any => {
@@ -45,9 +43,7 @@ const getButtonStatus = async ({
     { baseURL: apiURL }
   );
 
-  const res = validateAndConvertResponse(data);
-
-  return transformButtonStatus(res.cmdResult[0]);
+  return transformButtonStatus(data.cmd_result[0]);
 };
 
 export default getButtonStatus;

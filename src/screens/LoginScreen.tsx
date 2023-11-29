@@ -56,19 +56,19 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
       setIsLoading(true);
 
       await onLogin({
-        apiURL: project.urlSite,
+        apiURL: project.apiURL,
         projectId: project.id,
         login: formData.login,
         password: formData.password,
       });
 
-      router.replace('/');
+      router.replace('/(app)/(tabs)');
     } catch {
       toast.show({
         placement: 'top',
-        render: () => {
+        render: ({ id }) => {
           return (
-            <Toast action="error">
+            <Toast nativeID={'toast-' + id} action="error" variant="outline">
               <ToastTitle>
                 {i18n.t('login.incorrect_login_or_password_error')}
               </ToastTitle>

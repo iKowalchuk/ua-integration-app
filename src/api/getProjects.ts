@@ -1,23 +1,9 @@
 import api from './api';
 
-import validateAndConvertResponse from '@/utils/validateAndConvertResponse';
-
 export type Project = {
   id: number;
-  idProject: number;
   name: string;
-  urlSite: string;
-  urlApiIos: string;
-  descr: string;
-  detail: string;
-  created: {
-    date: string;
-    timezoneType: number;
-    timezone: string;
-  };
-  disabled: number;
-  sort: number;
-  tBot: string;
+  apiURL: string;
 };
 
 const getProjects = async (): Promise<Project[]> => {
@@ -25,9 +11,11 @@ const getProjects = async (): Promise<Project[]> => {
     cmd: 'get_all_projects',
   });
 
-  const res = validateAndConvertResponse(data);
-
-  return res.cmdResult;
+  return data.cmd_result.map((res: any) => ({
+    id: res.id,
+    name: res.descr,
+    apiURL: res.url_site,
+  }));
 };
 
 export default getProjects;

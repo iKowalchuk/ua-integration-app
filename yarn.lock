@@ -1729,10 +1729,10 @@
     "@react-native-aria/utils" "^0.2.10"
     "@react-stately/checkbox" "^3.4.2"
 
-"@gluestack-ui/config@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@gluestack-ui/config/-/config-1.0.4.tgz#83860e26a56a2e0590311d08b8c2cff659276628"
-  integrity sha512-hczkcAztBeIXcB6mB7dwdxrq7nGiLlQc1eoH4zNtwtTU5Tz9j5zpJw5sgJHNJbCm3xr2YJv9b5qPBIcgAjZboQ==
+"@gluestack-ui/config@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@gluestack-ui/config/-/config-1.0.3.tgz#27cb2d6dc9a738146fa47937d2b41e7217ef55d2"
+  integrity sha512-cP07ZOGDhwZKsTBdCUTa88O4KbRbAKArXyZcgTMZnoNJ5477psE9O9ClPd7xuPwJ/pLgh7NNCC1cAOMIpR0zpQ==
 
 "@gluestack-ui/divider@^0.1.8":
   version "0.1.8"
@@ -4651,16 +4651,6 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
-camelcase-keys@^9.1.2:
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-9.1.2.tgz#d287a4451245325984fe5148359a54397655e264"
-  integrity sha512-nFhquwz7p3nWSHeVYoIkefNPdR2Rt4EuKs9/gaqx3DhJL6HkNHIEcsH+D6N4NvW/MHxc4TT+rp0rc4K7E7x9hw==
-  dependencies:
-    camelcase "^8.0.0"
-    map-obj "5.0.0"
-    quick-lru "^6.1.1"
-    type-fest "^4.3.2"
-
 camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
@@ -4670,11 +4660,6 @@ camelcase@^6.2.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-6.3.0.tgz#5685b95eb209ac9c0c177467778c9c84df58ba9a"
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
-
-camelcase@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-8.0.0.tgz#c0d36d418753fb6ad9c5e0437579745c1c14a534"
-  integrity sha512-8WB3Jcas3swSvjIeA2yvCJ+Miyz5l1ZmB6HFb9R1317dt9LCQoswg/BGrmAmkWVEszSrrg4RwmO46qIm2OEnSA==
 
 camelize@^1.0.0:
   version "1.0.1"
@@ -8262,11 +8247,6 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
-map-obj@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-5.0.0.tgz#126c98596b63927d7360f287cccc67177aa1938b"
-  integrity sha512-2L3MIgJynYrZ3TYMriLDLWocz15okFakV6J12HXvMXDHui2x/zgChzg1u9mFFGbbGWE+GsLpQByt4POb9Or+uA==
-
 md5-file@^3.2.3:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/md5-file/-/md5-file-3.2.3.tgz#f9bceb941eca2214a4c0727f5e700314e770f06f"
@@ -9721,11 +9701,6 @@ queue@6.0.2:
   integrity sha512-iHZWu+q3IdFZFX36ro/lKBkSvfkztY5Y7HMiPlOUjhupPcG2JMfst2KKEpu5XndviX/3UhFbRngUPNKtgvtZiA==
   dependencies:
     inherits "~2.0.3"
-
-quick-lru@^6.1.1:
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-6.1.2.tgz#e9a90524108629be35287d0b864e7ad6ceb3659e"
-  integrity sha512-AAFUA5O1d83pIHEhJwWCq/RQcRukCkn/NSm2QsTEMle5f2hP0ChI2+3Xb051PZCkLryI/Ir1MVKviT2FIloaTQ==
 
 range-parser@~1.2.1:
   version "1.2.1"
@@ -11246,11 +11221,6 @@ type-fest@^3.0.0:
   version "3.13.1"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-3.13.1.tgz#bb744c1f0678bea7543a2d1ec24e83e68e8c8706"
   integrity sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g==
-
-type-fest@^4.3.2:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-4.6.0.tgz#9c575f7e20530defef4f9cdc5e2c85d6e4ea0fc9"
-  integrity sha512-rLjWJzQFOq4xw7MgJrCZ6T1jIOvvYElXT12r+y0CC6u67hegDHaxcPqb2fZHOGlqxugGQPNB1EnTezjBetkwkw==
 
 type-is@~1.6.18:
   version "1.6.18"

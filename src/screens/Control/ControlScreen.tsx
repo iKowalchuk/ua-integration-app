@@ -1,7 +1,7 @@
 import { Center, Heading } from '@gluestack-ui/themed';
 import React, { useEffect, useMemo, useState } from 'react';
 
-import getMenu, { Menu } from '@/api/getMenu';
+import getControls, { Control } from '@/api/getControls';
 import IOSectionList from '@/components/IOSectionList';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ControlCard from '@/screens/Control/ControlCard';
@@ -10,7 +10,7 @@ import LoadingScreen from '@/screens/LoadingScreen';
 const ControlScreen = () => {
   const { authState } = useAuthContext();
 
-  const [menu, setMenu] = useState<Menu[]>([]);
+  const [controls, setControls] = useState<Control[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,11 +21,11 @@ const ControlScreen = () => {
 
       try {
         setIsLoading(true);
-        const data = await getMenu({
+        const data = await getControls({
           apiURL: authState.session.apiURL,
           token: authState.session.token,
         });
-        setMenu(data);
+        setControls(data);
       } finally {
         setIsLoading(false);
       }
@@ -36,15 +36,15 @@ const ControlScreen = () => {
 
   const sectionMenu = useMemo(() => {
     return Object.entries(
-      menu.reduce(
-        (acc: { [key: string]: Menu[] }, { nameGroup, ...other }) =>
+      controls.reduce(
+        (acc: { [key: string]: Control[] }, { groupName, ...other }) =>
           Object.assign(acc, {
-            [nameGroup]: [...(acc[nameGroup] || []), { nameGroup, ...other }],
+            [groupName]: [...(acc[groupName] || []), { groupName, ...other }],
           }),
         {}
       )
     ).map(([key, value]) => ({ title: key, data: value }));
-  }, [menu]);
+  }, [controls]);
 
   if (isLoading) {
     return <LoadingScreen />;
@@ -58,14 +58,14 @@ const ControlScreen = () => {
       }}
       sections={sectionMenu}
       renderItem={({ item }) => (
-        <ControlCard label={item.descr} command={item.pCmdIn} />
+        <ControlCard label={item.name} command={item.command} />
       )}
       renderSectionHeader={({ section: { title } }) => (
         <Center>
           <Heading size="xl">{title}</Heading>
         </Center>
       )}
-      keyExtractor={(item) => item.pCmdIn}
+      keyExtractor={(item) => item.command}
       stickySectionHeadersEnabled={false}
     />
   );

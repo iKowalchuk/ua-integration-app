@@ -64,11 +64,11 @@ const SettingsScreen = () => {
     <Box flex={1} padding="$4">
       <Center flex={1}>
         <Avatar bg="$green500" size="xl">
-          <AvatarFallbackText>{user?.descr}</AvatarFallbackText>
+          <AvatarFallbackText>{user?.name}</AvatarFallbackText>
         </Avatar>
         <Center mt="$2">
-          <Heading size="lg">{user?.descr || '-'}</Heading>
-          <Text size="sm">{user?.nameHouse || '-'}</Text>
+          <Heading size="lg">{user?.name || '-'}</Heading>
+          <Text size="sm">{user?.houseName || '-'}</Text>
         </Center>
       </Center>
       <VStack space="md">

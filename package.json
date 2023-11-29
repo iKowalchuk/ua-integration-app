@@ -21,7 +21,7 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@gluestack-style/react": "^1.0.18",
-    "@gluestack-ui/config": "^1.0.4",
+    "@gluestack-ui/config": "^1.0.3",
     "@gluestack-ui/themed": "^1.0.18",
     "@hookform/resolvers": "^3.3.2",
     "@react-native-async-storage/async-storage": "1.18.2",
@@ -30,7 +30,6 @@
     "@shopify/flash-list": "1.4.3",
     "@testing-library/react": "^14.0.0",
     "axios": "^1.6.2",
-    "camelcase-keys": "^9.1.2",
     "constate": "^3.3.2",
     "expo": "^49.0.21",
     "expo-application": "~5.3.0",

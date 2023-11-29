@@ -82,8 +82,8 @@ const useAuth = (): AuthContextProps => {
           return newSessions;
         });
       }
-    } catch {
-      setAuthState({ type: 'unauthenticated' });
+    } catch (err) {
+      throw err;
     }
   };
 
@@ -97,6 +97,8 @@ const useAuth = (): AuthContextProps => {
         apiURL: authState.session.apiURL,
         token: authState.session.token,
       });
+    } catch (err) {
+      throw err;
     } finally {
       setSessions((prevSessions) => {
         const newSessions = prevSessions.filter(

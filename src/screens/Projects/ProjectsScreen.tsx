@@ -14,7 +14,7 @@ import ProjectsList from '@/screens/Projects/ProjectsList';
 const Projects = () => {
   const router = useRouter();
 
-  const { sessions, onSessionChange } = useAuthContext();
+  const { authState, sessions, onSessionChange } = useAuthContext();
 
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -73,7 +73,10 @@ const Projects = () => {
         data={noAuthProjectsData}
         onPress={(project) => {
           router.push({
-            pathname: '/(app)/login',
+            pathname:
+              authState.type === 'authenticated'
+                ? '/(app)/login'
+                : '/(auth)/login',
             params: { project: JSON.stringify(project) },
           });
         }}
