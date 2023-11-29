@@ -40,8 +40,6 @@ const useAuth = (): AuthContextProps => {
   const [authState, setAuthState] = useState<AuthState>({ type: 'initial' });
   const [sessions, setSessions] = useState<Session[]>([]);
 
-  console.log('authState', authState);
-
   const onLogin = async (payload: LoginPayload) => {
     try {
       const { token } = await login({
