@@ -61,6 +61,7 @@ const Projects = () => {
         data={authProjectsData}
         onPress={(project) => {
           onSessionChange(project.id);
+          router.replace('/(app)/(tabs)');
         }}
       />
     </Box>
