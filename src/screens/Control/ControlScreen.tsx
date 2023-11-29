@@ -5,6 +5,7 @@ import getMenu, { Menu } from '@/api/getMenu';
 import IOSectionList from '@/components/IOSectionList';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ControlCard from '@/screens/Control/ControlCard';
+import LoadingScreen from '@/screens/LoadingScreen';
 
 const ControlScreen = () => {
   const { authState } = useAuthContext();
@@ -21,8 +22,8 @@ const ControlScreen = () => {
       try {
         setIsLoading(true);
         const data = await getMenu({
-          apiURL: authState.apiURL,
-          token: authState.token,
+          apiURL: authState.session.apiURL,
+          token: authState.session.token,
         });
         setMenu(data);
       } finally {
@@ -46,7 +47,7 @@ const ControlScreen = () => {
   }, [menu]);
 
   if (isLoading) {
-    return false;
+    return <LoadingScreen />;
   }
 
   return (

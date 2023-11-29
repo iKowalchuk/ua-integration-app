@@ -23,7 +23,7 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
           onPress={() => onPress(item)}
           isDisabled={
             authState.type === 'authenticated' &&
-            authState.projectId === item.id
+            authState.session.projectId === item.id
           }
         >
           <ButtonText>{item.descr}</ButtonText>

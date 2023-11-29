@@ -6,8 +6,8 @@ import logout from '@/api/logout';
 import { PROJECT_ID_KEY, SESSIONS_KEY } from '@/constants/App';
 import * as storage from '@/utils/storage';
 
-type ProjectId = number;
 type ApiURL = string;
+type ProjectId = number;
 type Token = string;
 
 type Session = {
@@ -18,12 +18,12 @@ type Session = {
 
 type AuthState =
   | { type: 'initial' }
-  | ({ type: 'authenticated' } & Session)
+  | { type: 'authenticated'; session: Session }
   | { type: 'unauthenticated' };
 
 type LoginPayload = {
-  apiURL: string;
-  projectId: number;
+  apiURL: ApiURL;
+  projectId: ProjectId;
   login: string;
   password: string;
 };
@@ -39,6 +39,8 @@ interface AuthContextProps {
 const useAuth = (): AuthContextProps => {
   const [authState, setAuthState] = useState<AuthState>({ type: 'initial' });
   const [sessions, setSessions] = useState<Session[]>([]);
+
+  console.log('authState', authState);
 
   const onLogin = async (payload: LoginPayload) => {
     try {
@@ -56,7 +58,7 @@ const useAuth = (): AuthContextProps => {
 
       setAuthState({
         type: 'authenticated',
-        ...session,
+        session,
       });
       await storage.saveString(PROJECT_ID_KEY, payload.projectId.toString());
 
@@ -93,11 +95,14 @@ const useAuth = (): AuthContextProps => {
     }
 
     try {
-      await logout({ apiURL: authState.apiURL, token: authState.token });
+      await logout({
+        apiURL: authState.session.apiURL,
+        token: authState.session.token,
+      });
     } finally {
       setSessions((prevSessions) => {
         const newSessions = prevSessions.filter(
-          (session) => session.token !== authState.token
+          (session) => session.token !== authState.session.token
         );
 
         storage.save(SESSIONS_KEY, newSessions);
@@ -115,7 +120,7 @@ const useAuth = (): AuthContextProps => {
     if (session) {
       setAuthState({
         type: 'authenticated',
-        ...session,
+        session,
       });
       await storage.saveString(PROJECT_ID_KEY, projectId.toString());
     } else {
@@ -124,18 +129,18 @@ const useAuth = (): AuthContextProps => {
   };
 
   useEffect(() => {
-    const loadState = async () => {
+    const loadAuthState = async () => {
       const projectId = await storage.loadString(PROJECT_ID_KEY);
       const sessions = (await storage.load<Session[]>(SESSIONS_KEY)) || [];
 
       if (projectId) {
-        const session = sessions.find(
+        const activeSession = sessions.find(
           (session) => session.projectId === Number(projectId)
         );
-        if (session) {
+        if (activeSession) {
           setAuthState({
             type: 'authenticated',
-            ...session,
+            session: activeSession,
           });
         } else {
           setAuthState({ type: 'unauthenticated' });
@@ -147,7 +152,7 @@ const useAuth = (): AuthContextProps => {
       setSessions(sessions);
     };
 
-    loadState();
+    loadAuthState();
   }, []);
 
   return { authState, sessions, onLogin, onLogout, onSessionChange };

@@ -8,6 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getProjects, { Project } from '@/api/getProjects';
 import { useAuthContext } from '@/contexts/AuthContext';
+import LoadingScreen from '@/screens/LoadingScreen';
 import ProjectsList from '@/screens/Projects/ProjectsList';
 
 const Projects = () => {
@@ -37,7 +38,7 @@ const Projects = () => {
   );
 
   if (isLoading) {
-    return false;
+    return <LoadingScreen />;
   }
 
   if (authProjectsData.length === 0) {

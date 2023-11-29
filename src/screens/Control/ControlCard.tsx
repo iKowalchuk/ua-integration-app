@@ -48,8 +48,8 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
     try {
       setIsRunCommand(true);
       await runCommand({
-        apiURL: authState.apiURL,
-        token: authState.token,
+        apiURL: authState.session.apiURL,
+        token: authState.session.token,
         command,
       });
       setButtonStatus('open');
@@ -70,8 +70,8 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
       }
 
       const data = await getButtonStatus({
-        apiURL: authState.apiURL,
-        token: authState.token,
+        apiURL: authState.session.apiURL,
+        token: authState.session.token,
         command,
       });
       setButtonStatus(data);

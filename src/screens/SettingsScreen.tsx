@@ -16,6 +16,7 @@ import React, { useEffect, useState } from 'react';
 
 import getUser, { User } from '@/api/getUser';
 import { useAuthContext } from '@/contexts/AuthContext';
+import LoadingScreen from '@/screens/LoadingScreen';
 
 const SettingsScreen = () => {
   const { authState, onLogout } = useAuthContext();
@@ -33,8 +34,8 @@ const SettingsScreen = () => {
       try {
         setIsLoading(true);
         const data = await getUser({
-          apiURL: authState.apiURL,
-          token: authState.token,
+          apiURL: authState.session.apiURL,
+          token: authState.session.token,
         });
         setUser(data);
       } finally {
@@ -56,7 +57,7 @@ const SettingsScreen = () => {
   };
 
   if (isLoading) {
-    return false;
+    return <LoadingScreen />;
   }
 
   return (
