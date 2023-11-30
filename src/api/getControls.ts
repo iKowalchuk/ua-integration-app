@@ -1,6 +1,7 @@
 import api from './api';
 
 export type Control = {
+  id: number;
   name: string;
   groupName: string;
   command: string;
@@ -22,7 +23,10 @@ const getControls = async ({
     { baseURL: apiURL }
   );
 
-  return data.cmd_result.map((res: any) => ({
+  const res: any[] = data?.cmd_result || [];
+
+  return res.map((res: any) => ({
+    id: res.id_access,
     name: res.descr,
     groupName: res.name_group,
     command: res.p_cmd_in,

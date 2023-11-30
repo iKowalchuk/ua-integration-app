@@ -7,9 +7,10 @@ import {
   Text,
   VStack,
 } from '@gluestack-ui/themed';
+import { useFocusEffect } from 'expo-router';
 import i18n from 'i18n-js';
 import { MoreHorizontal, Video } from 'lucide-react-native';
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { InView } from 'react-native-intersection-observer';
 
 import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
@@ -63,30 +64,32 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
 
   const handeMorePress = () => {};
 
-  useEffect(() => {
-    const getButtonStatusRequest = async () => {
-      if (authState.type !== 'authenticated') {
-        return;
-      }
+  useFocusEffect(
+    useCallback(() => {
+      const getButtonStatusRequest = async () => {
+        if (authState.type !== 'authenticated') {
+          return;
+        }
 
-      const data = await getButtonStatus({
-        apiURL: authState.session.apiURL,
-        token: authState.session.token,
-        command,
-      });
-      setButtonStatus(data);
-    };
+        const data = await getButtonStatus({
+          apiURL: authState.session.apiURL,
+          token: authState.session.token,
+          command,
+        });
+        setButtonStatus(data);
+      };
 
-    if (appState === 'active' && inView) {
-      getButtonStatusRequest();
-      intervalRef.current = setInterval(getButtonStatusRequest, 3000);
-    }
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+      if (appState === 'active' && inView) {
+        getButtonStatusRequest();
+        intervalRef.current = setInterval(getButtonStatusRequest, 3000);
       }
-    };
-  }, [authState, appState, inView]);
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
+    }, [authState, appState, inView])
+  );
 
   if (buttonStatus === null) {
     return (

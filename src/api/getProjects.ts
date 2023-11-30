@@ -11,7 +11,9 @@ const getProjects = async (): Promise<Project[]> => {
     cmd: 'get_all_projects',
   });
 
-  return data.cmd_result.map((res: any) => ({
+  const res: any[] = data?.cmd_result || [];
+
+  return res.map((res: any) => ({
     id: res.id,
     name: res.descr,
     apiURL: res.url_site,

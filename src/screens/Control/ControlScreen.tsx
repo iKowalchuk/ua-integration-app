@@ -65,7 +65,7 @@ const ControlScreen = () => {
           <Heading size="xl">{title}</Heading>
         </Center>
       )}
-      keyExtractor={(item) => item.command}
+      keyExtractor={(item) => item.id}
       stickySectionHeadersEnabled={false}
     />
   );

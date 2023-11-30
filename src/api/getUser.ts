@@ -1,6 +1,7 @@
 import api from './api';
 
 export type User = {
+  id: number;
   name: string;
   houseName: string;
 };
@@ -21,9 +22,10 @@ const getUser = async ({
     { baseURL: apiURL }
   );
 
-  const res = data.DETAIL_USER;
+  const res: any = data?.DETAIL_USER || {};
 
   return {
+    id: res.id_users,
     name: res.descr,
     houseName: res.name_house,
   };

@@ -10,12 +10,12 @@ const parseStatus = (status: string): any => {
   }
 };
 
-const transformButtonStatus = (data: { status: string }): ButtonStatus => {
-  if (data?.status === '') {
+const transformButtonStatus = (status: string): ButtonStatus => {
+  if (status === '') {
     return 'online';
   }
 
-  const parsedStatus = parseStatus(data.status);
+  const parsedStatus = parseStatus(status);
 
   if (parsedStatus?.text === 'Відкриття') {
     return 'open';
@@ -43,7 +43,9 @@ const getButtonStatus = async ({
     { baseURL: apiURL }
   );
 
-  return transformButtonStatus(data.cmd_result[0]);
+  const res: string = data?.cmd_result[0]?.status || '';
+
+  return transformButtonStatus(res);
 };
 
 export default getButtonStatus;
