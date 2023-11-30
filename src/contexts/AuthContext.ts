@@ -90,7 +90,6 @@ const useAuth = (): AuthContextProps => {
   };
 
   const onLogout = async () => {
-    console.log(authState.type);
     if (authState.type !== 'authenticated') {
       return;
     }
