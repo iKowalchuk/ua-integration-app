@@ -12,7 +12,7 @@ const useAppState = () => {
     const appState = AppState.addEventListener('change', handleAppStateChange);
 
     return () => appState.remove();
-  }, [appState]);
+  }, []);
 
   return { appState };
 };
