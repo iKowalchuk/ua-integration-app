@@ -1,16 +1,18 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { MMKV } from 'react-native-mmkv';
+
+const storage = new MMKV();
 
 /**
  * Loads a string from storage.
  *
  * @param key The key to fetch.
  */
-export const loadString = async (key: string): Promise<string | null> => {
+export const loadString = (key: string): string | undefined => {
   try {
-    return await AsyncStorage.getItem(key);
+    return storage.getString(key);
   } catch {
     // not sure why this would fail... even reading the RN docs I'm unclear
-    return null;
+    return undefined;
   }
 };
 
@@ -20,12 +22,9 @@ export const loadString = async (key: string): Promise<string | null> => {
  * @param key The key to fetch.
  * @param value The value to store.
  */
-export const saveString = async (
-  key: string,
-  value: string
-): Promise<boolean> => {
+export const saveString = (key: string, value: string): boolean => {
   try {
-    await AsyncStorage.setItem(key, value);
+    storage.set(key, value);
     return true;
   } catch {
     return false;
@@ -37,12 +36,12 @@ export const saveString = async (
  *
  * @param key The key to fetch.
  */
-export const load = async <T = unknown>(key: string): Promise<T | null> => {
+export const load = <T = unknown>(key: string): T | undefined => {
   try {
-    const almostThere = await AsyncStorage.getItem(key);
-    return JSON.parse(almostThere ?? '') as T;
+    const data = storage.getString(key);
+    return JSON.parse(data ?? '') as T;
   } catch {
-    return null;
+    return undefined;
   }
 };
 
@@ -52,9 +51,9 @@ export const load = async <T = unknown>(key: string): Promise<T | null> => {
  * @param key The key to fetch.
  * @param value The value to store.
  */
-export const save = async (key: string, value: unknown): Promise<boolean> => {
+export const save = (key: string, value: unknown): boolean => {
   try {
-    await AsyncStorage.setItem(key, JSON.stringify(value));
+    saveString(key, JSON.stringify(value));
     return true;
   } catch {
     return false;
@@ -66,17 +65,17 @@ export const save = async (key: string, value: unknown): Promise<boolean> => {
  *
  * @param key The key to kill.
  */
-export const remove = async (key: string): Promise<void> => {
+export const remove = (key: string): void => {
   try {
-    await AsyncStorage.removeItem(key);
+    storage.delete(key);
   } catch {}
 };
 
 /**
  * Burn it all to the ground.
  */
-export const clear = async (): Promise<void> => {
+export const clear = (): void => {
   try {
-    await AsyncStorage.clear();
+    storage.clearAll();
   } catch {}
 };

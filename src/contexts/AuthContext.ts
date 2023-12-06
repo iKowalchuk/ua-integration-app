@@ -60,7 +60,7 @@ const useAuth = (): AuthContextProps => {
         type: 'authenticated',
         session,
       });
-      await storage.saveString(PROJECT_ID_KEY, payload.projectId.toString());
+      storage.saveString(PROJECT_ID_KEY, payload.projectId.toString());
 
       const isExistsSession = sessions.some(
         (session) => session.token === token
@@ -113,27 +113,27 @@ const useAuth = (): AuthContextProps => {
       });
 
       setAuthState({ type: 'unauthenticated' });
-      await storage.remove(PROJECT_ID_KEY);
+      storage.remove(PROJECT_ID_KEY);
     }
   };
 
-  const onSessionChange = async (projectId: ProjectId) => {
+  const onSessionChange = (projectId: ProjectId) => {
     const session = sessions.find((session) => session.projectId === projectId);
     if (session) {
       setAuthState({
         type: 'authenticated',
         session,
       });
-      await storage.saveString(PROJECT_ID_KEY, projectId.toString());
+      storage.saveString(PROJECT_ID_KEY, projectId.toString());
     } else {
       setAuthState({ type: 'unauthenticated' });
     }
   };
 
   useEffect(() => {
-    const loadAuthState = async () => {
-      const projectId = await storage.loadString(PROJECT_ID_KEY);
-      const sessions = (await storage.load<Session[]>(SESSIONS_KEY)) || [];
+    const loadAuthState = () => {
+      const projectId = storage.loadString(PROJECT_ID_KEY);
+      const sessions = storage.load<Session[]>(SESSIONS_KEY) || [];
 
       if (projectId) {
         const activeSession = sessions.find(
