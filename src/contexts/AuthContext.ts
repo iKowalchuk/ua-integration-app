@@ -164,6 +164,10 @@ const useAuth = (): AuthContextProps => {
 
     const interceptorId = api.interceptors.response.use(
       async (response) => {
+        if (response.config.skipAuthInterceptor) {
+          return response;
+        }
+
         if (
           response.data &&
           response.data.hasOwnProperty('AUTH') &&
