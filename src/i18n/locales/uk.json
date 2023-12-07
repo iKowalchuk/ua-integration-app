@@ -17,6 +17,11 @@
     "login_button": "Увійти",
     "incorrect_login_or_password_error": "Введено неправильний логін або пароль"
   },
+  "control": {
+    "confirm": {
+      "subtitle": "Ви впевнені, що бажаєте відкрити цей елемент керування?"
+    }
+  },
   "projects": {
     "projects_title": "Проекти",
     "select_to_continue_subtitle": "Виберіть, щоб продовжити!",

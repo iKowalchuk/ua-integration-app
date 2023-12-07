@@ -1,19 +1,18 @@
 import {
+  Actionsheet,
+  ActionsheetBackdrop,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
   Button,
   ButtonSpinner,
   ButtonText,
   Center,
-  CloseIcon,
   Heading,
-  Icon,
-  Modal,
-  ModalBackdrop,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
+  HStack,
   Spinner,
+  Text,
+  VStack,
 } from '@gluestack-ui/themed';
 import i18n from 'i18n-js';
 
@@ -32,52 +31,58 @@ const OpenConfirmModal = ({
   onClose,
   isLoading,
 }: OpenConfirmModalProps) => (
-  <Modal isOpen={isOpen} closeOnOverlayClick={!isLoading} onClose={onClose}>
-    <ModalBackdrop />
-    <ModalContent h={140}>
+  <Actionsheet
+    isOpen={isOpen}
+    onClose={onClose}
+    closeOnOverlayClick={!isLoading}
+  >
+    <ActionsheetBackdrop />
+    <ActionsheetContent h={180}>
       {isLoading ? (
-        <Center flex={1}>
+        <Center w="$full" h="$full">
           <Spinner size="large" />
         </Center>
       ) : (
         <>
-          <ModalHeader>
-            <Heading flex={1} size="lg" numberOfLines={1}>
-              {title}
-            </Heading>
-            <ModalCloseButton disabled={isLoading}>
-              <Icon as={CloseIcon} />
-            </ModalCloseButton>
-          </ModalHeader>
-          <ModalBody />
-          <ModalFooter>
-            <Button
-              flex={1}
-              variant="outline"
-              size="sm"
-              action="secondary"
-              mr="$3"
-              onPress={onClose}
-              isDisabled={isLoading}
-            >
-              <ButtonText>{i18n.t('button.cancel')}</ButtonText>
-            </Button>
-            <Button
-              flex={1}
-              size="sm"
-              action="positive"
-              borderWidth="$0"
-              onPress={onConfirm}
-              isDisabled={isLoading}
-            >
-              {isLoading && <ButtonSpinner mr="$1" />}
-              <ButtonText>{i18n.t('button.open')}</ButtonText>
-            </Button>
-          </ModalFooter>
+          <ActionsheetDragIndicatorWrapper>
+            <ActionsheetDragIndicator />
+          </ActionsheetDragIndicatorWrapper>
+          <VStack w="$full" h="$full" px={20} pt={8} p={30}>
+            <VStack flex={1}>
+              <Heading size="lg" numberOfLines={1}>
+                {title}
+              </Heading>
+              <Text size="md">{i18n.t('control.confirm.subtitle')}</Text>
+            </VStack>
+            <HStack alignItems="center" space="md">
+              <Button
+                flex={1}
+                variant="outline"
+                size="sm"
+                action="secondary"
+                mr="$3"
+                onPress={onClose}
+                isDisabled={isLoading}
+              >
+                <ButtonText>{i18n.t('button.cancel')}</ButtonText>
+              </Button>
+              <Button
+                flex={1}
+                size="sm"
+                action="positive"
+                borderWidth="$0"
+                onPress={onConfirm}
+                isDisabled={isLoading}
+              >
+                {isLoading && <ButtonSpinner mr="$1" />}
+                <ButtonText>{i18n.t('button.open')}</ButtonText>
+              </Button>
+            </HStack>
+          </VStack>
         </>
       )}
-    </ModalContent>
-  </Modal>
+    </ActionsheetContent>
+  </Actionsheet>
 );
 
 export default OpenConfirmModal;

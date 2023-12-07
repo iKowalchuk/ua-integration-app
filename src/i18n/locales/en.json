@@ -17,6 +17,11 @@
     "login_button": "Login",
     "incorrect_login_or_password_error": "Incorrect login or password"
   },
+  "control": {
+    "confirm": {
+      "subtitle": "Are you sure you want to open this control?"
+    }
+  },
   "projects": {
     "projects_title": "Projects",
     "select_to_continue_subtitle": "Select to continue!",
