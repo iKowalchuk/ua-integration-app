@@ -48,8 +48,8 @@
   "button": {
     "open": "Open",
     "opened": "Opened",
-    "cancel": "Cancel",
     "save": "Save",
+    "cancel": "Cancel",
     "favorite_add": "Add to favorites",
     "favorite_remove": "Remove from favorites",
     "rename": "Change name"
