@@ -98,7 +98,7 @@ const RenameModal = ({ name, isOpen, onSave, onClose }: RenameModalProps) => {
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button flex={1} onPress={handleSave}>
+          <Button flex={1} action="positive" onPress={handleSave}>
             <ButtonText>{i18n.t('button.save')}</ButtonText>
           </Button>
         </ModalFooter>
