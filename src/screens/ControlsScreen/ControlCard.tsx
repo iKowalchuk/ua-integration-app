@@ -22,6 +22,7 @@ import {
 } from 'lucide-react-native';
 import { useState, useRef, useCallback } from 'react';
 import { InView } from 'react-native-intersection-observer';
+import { useShallow } from 'zustand/react/shallow';
 
 import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
 import { Control } from '@/api/getControls';
@@ -45,12 +46,12 @@ const ControlCard = ({ control }: ControlCardProps) => {
 
   const { appState } = useAppState();
 
-  const { hasFavorite, toggleFavorite, renameControl } = useControlsStore(
-    (state) => ({
-      hasFavorite: state.hasFavorite,
+  const { favorites, toggleFavorite, renameControl } = useControlsStore(
+    useShallow((state) => ({
+      favorites: state.favorites,
       toggleFavorite: state.toggleFavorite,
       renameControl: state.renameControl,
-    })
+    }))
   );
 
   const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
@@ -227,12 +228,12 @@ const ControlCard = ({ control }: ControlCardProps) => {
                       {i18n.t('button.rename')}
                     </MenuItemLabel>
                   </MenuItem>
-                  {hasFavorite(control) ? (
+                  {favorites.includes(control.id) ? (
                     <MenuItem
                       key="favorite-remove"
                       textValue={i18n.t('button.favorite_remove')}
                       onPressOut={() => {
-                        toggleFavorite(control);
+                        toggleFavorite(control.id);
                       }}
                     >
                       <Icon as={MinusIcon} size="sm" mr="$2" />
@@ -245,7 +246,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
                       key="favorite-add"
                       textValue={i18n.t('button.favorite_add')}
                       onPressOut={() => {
-                        toggleFavorite(control);
+                        toggleFavorite(control.id);
                       }}
                     >
                       <Icon as={PlusIcon} size="sm" mr="$2" />

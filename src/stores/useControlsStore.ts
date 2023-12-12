@@ -6,28 +6,22 @@ import zustandStorage from '@/stores/zustandStorage';
 
 type State = {
   controls: Control[];
-  favoriteControls: Control[];
+  favorites: number[];
   renamedControls: Record<number, string>;
 };
 
 type Actions = {
   fetchControls: (payload: { apiURL: string; token: string }) => Promise<void>;
-  hasFavorite: (control: Control) => boolean;
-  toggleFavorite: (control: Control) => void;
+  toggleFavorite: (controlId: number) => void;
   renameControl: (controlId: number, name: string) => void;
 };
 
-const isInFavorites = (favorites: Control[], control: Control) =>
-  favorites.some((favControl) => favControl.id === control.id);
-
-const addToFavorites = (state: State, control: Control) => ({
-  favoriteControls: [...state.favoriteControls, control],
+const addToFavorites = (state: State, controlId: number) => ({
+  favorites: [...state.favorites, controlId],
 });
 
-const removeFromFavorites = (state: State, control: Control) => ({
-  favoriteControls: state.favoriteControls.filter(
-    (favControl) => favControl.id !== control.id
-  ),
+const removeFromFavorites = (state: State, controlId: number) => ({
+  favorites: state.favorites.filter((id) => id !== controlId),
 });
 
 const renameControl = (state: State, controlId: number, name: string) => ({
@@ -50,7 +44,7 @@ const useControlsStore = create<State & Actions>()(
   persist(
     (set, get) => ({
       controls: [],
-      favoriteControls: [],
+      favorites: [],
       renamedControls: {},
 
       fetchControls: async (payload) => {
@@ -63,17 +57,12 @@ const useControlsStore = create<State & Actions>()(
         }));
       },
 
-      hasFavorite: (control) => {
-        const { favoriteControls } = get();
-        return isInFavorites(favoriteControls, control);
-      },
-
-      toggleFavorite: (control) => {
-        const { favoriteControls } = get();
-        const setFavorites = isInFavorites(favoriteControls, control)
+      toggleFavorite: (controlId) => {
+        const { favorites } = get();
+        const setFavorites = favorites.includes(controlId)
           ? removeFromFavorites
           : addToFavorites;
-        set((state) => setFavorites(state, control));
+        set((state) => setFavorites(state, controlId));
       },
 
       renameControl: (controlId, name) => {
