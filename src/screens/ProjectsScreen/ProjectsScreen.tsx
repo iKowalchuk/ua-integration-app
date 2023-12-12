@@ -5,26 +5,32 @@ import i18n from 'i18n-js';
 import { partition } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useShallow } from 'zustand/react/shallow';
 
-import getProjects, { Project } from '@/api/getProjects';
+import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import LoadingScreen from '@/screens/LoadingScreen';
-import ProjectsList from '@/screens/Projects/ProjectsList';
+import ProjectsList from '@/screens/ProjectsScreen/ProjectsList';
+import useProjectsStore from '@/stores/useProjectsStore';
 
 const Projects = () => {
   const router = useRouter();
 
   const { authState, sessions, onSessionChange } = useAuthContext();
 
-  const [projects, setProjects] = useState<Project[]>([]);
+  const { projects, fetchProjects } = useProjectsStore(
+    useShallow((state) => ({
+      projects: state.projects,
+      fetchProjects: state.fetchProjects,
+    }))
+  );
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const getProjectsRequest = async () => {
       try {
         setIsLoading(true);
-        const data = await getProjects();
-        setProjects(data);
+        await fetchProjects();
       } finally {
         setIsLoading(false);
       }
@@ -38,7 +44,7 @@ const Projects = () => {
   );
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingView />;
   }
 
   if (authProjectsData.length === 0) {

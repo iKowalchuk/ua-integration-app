@@ -1,9 +1,10 @@
 {
   "common": {
     "login_screen": "Login",
-    "control_screen": "Control",
+    "controls_screen": "Controls",
     "projects_screen": "Projects",
     "settings_screen": "Settings",
+    "camera_screen": "Camera",
     "not_found_screen": "Oops!"
   },
   "login": {
@@ -17,10 +18,18 @@
     "login_button": "Login",
     "incorrect_login_or_password_error": "Incorrect login or password"
   },
-  "control": {
-    "confirm": {
+  "controls": {
+    "rename_modal": {
+      "title": "Change name",
+      "name_label": "Name",
+      "name_is_required_error": "Name is required"
+    },
+    "open_confirm": {
       "subtitle": "Are you sure you want to open this control?"
     }
+  },
+  "camera": {
+    "no_signal": "No signal"
   },
   "projects": {
     "projects_title": "Projects",
@@ -39,7 +48,11 @@
   "button": {
     "open": "Open",
     "opened": "Opened",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "save": "Save",
+    "favorite_add": "Add to favorites",
+    "favorite_remove": "Remove from favorites",
+    "rename": "Change name"
   },
   "404": {
     "this_screen_doesnt_exist": "This screen doesn't exist.",

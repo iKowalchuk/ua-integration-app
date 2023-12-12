@@ -1,7 +1,7 @@
-import ControlScreen from '@/screens/Control/ControlScreen';
+import ControlsScreen from '@/screens/ControlsScreen/ControlsScreen';
 
-const TabControl = () => {
-  return <ControlScreen />;
+const TabControls = () => {
+  return <ControlsScreen />;
 };
 
-export default TabControl;
+export default TabControls;

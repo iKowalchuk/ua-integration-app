@@ -1,8 +1,8 @@
 import { Redirect } from 'expo-router';
 import React from 'react';
 
+import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import LoadingScreen from '@/screens/LoadingScreen';
 
 const App = () => {
   const { authState } = useAuthContext();
@@ -15,7 +15,7 @@ const App = () => {
     return <Redirect href="/(app)/(tabs)" />;
   }
 
-  return <LoadingScreen />;
+  return <LoadingView />;
 };
 
 export default App;

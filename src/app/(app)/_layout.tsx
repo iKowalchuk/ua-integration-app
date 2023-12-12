@@ -2,8 +2,8 @@ import { Redirect, Stack, useGlobalSearchParams } from 'expo-router';
 import i18n from 'i18n-js';
 import React from 'react';
 
+import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import LoadingScreen from '@/screens/LoadingScreen';
 
 const OperatorLayout = () => {
   const { project } = useGlobalSearchParams<{ project?: string }>();
@@ -11,7 +11,7 @@ const OperatorLayout = () => {
   const { authState } = useAuthContext();
 
   if (authState.type === 'initial') {
-    return <LoadingScreen />;
+    return <LoadingView />;
   }
 
   if (authState.type === 'unauthenticated') {
@@ -23,6 +23,12 @@ const OperatorLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="camera"
+        options={{
+          title: i18n.t('common.camera_screen'),
+        }}
+      />
       <Stack.Screen
         name="login"
         options={{

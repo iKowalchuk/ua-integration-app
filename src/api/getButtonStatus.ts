@@ -24,11 +24,7 @@ const transformButtonStatus = (status: string): ButtonStatus => {
   return 'offline';
 };
 
-const getButtonStatus = async ({
-  apiURL,
-  token,
-  command,
-}: {
+const getButtonStatus = async (payload: {
   apiURL: string;
   token: string;
   command: string;
@@ -37,10 +33,10 @@ const getButtonStatus = async ({
     '/api/ios.php',
     {
       cmd: 'get_status_button',
-      p_cmd_in: command,
-      token,
+      p_cmd_in: payload.command,
+      token: payload.token,
     },
-    { baseURL: apiURL }
+    { baseURL: payload.apiURL }
   );
 
   const res: string = data?.cmd_result[0]?.status || '';

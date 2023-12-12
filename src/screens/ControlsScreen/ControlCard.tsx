@@ -4,40 +4,61 @@ import {
   ButtonIcon,
   ButtonText,
   HStack,
+  Icon,
+  Menu,
+  MenuItem,
+  MenuItemLabel,
   Text,
   VStack,
 } from '@gluestack-ui/themed';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
-import { MoreHorizontal, Video } from 'lucide-react-native';
+import {
+  MoreHorizontal as MoreHorizontalIcon,
+  Video as VideoIcon,
+  Plus as PlusIcon,
+  Minus as MinusIcon,
+  Pencil as PencilIcon,
+} from 'lucide-react-native';
 import { useState, useRef, useCallback } from 'react';
 import { InView } from 'react-native-intersection-observer';
 
 import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
+import { Control } from '@/api/getControls';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
-import OpenConfirmModal from '@/screens/Control/OpenConfirmModal';
+import OpenConfirmActionsheet from '@/screens/ControlsScreen/OpenConfirmActionsheet';
+import RenameModal from '@/screens/ControlsScreen/RenameModal';
+import useControlsStore from '@/stores/useControlsStore';
 
-const showVideoButton = false;
-const showMoreButton = false;
-
-type ControlItemProps = {
-  label: string;
-  command: string;
+type ControlCardProps = {
+  control: Control;
 };
 
-const ControlCard = ({ label, command }: ControlItemProps) => {
+const ControlCard = ({ control }: ControlCardProps) => {
+  const router = useRouter();
+
   const { authState } = useAuthContext();
 
   const { appState } = useAppState();
 
+  const { hasFavorite, toggleFavorite, renameControl } = useControlsStore(
+    (state) => ({
+      hasFavorite: state.hasFavorite,
+      toggleFavorite: state.toggleFavorite,
+      renameControl: state.renameControl,
+    })
+  );
+
   const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
   const [inView, setInView] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [isRunCommand, setIsRunCommand] = useState(false);
+
+  const [showOpenActionsheet, setShowOpenActionsheet] = useState(false);
+  const [showRenameModal, setShowRenameModal] = useState(false);
 
   const intervalRef = useRef<NodeJS.Timeout>();
 
@@ -51,18 +72,18 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
       await runCommand({
         apiURL: authState.session.apiURL,
         token: authState.session.token,
-        command,
+        command: control.command,
       });
       setButtonStatus('open');
-      setShowModal(false);
+      setShowOpenActionsheet(false);
     } finally {
       setIsRunCommand(false);
     }
   };
 
-  const handleVideoPress = () => {};
-
-  const handeMorePress = () => {};
+  const handleVideoPress = () => {
+    router.push('/camera');
+  };
 
   useFocusEffect(
     useCallback(() => {
@@ -74,7 +95,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
         const data = await getButtonStatus({
           apiURL: authState.session.apiURL,
           token: authState.session.token,
-          command,
+          command: control.command,
         });
         setButtonStatus(data);
       };
@@ -119,16 +140,28 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
 
   return (
     <>
-      <OpenConfirmModal
-        title={label}
-        isOpen={showModal}
-        onClose={() => {
-          setShowModal(false);
-        }}
+      <OpenConfirmActionsheet
+        title={control.name}
+        isOpen={showOpenActionsheet}
         onConfirm={() => {
           handleRunCommand();
         }}
+        onClose={() => {
+          setShowOpenActionsheet(false);
+        }}
         isLoading={isRunCommand}
+      />
+
+      <RenameModal
+        name={control.name}
+        isOpen={showRenameModal}
+        onSave={(name) => {
+          renameControl(control.id, name);
+          setShowRenameModal(false);
+        }}
+        onClose={() => {
+          setShowRenameModal(false);
+        }}
       />
 
       <InView onChange={setInView}>
@@ -155,7 +188,7 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                   </Text>
                 </Box>
                 <Text size="md" fontWeight="$bold" numberOfLines={1}>
-                  {label}
+                  {control.name}
                 </Text>
               </VStack>
               <HStack space="3xl">
@@ -164,25 +197,70 @@ const ControlCard = ({ label, command }: ControlItemProps) => {
                   variant="link"
                   action="primary"
                   onPress={handleVideoPress}
-                  isDisabled={!showVideoButton}
                 >
-                  <ButtonIcon as={Video} size="xl" />
+                  <ButtonIcon as={VideoIcon} size="xl" />
                 </Button>
-                <Button
-                  size="md"
-                  variant="link"
-                  action="primary"
-                  onPress={handeMorePress}
-                  isDisabled={!showMoreButton}
+                <Menu
+                  placement="bottom right"
+                  trigger={({ ...triggerProps }) => {
+                    return (
+                      <Button
+                        {...triggerProps}
+                        size="md"
+                        variant="link"
+                        action="primary"
+                      >
+                        <ButtonIcon as={MoreHorizontalIcon} size="xl" />
+                      </Button>
+                    );
+                  }}
                 >
-                  <ButtonIcon as={MoreHorizontal} size="xl" />
-                </Button>
+                  <MenuItem
+                    key="change-name"
+                    textValue={i18n.t('button.rename')}
+                    onPressOut={() => {
+                      setShowRenameModal(true);
+                    }}
+                  >
+                    <Icon as={PencilIcon} size="sm" mr="$2" />
+                    <MenuItemLabel size="sm">
+                      {i18n.t('button.rename')}
+                    </MenuItemLabel>
+                  </MenuItem>
+                  {hasFavorite(control) ? (
+                    <MenuItem
+                      key="favorite-remove"
+                      textValue={i18n.t('button.favorite_remove')}
+                      onPressOut={() => {
+                        toggleFavorite(control);
+                      }}
+                    >
+                      <Icon as={MinusIcon} size="sm" mr="$2" />
+                      <MenuItemLabel size="sm">
+                        {i18n.t('button.favorite_remove')}
+                      </MenuItemLabel>
+                    </MenuItem>
+                  ) : (
+                    <MenuItem
+                      key="favorite-add"
+                      textValue={i18n.t('button.favorite_add')}
+                      onPressOut={() => {
+                        toggleFavorite(control);
+                      }}
+                    >
+                      <Icon as={PlusIcon} size="sm" mr="$2" />
+                      <MenuItemLabel size="sm">
+                        {i18n.t('button.favorite_add')}
+                      </MenuItemLabel>
+                    </MenuItem>
+                  )}
+                </Menu>
               </HStack>
             </HStack>
             <Button
               action={buttonStatus === 'offline' ? 'secondary' : 'primary'}
               onPress={() => {
-                setShowModal(true);
+                setShowOpenActionsheet(true);
               }}
               isDisabled={buttonStatus !== 'online'}
             >

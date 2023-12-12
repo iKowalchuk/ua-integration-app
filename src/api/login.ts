@@ -7,11 +7,7 @@ type Login = {
   token: string;
 };
 
-const login = async ({
-  apiURL,
-  login,
-  password,
-}: {
+const login = async (payload: {
   apiURL: string;
   login: string;
   password: string;
@@ -21,12 +17,12 @@ const login = async ({
   const { data } = await api.post(
     '/api/ios.php',
     {
-      login,
-      password,
       token,
+      login: payload.login,
+      password: payload.password,
     },
     {
-      baseURL: apiURL,
+      baseURL: payload.apiURL,
       skipAuthInterceptor: true, // custom option to skip the auth interceptor
     }
   );

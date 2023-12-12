@@ -68,7 +68,7 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
         placement: 'top',
         render: ({ id }) => {
           return (
-            <Toast nativeID={'toast-' + id} action="error" variant="outline">
+            <Toast nativeID={'toast-' + id} action="error">
               <ToastTitle>
                 {i18n.t('login.incorrect_login_or_password_error')}
               </ToastTitle>
@@ -107,7 +107,6 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
                   onChangeText={(value) =>
                     setFormData({ ...formData, login: value })
                   }
-                  placeholderTextColor="#FFFFFF"
                 />
               </Input>
               <FormControlError>
@@ -130,7 +129,6 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
                   onChangeText={(value) =>
                     setFormData({ ...formData, password: value })
                   }
-                  placeholderTextColor="#FFFFFF"
                 />
               </Input>
               <FormControlError>

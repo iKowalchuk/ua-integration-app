@@ -6,10 +6,7 @@ export type User = {
   houseName: string;
 };
 
-const getUser = async ({
-  apiURL,
-  token,
-}: {
+const getUser = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<User> => {
@@ -17,9 +14,9 @@ const getUser = async ({
     '/api/ios.php',
     {
       cmd: 'user_get_key',
-      token,
+      token: payload.token,
     },
-    { baseURL: apiURL }
+    { baseURL: payload.apiURL }
   );
 
   const res: any = data?.DETAIL_USER || {};

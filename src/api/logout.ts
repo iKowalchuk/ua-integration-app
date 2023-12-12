@@ -1,9 +1,6 @@
 import api from './api';
 
-const logout = async ({
-  apiURL,
-  token,
-}: {
+const logout = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<void> => {
@@ -11,9 +8,9 @@ const logout = async ({
     '/api/ios.php',
     {
       cmd: 'user_user_del_key',
-      token,
+      token: payload.token,
     },
-    { baseURL: apiURL }
+    { baseURL: payload.apiURL }
   );
 };
 

@@ -1,4 +1,4 @@
-import ProjectsScreen from '@/screens/Projects/ProjectsScreen';
+import ProjectsScreen from '@/screens/ProjectsScreen/ProjectsScreen';
 
 const TabProjects = () => {
   return <ProjectsScreen />;

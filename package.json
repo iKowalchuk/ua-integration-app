@@ -24,7 +24,7 @@
     "@expo/vector-icons": "^13.0.0",
     "@gluestack-style/react": "^1.0.26",
     "@gluestack-ui/config": "^1.0.8",
-    "@gluestack-ui/themed": "^1.0.24",
+    "@gluestack-ui/themed": "^1.0.25",
     "@hookform/resolvers": "^3.3.2",
     "@react-navigation/material-top-tabs": "^6.6.5",
     "@react-navigation/native": "^6.1.9",

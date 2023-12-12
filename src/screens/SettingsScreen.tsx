@@ -15,8 +15,8 @@ import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
 import getUser, { User } from '@/api/getUser';
+import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import LoadingScreen from '@/screens/LoadingScreen';
 
 const SettingsScreen = () => {
   const { authState, onLogout } = useAuthContext();
@@ -57,7 +57,7 @@ const SettingsScreen = () => {
   };
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingView />;
   }
 
   return (

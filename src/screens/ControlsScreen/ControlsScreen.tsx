@@ -1,16 +1,24 @@
 import { Center, Heading } from '@gluestack-ui/themed';
 import React, { useEffect, useMemo, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 
-import getControls, { Control } from '@/api/getControls';
+import { Control } from '@/api/getControls';
 import IOSectionList from '@/components/IOSectionList';
+import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import ControlCard from '@/screens/Control/ControlCard';
-import LoadingScreen from '@/screens/LoadingScreen';
+import ControlCard from '@/screens/ControlsScreen/ControlCard';
+import useControlsStore from '@/stores/useControlsStore';
 
-const ControlScreen = () => {
+const ControlsScreen = () => {
   const { authState } = useAuthContext();
 
-  const [controls, setControls] = useState<Control[]>([]);
+  const { controls, fetchControls } = useControlsStore(
+    useShallow((state) => ({
+      controls: state.controls,
+      fetchControls: state.fetchControls,
+    }))
+  );
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,11 +29,10 @@ const ControlScreen = () => {
 
       try {
         setIsLoading(true);
-        const data = await getControls({
+        await fetchControls({
           apiURL: authState.session.apiURL,
           token: authState.session.token,
         });
-        setControls(data);
       } finally {
         setIsLoading(false);
       }
@@ -47,7 +54,7 @@ const ControlScreen = () => {
   }, [controls]);
 
   if (isLoading) {
-    return <LoadingScreen />;
+    return <LoadingView />;
   }
 
   return (
@@ -57,9 +64,7 @@ const ControlScreen = () => {
         padding: 16,
       }}
       sections={sectionMenu}
-      renderItem={({ item }) => (
-        <ControlCard label={item.name} command={item.command} />
-      )}
+      renderItem={({ item }) => <ControlCard control={item} />}
       renderSectionHeader={({ section: { title } }) => (
         <Center>
           <Heading size="xl">{title}</Heading>
@@ -71,4 +76,4 @@ const ControlScreen = () => {
   );
 };
 
-export default ControlScreen;
+export default ControlsScreen;

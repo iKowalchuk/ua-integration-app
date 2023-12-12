@@ -16,21 +16,21 @@ import {
 } from '@gluestack-ui/themed';
 import i18n from 'i18n-js';
 
-type OpenConfirmModalProps = {
+type OpenConfirmActionsheetProps = {
   title: string;
   isOpen: boolean;
-  onClose: () => void;
   onConfirm: () => void;
+  onClose: () => void;
   isLoading: boolean;
 };
 
-const OpenConfirmModal = ({
+const OpenConfirmActionsheet = ({
   title,
   isOpen,
   onConfirm,
   onClose,
   isLoading,
-}: OpenConfirmModalProps) => (
+}: OpenConfirmActionsheetProps) => (
   <Actionsheet
     isOpen={isOpen}
     onClose={onClose}
@@ -52,7 +52,7 @@ const OpenConfirmModal = ({
               <Heading size="lg" numberOfLines={1}>
                 {title}
               </Heading>
-              <Text size="md">{i18n.t('control.confirm.subtitle')}</Text>
+              <Text size="md">{i18n.t('controls.open_confirm.subtitle')}</Text>
             </VStack>
             <HStack alignItems="center" space="md">
               <Button
@@ -85,4 +85,4 @@ const OpenConfirmModal = ({
   </Actionsheet>
 );
 
-export default OpenConfirmModal;
+export default OpenConfirmActionsheet;

@@ -1,10 +1,6 @@
 import api from './api';
 
-const runCommand = async ({
-  apiURL,
-  token,
-  command,
-}: {
+const runCommand = async (payload: {
   apiURL: string;
   token: string;
   command: string;
@@ -13,10 +9,10 @@ const runCommand = async ({
     '/api/ios.php',
     {
       cmd: 'run_cmd',
-      name_cmd: command,
-      token,
+      name_cmd: payload.command,
+      token: payload.token,
     },
-    { baseURL: apiURL }
+    { baseURL: payload.apiURL }
   );
 };
 

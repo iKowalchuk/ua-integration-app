@@ -1,4 +1,4 @@
-import SettingsScreen from '@/screens/Settings/SettingsScreen';
+import SettingsScreen from '@/screens/SettingsScreen';
 
 const TabSettings = () => {
   return <SettingsScreen />;

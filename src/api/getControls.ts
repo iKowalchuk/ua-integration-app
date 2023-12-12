@@ -7,10 +7,7 @@ export type Control = {
   command: string;
 };
 
-const getControls = async ({
-  apiURL,
-  token,
-}: {
+const getControls = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<Control[]> => {
@@ -18,9 +15,9 @@ const getControls = async ({
     '/api/ios.php',
     {
       cmd: 'get_my_menu',
-      token,
+      token: payload.token,
     },
-    { baseURL: apiURL }
+    { baseURL: payload.apiURL }
   );
 
   const res: any[] = data?.cmd_result || [];
