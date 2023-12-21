@@ -19,9 +19,12 @@
     "incorrect_login_or_password_error": "Incorrect login or password"
   },
   "controls": {
+    "section": {
+      "favorites": "Favorites"
+    },
     "rename_modal": {
       "title": "Change name",
-      "name_label": "Name",
+      "name_label": "",
       "name_is_required_error": "Name is required"
     },
     "open_confirm": {

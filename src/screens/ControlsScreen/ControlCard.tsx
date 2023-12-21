@@ -1,13 +1,22 @@
 import {
+  Actionsheet,
+  ActionsheetBackdrop,
+  ActionsheetContent,
+  ActionsheetDragIndicator,
+  ActionsheetDragIndicatorWrapper,
+  ActionsheetIcon,
+  ActionsheetItem,
+  ActionsheetItemText,
   Box,
   Button,
   ButtonIcon,
+  ButtonSpinner,
   ButtonText,
+  Center,
+  Heading,
   HStack,
   Icon,
-  Menu,
-  MenuItem,
-  MenuItemLabel,
+  Spinner,
   Text,
   VStack,
 } from '@gluestack-ui/themed';
@@ -31,7 +40,6 @@ import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
-import OpenConfirmActionsheet from '@/screens/ControlsScreen/OpenConfirmActionsheet';
 import RenameModal from '@/screens/ControlsScreen/RenameModal';
 import useControlsStore from '@/stores/useControlsStore';
 
@@ -58,7 +66,10 @@ const ControlCard = ({ control }: ControlCardProps) => {
   const [inView, setInView] = useState(false);
   const [isRunCommand, setIsRunCommand] = useState(false);
 
-  const [showOpenActionsheet, setShowOpenActionsheet] = useState(false);
+  const [showOpenConfirmActionsheet, setShowOpenConfirmActionsheet] =
+    useState(false);
+  const [showMoreActionsActionsheet, setShowMoreActionsActionsheet] =
+    useState(false);
   const [showRenameModal, setShowRenameModal] = useState(false);
 
   const intervalRef = useRef<NodeJS.Timeout>();
@@ -76,7 +87,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         command: control.command,
       });
       setButtonStatus('open');
-      setShowOpenActionsheet(false);
+      setShowOpenConfirmActionsheet(false);
     } finally {
       setIsRunCommand(false);
     }
@@ -84,6 +95,10 @@ const ControlCard = ({ control }: ControlCardProps) => {
 
   const handleVideoPress = () => {
     router.push('/camera');
+  };
+
+  const handleMoreActionsPress = () => {
+    setShowMoreActionsActionsheet(true);
   };
 
   useFocusEffect(
@@ -105,6 +120,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         getButtonStatusRequest();
         intervalRef.current = setInterval(getButtonStatusRequest, 3000);
       }
+
       return () => {
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
@@ -141,17 +157,120 @@ const ControlCard = ({ control }: ControlCardProps) => {
 
   return (
     <>
-      <OpenConfirmActionsheet
-        title={control.name}
-        isOpen={showOpenActionsheet}
-        onConfirm={() => {
-          handleRunCommand();
-        }}
+      <Actionsheet
+        isOpen={showOpenConfirmActionsheet}
         onClose={() => {
-          setShowOpenActionsheet(false);
+          setShowOpenConfirmActionsheet(false);
         }}
-        isLoading={isRunCommand}
-      />
+        closeOnOverlayClick={!isRunCommand}
+      >
+        <ActionsheetBackdrop />
+        <ActionsheetContent h={180}>
+          {isRunCommand ? (
+            <Center w="$full" h="$full">
+              <Spinner size="large" />
+            </Center>
+          ) : (
+            <>
+              <ActionsheetDragIndicatorWrapper>
+                <ActionsheetDragIndicator />
+              </ActionsheetDragIndicatorWrapper>
+              <VStack w="$full" h="$full" px={20} pt={8} p={30}>
+                <VStack flex={1}>
+                  <Heading size="lg" numberOfLines={1}>
+                    {control.name}
+                  </Heading>
+                  <Text size="md">
+                    {i18n.t('controls.open_confirm.subtitle')}
+                  </Text>
+                </VStack>
+                <HStack alignItems="center" space="md">
+                  <Button
+                    flex={1}
+                    variant="outline"
+                    size="sm"
+                    action="secondary"
+                    mr="$3"
+                    onPress={() => {
+                      setShowOpenConfirmActionsheet(false);
+                    }}
+                    isDisabled={isRunCommand}
+                  >
+                    <ButtonText>{i18n.t('button.cancel')}</ButtonText>
+                  </Button>
+                  <Button
+                    flex={1}
+                    size="sm"
+                    action="positive"
+                    borderWidth="$0"
+                    onPress={() => {
+                      handleRunCommand();
+                    }}
+                    isDisabled={isRunCommand}
+                  >
+                    {isRunCommand && <ButtonSpinner mr="$1" />}
+                    <ButtonText>{i18n.t('button.open')}</ButtonText>
+                  </Button>
+                </HStack>
+              </VStack>
+            </>
+          )}
+        </ActionsheetContent>
+      </Actionsheet>
+
+      <Actionsheet
+        isOpen={showMoreActionsActionsheet}
+        onClose={() => {
+          setShowMoreActionsActionsheet(false);
+        }}
+      >
+        <ActionsheetBackdrop />
+        <ActionsheetContent pb="$4">
+          <ActionsheetDragIndicatorWrapper>
+            <ActionsheetDragIndicator />
+          </ActionsheetDragIndicatorWrapper>
+          <ActionsheetItem
+            onPress={() => {
+              setShowMoreActionsActionsheet(false);
+              setShowRenameModal(true);
+            }}
+          >
+            <ActionsheetIcon size="md">
+              <Icon as={PencilIcon} />
+            </ActionsheetIcon>
+            <ActionsheetItemText>{i18n.t('button.rename')}</ActionsheetItemText>
+          </ActionsheetItem>
+          {favorites.includes(control.id) ? (
+            <ActionsheetItem
+              onPress={() => {
+                setShowMoreActionsActionsheet(false);
+                toggleFavorite(control.id);
+              }}
+            >
+              <ActionsheetIcon size="md">
+                <Icon as={MinusIcon} />
+              </ActionsheetIcon>
+              <ActionsheetItemText>
+                {i18n.t('button.favorite_remove')}
+              </ActionsheetItemText>
+            </ActionsheetItem>
+          ) : (
+            <ActionsheetItem
+              onPress={() => {
+                setShowMoreActionsActionsheet(false);
+                toggleFavorite(control.id);
+              }}
+            >
+              <ActionsheetIcon size="md">
+                <Icon as={PlusIcon} />
+              </ActionsheetIcon>
+              <ActionsheetItemText>
+                {i18n.t('button.favorite_add')}
+              </ActionsheetItemText>
+            </ActionsheetItem>
+          )}
+        </ActionsheetContent>
+      </Actionsheet>
 
       <RenameModal
         name={control.name}
@@ -201,67 +320,20 @@ const ControlCard = ({ control }: ControlCardProps) => {
                 >
                   <ButtonIcon as={VideoIcon} size="xl" />
                 </Button>
-                <Menu
-                  placement="bottom right"
-                  trigger={({ ...triggerProps }) => {
-                    return (
-                      <Button
-                        {...triggerProps}
-                        size="md"
-                        variant="link"
-                        action="primary"
-                      >
-                        <ButtonIcon as={MoreHorizontalIcon} size="xl" />
-                      </Button>
-                    );
-                  }}
+                <Button
+                  size="md"
+                  variant="link"
+                  action="primary"
+                  onPress={handleMoreActionsPress}
                 >
-                  <MenuItem
-                    key="change-name"
-                    textValue={i18n.t('button.rename')}
-                    onPressOut={() => {
-                      setShowRenameModal(true);
-                    }}
-                  >
-                    <Icon as={PencilIcon} size="sm" mr="$2" />
-                    <MenuItemLabel size="sm">
-                      {i18n.t('button.rename')}
-                    </MenuItemLabel>
-                  </MenuItem>
-                  {favorites.includes(control.id) ? (
-                    <MenuItem
-                      key="favorite-remove"
-                      textValue={i18n.t('button.favorite_remove')}
-                      onPressOut={() => {
-                        toggleFavorite(control.id);
-                      }}
-                    >
-                      <Icon as={MinusIcon} size="sm" mr="$2" />
-                      <MenuItemLabel size="sm">
-                        {i18n.t('button.favorite_remove')}
-                      </MenuItemLabel>
-                    </MenuItem>
-                  ) : (
-                    <MenuItem
-                      key="favorite-add"
-                      textValue={i18n.t('button.favorite_add')}
-                      onPressOut={() => {
-                        toggleFavorite(control.id);
-                      }}
-                    >
-                      <Icon as={PlusIcon} size="sm" mr="$2" />
-                      <MenuItemLabel size="sm">
-                        {i18n.t('button.favorite_add')}
-                      </MenuItemLabel>
-                    </MenuItem>
-                  )}
-                </Menu>
+                  <ButtonIcon as={MoreHorizontalIcon} size="xl" />
+                </Button>
               </HStack>
             </HStack>
             <Button
               action={buttonStatus === 'offline' ? 'secondary' : 'primary'}
               onPress={() => {
-                setShowOpenActionsheet(true);
+                setShowOpenConfirmActionsheet(true);
               }}
               isDisabled={buttonStatus !== 'online'}
             >

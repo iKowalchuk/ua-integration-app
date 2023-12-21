@@ -1,25 +1,30 @@
-import { Center, Heading } from '@gluestack-ui/themed';
-import React, { useEffect, useMemo, useState } from 'react';
+import i18n from 'i18n-js';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import PagerView from 'react-native-pager-view';
 import { useShallow } from 'zustand/react/shallow';
 
 import { Control } from '@/api/getControls';
-import IOSectionList from '@/components/IOSectionList';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import ControlCard from '@/screens/ControlsScreen/ControlCard';
+import ControlSectionData from '@/screens/ControlsScreen/ControlSectionData';
+import ControlSectionTabs from '@/screens/ControlsScreen/ControlSectionTabs';
 import useControlsStore from '@/stores/useControlsStore';
 
 const ControlsScreen = () => {
   const { authState } = useAuthContext();
 
-  const { controls, fetchControls } = useControlsStore(
+  const { controls, fetchControls, favorites } = useControlsStore(
     useShallow((state) => ({
       controls: state.controls,
       fetchControls: state.fetchControls,
+      favorites: state.favorites,
     }))
   );
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [sectionTabIndex, setSectionTabIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const viewPagerRef = useRef<PagerView>(null);
 
   useEffect(() => {
     const getMenuRequest = async () => {
@@ -41,38 +46,69 @@ const ControlsScreen = () => {
     getMenuRequest();
   }, [authState]);
 
-  const sectionMenu = useMemo(() => {
-    return Object.entries(
+  useEffect(() => {
+    setSectionTabIndex(0);
+    viewPagerRef.current?.setPageWithoutAnimation(0);
+  }, [favorites.length]);
+
+  const sectionItems = useMemo(() => {
+    const groupFavorites = i18n.t('controls.section.favorites');
+
+    const entries = Object.entries(
       controls.reduce(
-        (acc: { [key: string]: Control[] }, { groupName, ...other }) =>
-          Object.assign(acc, {
+        (acc: { [key: string]: Control[] }, { groupName, ...other }) => {
+          return Object.assign(acc, {
+            ...(favorites.includes(other.id) && {
+              [groupFavorites]: [
+                ...(acc[groupFavorites] || []),
+                { groupName, ...other },
+              ],
+            }),
             [groupName]: [...(acc[groupName] || []), { groupName, ...other }],
-          }),
+          });
+        },
         {}
       )
-    ).map(([key, value]) => ({ title: key, data: value }));
-  }, [controls]);
+    );
+
+    // Sort the entries so that groupFavorites always comes first
+    entries.sort(([keyA], [keyB]) => {
+      if (keyA === groupFavorites) return -1;
+      if (keyB === groupFavorites) return 1;
+      return 0;
+    });
+
+    return entries.map(([key, value]) => ({ title: key, data: value }));
+  }, [controls, favorites]);
 
   if (isLoading) {
     return <LoadingView />;
   }
 
   return (
-    <IOSectionList
-      contentContainerStyle={{
-        gap: 16,
-        padding: 16,
-      }}
-      sections={sectionMenu}
-      renderItem={({ item }) => <ControlCard control={item} />}
-      renderSectionHeader={({ section: { title } }) => (
-        <Center>
-          <Heading size="xl">{title}</Heading>
-        </Center>
-      )}
-      keyExtractor={(item) => item.id}
-      stickySectionHeadersEnabled={false}
-    />
+    <>
+      <ControlSectionTabs
+        data={sectionItems}
+        activeIndex={sectionTabIndex}
+        onIndexChange={(index) => {
+          setSectionTabIndex(index);
+          viewPagerRef.current?.setPage(index);
+        }}
+      />
+
+      <PagerView
+        style={{ flex: 1 }}
+        ref={viewPagerRef}
+        initialPage={sectionTabIndex}
+        onPageSelected={({ nativeEvent }) =>
+          setSectionTabIndex(nativeEvent.position)
+        }
+      >
+        {sectionItems.map(({ data }, index) => (
+          <ControlSectionData key={index} data={data} />
+        ))}
+      </PagerView>
+    </>
   );
 };
 

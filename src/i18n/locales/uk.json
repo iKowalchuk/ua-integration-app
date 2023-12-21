@@ -19,9 +19,12 @@
     "incorrect_login_or_password_error": "Введено неправильний логін або пароль"
   },
   "controls": {
+    "section": {
+      "favorites": "Обране"
+    },
     "rename_modal": {
       "title": "Змінити назву",
-      "name_label": "Назва",
+      "name_label": "",
       "name_is_required_error": "Введіть назву"
     },
     "open_confirm": {

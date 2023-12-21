@@ -19,9 +19,12 @@
     "incorrect_login_or_password_error": "Введен неверный логин или пароль"
   },
   "controls": {
+    "section": {
+      "favorites": "Избранное"
+    },
     "rename_modal": {
       "title": "Изменить имя",
-      "name_label": "Имя",
+      "name_label": "",
       "name_is_required_error": "Введите имя"
     },
     "open_confirm": {
