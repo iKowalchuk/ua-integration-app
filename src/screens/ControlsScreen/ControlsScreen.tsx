@@ -89,8 +89,8 @@ const ControlsScreen = () => {
     <>
       <ControlSectionTabs
         data={sectionItems}
-        activeIndex={sectionTabIndex}
-        onIndexChange={(index) => {
+        activeTabIndex={sectionTabIndex}
+        onTabIndexChange={(index) => {
           setSectionTabIndex(index);
           viewPagerRef.current?.setPage(index);
         }}

@@ -23,16 +23,21 @@ import {
 import i18n from 'i18n-js';
 import React, { useState } from 'react';
 
-type RenameModalProps = {
+type ControlRenameModalProps = {
   name: string;
   isOpen: boolean;
   onSave: (name: string) => void;
   onClose: () => void;
 };
 
-const MAX_LENGTH = 25;
+const MAX_LENGTH = 50;
 
-const RenameModal = ({ name, isOpen, onSave, onClose }: RenameModalProps) => {
+const ControlRenameModal = ({
+  name,
+  isOpen,
+  onSave,
+  onClose,
+}: ControlRenameModalProps) => {
   const [formData, setFormData] = useState<{ name: string }>({
     name: name || '',
   });
@@ -107,4 +112,4 @@ const RenameModal = ({ name, isOpen, onSave, onClose }: RenameModalProps) => {
   );
 };
 
-export default RenameModal;
+export default ControlRenameModal;

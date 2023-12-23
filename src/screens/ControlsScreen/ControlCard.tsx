@@ -40,7 +40,7 @@ import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
-import RenameModal from '@/screens/ControlsScreen/RenameModal';
+import ControlRenameModal from '@/screens/ControlsScreen/ControlRenameModal';
 import useControlsStore from '@/stores/useControlsStore';
 
 type ControlCardProps = {
@@ -133,21 +133,21 @@ const ControlCard = ({ control }: ControlCardProps) => {
     return (
       <InView onChange={setInView}>
         <Card>
-          <VStack padding="$4" space="md">
-            <HStack
-              space="md"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <VStack space="xs">
+          <VStack p="$4" space="md">
+            <VStack space="md">
+              <HStack
+                space="md"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Skeleton width={64} height={20} borderRadius={5} />
-                <Skeleton width={124} height={22} borderRadius={5} />
-              </VStack>
-              <HStack space="3xl">
-                <Skeleton width={24} height={24} borderRadius={5} />
-                <Skeleton width={24} height={24} borderRadius={5} />
+                <HStack space="3xl">
+                  <Skeleton width={24} height={24} borderRadius={5} />
+                  <Skeleton width={24} height={24} borderRadius={5} />
+                </HStack>
               </HStack>
-            </HStack>
+              <Skeleton width={124} height={22} borderRadius={5} />
+            </VStack>
             <Skeleton width="100%" height={40} borderRadius={5} />
           </VStack>
         </Card>
@@ -272,7 +272,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         </ActionsheetContent>
       </Actionsheet>
 
-      <RenameModal
+      <ControlRenameModal
         name={control.name}
         isOpen={showRenameModal}
         onSave={(name) => {
@@ -286,50 +286,48 @@ const ControlCard = ({ control }: ControlCardProps) => {
 
       <InView onChange={setInView}>
         <Card>
-          <VStack padding="$4" space="md">
-            <HStack
-              space="md"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <VStack flex={1}>
+          <VStack p="$4" pt="$2" space="md">
+            <VStack>
+              <HStack
+                space="md"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Box h="$6">
-                  <Text
-                    color={
-                      buttonStatus === 'online' || buttonStatus === 'open'
-                        ? '$green500'
-                        : '$red500'
-                    }
-                    size="sm"
-                  >
-                    {buttonStatus === 'online' || buttonStatus === 'open'
-                      ? i18n.t('status.online')
-                      : i18n.t('status.offline')}
-                  </Text>
+                  {buttonStatus === 'online' || buttonStatus === 'open' ? (
+                    <Text color="$green500" size="sm">
+                      {i18n.t('status.online')}
+                    </Text>
+                  ) : (
+                    <Text color="$red500" size="sm">
+                      {i18n.t('status.offline')}
+                    </Text>
+                  )}
                 </Box>
-                <Text size="md" fontWeight="$bold" numberOfLines={1}>
-                  {control.name}
-                </Text>
-              </VStack>
-              <HStack space="3xl">
-                <Button
-                  size="md"
-                  variant="link"
-                  action="primary"
-                  onPress={handleVideoPress}
-                >
-                  <ButtonIcon as={VideoIcon} size="xl" />
-                </Button>
-                <Button
-                  size="md"
-                  variant="link"
-                  action="primary"
-                  onPress={handleMoreActionsPress}
-                >
-                  <ButtonIcon as={MoreHorizontalIcon} size="xl" />
-                </Button>
+
+                <HStack space="3xl">
+                  <Button
+                    size="md"
+                    variant="link"
+                    action="primary"
+                    onPress={handleVideoPress}
+                  >
+                    <ButtonIcon as={VideoIcon} size="xl" />
+                  </Button>
+                  <Button
+                    size="md"
+                    variant="link"
+                    action="primary"
+                    onPress={handleMoreActionsPress}
+                  >
+                    <ButtonIcon as={MoreHorizontalIcon} size="xl" />
+                  </Button>
+                </HStack>
               </HStack>
-            </HStack>
+              <Text size="md" fontWeight="$bold" numberOfLines={1}>
+                {control.name}
+              </Text>
+            </VStack>
             <Button
               action={buttonStatus === 'offline' ? 'secondary' : 'primary'}
               onPress={() => {
