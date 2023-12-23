@@ -1,6 +1,8 @@
 import { Box, HStack, Pressable, Text } from '@gluestack-ui/themed';
 import { useEffect, useRef, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, useWindowDimensions, View } from 'react-native';
+
+const PADDING = 16;
 
 type ControlSectionTabsProps = {
   data: {
@@ -15,14 +17,18 @@ const ControlSectionTabs = ({
   activeTabIndex,
   onTabIndexChange,
 }: ControlSectionTabsProps) => {
+  const layout = useWindowDimensions();
+
   const scrollRef = useRef<ScrollView>(null);
   const viewsRef = useRef<(View | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(activeTabIndex || 0);
 
   const handleIndexChange = (index: number) => {
     const selected = viewsRef.current[index];
-    selected?.measure((x) => {
-      scrollRef.current?.scrollTo({ x, y: 0, animated: true });
+    selected?.measure((x, y, width, height, pageX) => {
+      const center = layout.width / 2;
+      const scrollPosition = x + PADDING - center + width / 2;
+      scrollRef.current?.scrollTo({ x: scrollPosition, y: 0, animated: true });
     });
     setActiveIndex(index);
     onTabIndexChange(index);
@@ -46,7 +52,7 @@ const ControlSectionTabs = ({
           horizontal
           showsHorizontalScrollIndicator={false}
         >
-          <HStack space="lg" mx="$4">
+          <HStack space="lg" mx={PADDING}>
             {data.map((tab, index) => {
               return (
                 <View

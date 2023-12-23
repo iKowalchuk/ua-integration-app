@@ -30,7 +30,7 @@ type ControlRenameModalProps = {
   onClose: () => void;
 };
 
-const MAX_LENGTH = 50;
+const MAX_LENGTH = 24;
 
 const ControlRenameModal = ({
   name,
