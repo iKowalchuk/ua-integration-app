@@ -135,11 +135,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         <Card>
           <VStack p="$4" space="md">
             <VStack space="md">
-              <HStack
-                space="md"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <HStack space="md" justifyContent="space-between">
                 <Skeleton width={64} height={20} borderRadius={5} />
                 <HStack space="3xl">
                   <Skeleton width={24} height={24} borderRadius={5} />
@@ -286,13 +282,9 @@ const ControlCard = ({ control }: ControlCardProps) => {
 
       <InView onChange={setInView}>
         <Card>
-          <VStack p="$4" pt="$2" space="md">
+          <VStack p="$4" space="md">
             <VStack>
-              <HStack
-                space="md"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <HStack space="md" justifyContent="space-between">
                 <Box h="$6">
                   {buttonStatus === 'online' || buttonStatus === 'open' ? (
                     <Text color="$green500" size="sm">
@@ -306,18 +298,12 @@ const ControlCard = ({ control }: ControlCardProps) => {
                 </Box>
 
                 <HStack space="3xl">
-                  <Button
-                    size="md"
-                    variant="link"
-                    action="primary"
-                    onPress={handleVideoPress}
-                  >
+                  <Button size="xs" variant="link" onPress={handleVideoPress}>
                     <ButtonIcon as={VideoIcon} size="xl" />
                   </Button>
                   <Button
-                    size="md"
+                    size="xs"
                     variant="link"
-                    action="primary"
                     onPress={handleMoreActionsPress}
                   >
                     <ButtonIcon as={MoreHorizontalIcon} size="xl" />
