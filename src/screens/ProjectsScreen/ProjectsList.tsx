@@ -14,7 +14,7 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
   const { authState } = useAuthContext();
 
   return (
-    <ScrollView contentContainerStyle={{ gap: 4 }}>
+    <ScrollView contentContainerStyle={{ gap: 4, paddingTop: 16 }}>
       {data.map((item) => (
         <Button
           key={item.id}

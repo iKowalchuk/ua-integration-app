@@ -60,12 +60,20 @@ const RootLayout = () => {
 const RootLayoutNav = () => {
   const colorScheme = useColorScheme();
 
+  const theme =
+    colorScheme === 'dark'
+      ? {
+          ...DarkTheme,
+          colors: { ...DarkTheme.colors, background: 'rgb(18, 18, 18)' },
+        }
+      : DefaultTheme;
+
   return (
     <GluestackUIProvider
       config={config}
       colorMode={colorScheme === 'dark' ? 'dark' : 'light'}
     >
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={theme}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="index" />
           <Stack.Screen name="(auth)" />

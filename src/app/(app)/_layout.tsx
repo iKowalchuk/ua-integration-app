@@ -1,4 +1,4 @@
-import { Redirect, Stack, useGlobalSearchParams } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import i18n from 'i18n-js';
 import React from 'react';
 
@@ -6,8 +6,6 @@ import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
 
 const OperatorLayout = () => {
-  const { project } = useGlobalSearchParams<{ project?: string }>();
-
   const { authState } = useAuthContext();
 
   if (authState.type === 'initial') {
@@ -17,8 +15,6 @@ const OperatorLayout = () => {
   if (authState.type === 'unauthenticated') {
     return <Redirect href="/(auth)/projects" />;
   }
-
-  const projectObject = project && JSON.parse(project);
 
   return (
     <Stack>
@@ -32,7 +28,7 @@ const OperatorLayout = () => {
       <Stack.Screen
         name="login"
         options={{
-          title: projectObject?.name ?? i18n.t('common.login_screen'),
+          title: i18n.t('common.login_screen'),
         }}
       />
     </Stack>

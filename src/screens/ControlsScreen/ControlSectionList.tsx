@@ -8,7 +8,7 @@ type ControlSectionDataProps = {
   data: Control[];
 };
 
-const ControlSectionData = ({ data }: ControlSectionDataProps) => {
+const ControlSectionList = ({ data }: ControlSectionDataProps) => {
   return (
     <IOFlatList
       contentContainerStyle={{
@@ -22,4 +22,4 @@ const ControlSectionData = ({ data }: ControlSectionDataProps) => {
   );
 };
 
-export default ControlSectionData;
+export default ControlSectionList;

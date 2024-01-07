@@ -1,16 +1,20 @@
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Stack } from 'expo-router';
 import i18n from 'i18n-js';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import PagerView from 'react-native-pager-view';
+import React, { memo, useEffect, useMemo, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 
 import { Control } from '@/api/getControls';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import ControlSectionData from '@/screens/ControlsScreen/ControlSectionData';
-import ControlSectionTabs from '@/screens/ControlsScreen/ControlSectionTabs';
+import ControlSectionList from '@/screens/ControlsScreen/ControlSectionList';
 import useControlsStore from '@/stores/useControlsStore';
+import useProjectsStore from '@/stores/useProjectsStore';
 
 const ControlsScreen = () => {
+  const { width } = useWindowDimensions();
+
   const { authState } = useAuthContext();
 
   const { controls, fetchControls, favorites } = useControlsStore(
@@ -21,10 +25,14 @@ const ControlsScreen = () => {
     }))
   );
 
-  const [sectionTabIndex, setSectionTabIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const { projects, fetchProjects } = useProjectsStore(
+    useShallow((state) => ({
+      projects: state.projects,
+      fetchProjects: state.fetchProjects,
+    }))
+  );
 
-  const viewPagerRef = useRef<PagerView>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getMenuRequest = async () => {
@@ -34,6 +42,7 @@ const ControlsScreen = () => {
 
       try {
         setIsLoading(true);
+        await fetchProjects();
         await fetchControls({
           apiURL: authState.session.apiURL,
           token: authState.session.token,
@@ -45,11 +54,6 @@ const ControlsScreen = () => {
 
     getMenuRequest();
   }, [authState]);
-
-  useEffect(() => {
-    setSectionTabIndex(0);
-    viewPagerRef.current?.setPageWithoutAnimation(0);
-  }, [favorites.length]);
 
   const sectionItems = useMemo(() => {
     const groupFavorites = i18n.t('controls.section.favorites');
@@ -85,29 +89,37 @@ const ControlsScreen = () => {
     return <LoadingView />;
   }
 
+  const currentProject = projects.find(
+    (item) =>
+      authState.type === 'authenticated' &&
+      authState.session.projectId === item.id
+  );
+
+  const Tab = createMaterialTopTabNavigator();
+
   return (
     <>
-      <ControlSectionTabs
-        data={sectionItems}
-        activeTabIndex={sectionTabIndex}
-        onTabIndexChange={(index) => {
-          setSectionTabIndex(index);
-          viewPagerRef.current?.setPage(index);
-        }}
-      />
+      <Stack.Screen options={{ headerTitle: currentProject?.name }} />
 
-      <PagerView
-        style={{ flex: 1 }}
-        ref={viewPagerRef}
-        initialPage={sectionTabIndex}
-        onPageSelected={({ nativeEvent }) =>
-          setSectionTabIndex(nativeEvent.position)
-        }
+      <Tab.Navigator
+        key={favorites.length === 0 ? 'no-favorites' : 'with-favorites'}
+        initialLayout={{ width }}
+        screenOptions={{
+          tabBarScrollEnabled: true,
+          tabBarItemStyle: { width: 'auto' },
+        }}
       >
-        {sectionItems.map(({ data }, index) => (
-          <ControlSectionData key={index} data={data} />
+        {sectionItems.map(({ title, data }) => (
+          <Tab.Screen
+            key={title}
+            name={title}
+            component={memo(() => (
+              <ControlSectionList data={data} />
+            ))}
+            options={{ tabBarLabel: title }}
+          />
         ))}
-      </PagerView>
+      </Tab.Navigator>
     </>
   );
 };

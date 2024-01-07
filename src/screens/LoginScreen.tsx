@@ -17,7 +17,7 @@ import {
   ToastTitle,
   useToast,
 } from '@gluestack-ui/themed';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
@@ -82,70 +82,74 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <Center flex={1}>
-        <Box p="$2" w="90%">
-          <Heading size="lg" color="$primary500">
-            {i18n.t('login.welcome_title')}
-          </Heading>
-          <Heading color="$secondary400" size="xs">
-            {i18n.t('login.sign_in_to_continue_subtitle')}
-          </Heading>
-          <VStack space="md" mt="$5">
-            <FormControl size="md" isInvalid={isSubmit && !formData.login}>
-              <FormControlLabel mb="$1">
-                <FormControlLabelText>
-                  {i18n.t('login.login_label')}
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input>
-                <InputField
-                  value={formData.login}
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, login: value })
-                  }
-                />
-              </Input>
-              <FormControlError>
-                <FormControlErrorText>
-                  {i18n.t('login.login_is_required_error')}
-                </FormControlErrorText>
-              </FormControlError>
-            </FormControl>
+    <>
+      <Stack.Screen options={{ title: project.name }} />
 
-            <FormControl size="md" isInvalid={isSubmit && !formData.password}>
-              <FormControlLabel mb="$1">
-                <FormControlLabelText>
-                  {i18n.t('login.password_label')}
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input>
-                <InputField
-                  type="password"
-                  value={formData.password}
-                  onChangeText={(value) =>
-                    setFormData({ ...formData, password: value })
-                  }
-                />
-              </Input>
-              <FormControlError>
-                <FormControlErrorText>
-                  {i18n.t('login.password_is_required_error')}
-                </FormControlErrorText>
-              </FormControlError>
-            </FormControl>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <Center flex={1}>
+          <Box p="$2" w="90%">
+            <Heading size="lg" color="$primary500">
+              {i18n.t('login.welcome_title')}
+            </Heading>
+            <Heading color="$secondary400" size="xs">
+              {i18n.t('login.sign_in_to_continue_subtitle')}
+            </Heading>
+            <VStack space="md" mt="$5">
+              <FormControl size="md" isInvalid={isSubmit && !formData.login}>
+                <FormControlLabel mb="$1">
+                  <FormControlLabelText>
+                    {i18n.t('login.login_label')}
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input>
+                  <InputField
+                    value={formData.login}
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, login: value })
+                    }
+                  />
+                </Input>
+                <FormControlError>
+                  <FormControlErrorText>
+                    {i18n.t('login.login_is_required_error')}
+                  </FormControlErrorText>
+                </FormControlError>
+              </FormControl>
 
-            <Button mt="$5" onPress={handleLogin} isDisabled={isLoading}>
-              {isLoading && <ButtonSpinner mr="$1" />}
-              <ButtonText>{i18n.t('login.login_button')}</ButtonText>
-            </Button>
-          </VStack>
-        </Box>
-      </Center>
-    </KeyboardAvoidingView>
+              <FormControl size="md" isInvalid={isSubmit && !formData.password}>
+                <FormControlLabel mb="$1">
+                  <FormControlLabelText>
+                    {i18n.t('login.password_label')}
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input>
+                  <InputField
+                    type="password"
+                    value={formData.password}
+                    onChangeText={(value) =>
+                      setFormData({ ...formData, password: value })
+                    }
+                  />
+                </Input>
+                <FormControlError>
+                  <FormControlErrorText>
+                    {i18n.t('login.password_is_required_error')}
+                  </FormControlErrorText>
+                </FormControlError>
+              </FormControl>
+
+              <Button mt="$5" onPress={handleLogin} isDisabled={isLoading}>
+                {isLoading && <ButtonSpinner mr="$1" />}
+                <ButtonText>{i18n.t('login.login_button')}</ButtonText>
+              </Button>
+            </VStack>
+          </Box>
+        </Center>
+      </KeyboardAvoidingView>
+    </>
   );
 };
 

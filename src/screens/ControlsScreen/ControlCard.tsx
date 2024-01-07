@@ -25,8 +25,8 @@ import i18n from 'i18n-js';
 import {
   MoreHorizontal as MoreHorizontalIcon,
   Video as VideoIcon,
-  Plus as PlusIcon,
-  Minus as MinusIcon,
+  Heart as HeartIcon,
+  HeartOff as HeartOffIcon,
   Pencil as PencilIcon,
 } from 'lucide-react-native';
 import { useState, useRef, useCallback } from 'react';
@@ -221,7 +221,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         }}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent pb="$4">
+        <ActionsheetContent h={148}>
           <ActionsheetDragIndicatorWrapper>
             <ActionsheetDragIndicator />
           </ActionsheetDragIndicatorWrapper>
@@ -244,7 +244,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
               }}
             >
               <ActionsheetIcon size="md">
-                <Icon as={MinusIcon} />
+                <Icon as={HeartOffIcon} />
               </ActionsheetIcon>
               <ActionsheetItemText>
                 {i18n.t('button.favorite_remove')}
@@ -258,7 +258,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
               }}
             >
               <ActionsheetIcon size="md">
-                <Icon as={PlusIcon} />
+                <Icon as={HeartIcon} />
               </ActionsheetIcon>
               <ActionsheetItemText>
                 {i18n.t('button.favorite_add')}

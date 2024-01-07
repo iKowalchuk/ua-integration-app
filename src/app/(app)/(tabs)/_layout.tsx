@@ -29,7 +29,6 @@ const TabLayout = () => {
         name="index"
         options={{
           title: i18n.t('common.controls_screen'),
-          headerTitle: i18n.t('common.controls_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="ios-key-outline" color={color} />
           ),

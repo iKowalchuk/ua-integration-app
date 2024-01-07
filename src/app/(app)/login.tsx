@@ -1,17 +1,18 @@
 import { Redirect, useLocalSearchParams } from 'expo-router';
 
+import { Project } from '@/api/getProjects';
 import LoginScreen from '@/screens/LoginScreen';
 
 const Login = () => {
   const { project } = useLocalSearchParams<{ project?: string }>();
 
-  const projectObject = project && JSON.parse(project);
+  const currentProject = project ? (JSON.parse(project) as Project) : undefined;
 
-  if (!projectObject) {
+  if (!currentProject) {
     return <Redirect href="/(app)/(tabs)" />;
   }
 
-  return <LoginScreen project={projectObject} />;
+  return <LoginScreen project={currentProject} />;
 };
 
 export default Login;
