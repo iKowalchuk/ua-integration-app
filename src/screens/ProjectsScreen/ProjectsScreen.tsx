@@ -13,6 +13,8 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import ProjectsList from '@/screens/ProjectsScreen/ProjectsList';
 import useProjectsStore from '@/stores/useProjectsStore';
 
+const Tab = createMaterialTopTabNavigator();
+
 const Projects = () => {
   const { width } = useWindowDimensions();
 
@@ -89,19 +91,17 @@ const Projects = () => {
     />
   );
 
-  const Tab = createMaterialTopTabNavigator();
-
   return (
     <Tab.Navigator initialLayout={{ width }}>
       <Tab.Screen
         name="my"
-        component={AuthProjectsComponent}
         options={{ tabBarLabel: i18n.t('projects.my_label') }}
+        children={AuthProjectsComponent}
       />
       <Tab.Screen
         name="other"
-        component={NoAuthProjectsComponent}
         options={{ tabBarLabel: i18n.t('projects.other_label') }}
+        children={NoAuthProjectsComponent}
       />
     </Tab.Navigator>
   );

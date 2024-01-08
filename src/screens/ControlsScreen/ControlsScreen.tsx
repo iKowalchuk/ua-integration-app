@@ -1,7 +1,8 @@
+import { Center, Text } from '@gluestack-ui/themed';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Stack } from 'expo-router';
 import i18n from 'i18n-js';
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 
@@ -11,6 +12,8 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import ControlSectionList from '@/screens/ControlsScreen/ControlSectionList';
 import useControlsStore from '@/stores/useControlsStore';
 import useProjectsStore from '@/stores/useProjectsStore';
+
+const Tab = createMaterialTopTabNavigator();
 
 const ControlsScreen = () => {
   const { width } = useWindowDimensions();
@@ -55,32 +58,25 @@ const ControlsScreen = () => {
     getMenuRequest();
   }, [authState]);
 
-  const sectionItems = useMemo(() => {
-    const groupFavorites = i18n.t('controls.section.favorites');
+  const GROUP_FAVORITES = i18n.t('controls.section.favorites');
 
+  const sectionItems = useMemo(() => {
     const entries = Object.entries(
       controls.reduce(
         (acc: { [key: string]: Control[] }, { groupName, ...other }) => {
           return Object.assign(acc, {
-            ...(favorites.includes(other.id) && {
-              [groupFavorites]: [
-                ...(acc[groupFavorites] || []),
-                { groupName, ...other },
-              ],
-            }),
+            [GROUP_FAVORITES]: [
+              ...(acc[GROUP_FAVORITES] || []),
+              ...(favorites.includes(other.id)
+                ? [{ groupName, ...other }]
+                : []),
+            ],
             [groupName]: [...(acc[groupName] || []), { groupName, ...other }],
           });
         },
         {}
       )
     );
-
-    // Sort the entries so that groupFavorites always comes first
-    entries.sort(([keyA], [keyB]) => {
-      if (keyA === groupFavorites) return -1;
-      if (keyB === groupFavorites) return 1;
-      return 0;
-    });
 
     return entries.map(([key, value]) => ({ title: key, data: value }));
   }, [controls, favorites]);
@@ -95,8 +91,6 @@ const ControlsScreen = () => {
       authState.session.projectId === item.id
   );
 
-  const Tab = createMaterialTopTabNavigator();
-
   return (
     <>
       <Stack.Screen options={{ headerTitle: currentProject?.name }} />
@@ -104,6 +98,11 @@ const ControlsScreen = () => {
       <Tab.Navigator
         key={favorites.length === 0 ? 'no-favorites' : 'with-favorites'}
         initialLayout={{ width }}
+        initialRouteName={
+          sectionItems[0].data.length === 0
+            ? sectionItems[1].title
+            : sectionItems[0].title
+        }
         screenOptions={{
           tabBarScrollEnabled: true,
           tabBarItemStyle: { width: 'auto' },
@@ -113,10 +112,16 @@ const ControlsScreen = () => {
           <Tab.Screen
             key={title}
             name={title}
-            component={memo(() => (
-              <ControlSectionList data={data} />
-            ))}
             options={{ tabBarLabel: title }}
+            children={() =>
+              data.length === 0 && title === GROUP_FAVORITES ? (
+                <Center flex={1}>
+                  <Text>{i18n.t('controls.no_favorites')}</Text>
+                </Center>
+              ) : (
+                <ControlSectionList data={data} />
+              )
+            }
           />
         ))}
       </Tab.Navigator>

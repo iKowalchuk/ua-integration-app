@@ -1,6 +1,6 @@
 import { Button, ButtonText } from '@gluestack-ui/themed';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { FlatList } from 'react-native';
 
 import { Project } from '@/api/getProjects';
 import { useAuthContext } from '@/contexts/AuthContext';
@@ -14,12 +14,13 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
   const { authState } = useAuthContext();
 
   return (
-    <ScrollView contentContainerStyle={{ gap: 4, paddingTop: 16 }}>
-      {data.map((item) => (
+    <FlatList
+      style={{ paddingHorizontal: 16 }}
+      contentContainerStyle={{ gap: 8, paddingVertical: 16 }}
+      data={data}
+      renderItem={({ item }) => (
         <Button
           key={item.id}
-          mx="$4"
-          mb="$2"
           onPress={() => onPress(item)}
           isDisabled={
             authState.type === 'authenticated' &&
@@ -28,8 +29,9 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
         >
           <ButtonText>{item.name}</ButtonText>
         </Button>
-      ))}
-    </ScrollView>
+      )}
+      keyExtractor={(item) => item.name + item.id}
+    />
   );
 };
 

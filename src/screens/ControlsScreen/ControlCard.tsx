@@ -221,7 +221,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
         }}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent h={148}>
+        <ActionsheetContent>
           <ActionsheetDragIndicatorWrapper>
             <ActionsheetDragIndicator />
           </ActionsheetDragIndicatorWrapper>

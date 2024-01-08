@@ -29,7 +29,8 @@
     },
     "open_confirm": {
       "subtitle": "Are you sure you want to open this control?"
-    }
+    },
+    "no_favorites": "Your favorites list is empty."
   },
   "camera": {
     "no_signal": "No signal"
