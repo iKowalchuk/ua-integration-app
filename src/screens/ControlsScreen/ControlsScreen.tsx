@@ -96,7 +96,6 @@ const ControlsScreen = () => {
       <Stack.Screen options={{ headerTitle: currentProject?.name }} />
 
       <Tab.Navigator
-        key={favorites.length === 0 ? 'no-favorites' : 'with-favorites'}
         initialLayout={{ width }}
         initialRouteName={
           sectionItems[0].data.length === 0
