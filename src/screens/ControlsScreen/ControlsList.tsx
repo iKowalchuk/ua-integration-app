@@ -2,13 +2,13 @@ import React from 'react';
 import { IOFlatList } from 'react-native-intersection-observer';
 
 import { Control } from '@/api/getControls';
-import ControlCard from '@/screens/ControlsScreen/ControlCard';
+import ControlItem from '@/screens/ControlsScreen/ControlItem';
 
-type ControlSectionDataProps = {
+type ControlsListProps = {
   data: Control[];
 };
 
-const ControlSectionList = ({ data }: ControlSectionDataProps) => {
+const ControlsList = ({ data }: ControlsListProps) => {
   return (
     <IOFlatList
       contentContainerStyle={{
@@ -16,10 +16,10 @@ const ControlSectionList = ({ data }: ControlSectionDataProps) => {
         padding: 16,
       }}
       data={data}
-      renderItem={({ item }) => <ControlCard control={item} />}
+      renderItem={({ item }) => <ControlItem control={item} />}
       keyExtractor={(item) => `${item.id}`}
     />
   );
 };
 
-export default ControlSectionList;
+export default ControlsList;

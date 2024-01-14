@@ -9,7 +9,7 @@ import { useShallow } from 'zustand/react/shallow';
 import { Control } from '@/api/getControls';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
-import ControlSectionList from '@/screens/ControlsScreen/ControlSectionList';
+import ControlsList from '@/screens/ControlsScreen/ControlsList';
 import useControlsStore from '@/stores/useControlsStore';
 import useProjectsStore from '@/stores/useProjectsStore';
 
@@ -118,7 +118,7 @@ const ControlsScreen = () => {
                   <Text>{i18n.t('controls.no_favorites')}</Text>
                 </Center>
               ) : (
-                <ControlSectionList data={data} />
+                <ControlsList data={data} />
               )
             }
           />

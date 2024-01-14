@@ -43,11 +43,11 @@ import useAppState from '@/hooks/useAppState';
 import ControlRenameModal from '@/screens/ControlsScreen/ControlRenameModal';
 import useControlsStore from '@/stores/useControlsStore';
 
-type ControlCardProps = {
+type ControlItemProps = {
   control: Control;
 };
 
-const ControlCard = ({ control }: ControlCardProps) => {
+const ControlItem = ({ control }: ControlItemProps) => {
   const router = useRouter();
 
   const { authState } = useAuthContext();
@@ -72,7 +72,7 @@ const ControlCard = ({ control }: ControlCardProps) => {
     useState(false);
   const [showRenameModal, setShowRenameModal] = useState(false);
 
-  const intervalRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<NodeJS.Timeout>();
 
   const handleRunCommand = async () => {
     if (authState.type !== 'authenticated') {
@@ -114,16 +114,17 @@ const ControlCard = ({ control }: ControlCardProps) => {
           command: control.command,
         });
         setButtonStatus(data);
+
+        timeoutRef.current = setTimeout(getButtonStatusRequest, 3000);
       };
 
       if (appState === 'active' && inView) {
         getButtonStatusRequest();
-        intervalRef.current = setInterval(getButtonStatusRequest, 3000);
       }
 
       return () => {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
         }
       };
     }, [authState, appState, inView])
@@ -334,4 +335,4 @@ const ControlCard = ({ control }: ControlCardProps) => {
   );
 };
 
-export default ControlCard;
+export default ControlItem;
