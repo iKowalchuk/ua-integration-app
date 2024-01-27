@@ -95,35 +95,37 @@ const ControlsScreen = () => {
     <>
       <Stack.Screen options={{ headerTitle: currentProject?.name }} />
 
-      <Tab.Navigator
-        initialLayout={{ width }}
-        initialRouteName={
-          sectionItems[0].data.length === 0
-            ? sectionItems[1].title
-            : sectionItems[0].title
-        }
-        screenOptions={{
-          tabBarScrollEnabled: true,
-          tabBarItemStyle: { width: 'auto' },
-        }}
-      >
-        {sectionItems.map(({ title, data }) => (
-          <Tab.Screen
-            key={title}
-            name={title}
-            options={{ tabBarLabel: title }}
-            children={() =>
-              data.length === 0 && title === GROUP_FAVORITES ? (
-                <Center flex={1}>
-                  <Text>{i18n.t('controls.no_favorites')}</Text>
-                </Center>
-              ) : (
-                <ControlsList data={data} />
-              )
-            }
-          />
-        ))}
-      </Tab.Navigator>
+      {sectionItems.length > 0 ? (
+        <Tab.Navigator
+          initialLayout={{ width }}
+          initialRouteName={
+            sectionItems[0].data.length === 0
+              ? sectionItems[1].title
+              : sectionItems[0].title
+          }
+          screenOptions={{
+            tabBarScrollEnabled: true,
+            tabBarItemStyle: { width: 'auto' },
+          }}
+        >
+          {sectionItems.map(({ title, data }) => (
+            <Tab.Screen
+              key={title}
+              name={title}
+              options={{ tabBarLabel: title }}
+              children={() =>
+                data.length === 0 && title === GROUP_FAVORITES ? (
+                  <Center flex={1}>
+                    <Text>{i18n.t('controls.no_favorites')}</Text>
+                  </Center>
+                ) : (
+                  <ControlsList data={data} />
+                )
+              }
+            />
+          ))}
+        </Tab.Navigator>
+      ) : null}
     </>
   );
 };
