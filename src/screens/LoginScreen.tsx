@@ -16,9 +16,12 @@ import {
   Toast,
   ToastTitle,
   useToast,
+  InputSlot,
+  InputIcon,
 } from '@gluestack-ui/themed';
 import { Stack, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
+import { EyeIcon, EyeOffIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
@@ -42,8 +45,15 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
       password: '',
     }
   );
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword((showState) => {
+      return !showState;
+    });
+  };
 
   const handleLogin = async () => {
     setIsSubmit(true);
@@ -127,12 +137,18 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
                 </FormControlLabel>
                 <Input>
                   <InputField
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     value={formData.password}
                     onChangeText={(value) =>
                       setFormData({ ...formData, password: value })
                     }
                   />
+                  <InputSlot pr="$3" onPress={toggleShowPassword}>
+                    <InputIcon
+                      as={showPassword ? EyeIcon : EyeOffIcon}
+                      color="$darkBlue500"
+                    />
+                  </InputSlot>
                 </Input>
                 <FormControlError>
                   <FormControlErrorText>
