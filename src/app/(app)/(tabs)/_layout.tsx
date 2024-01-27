@@ -30,7 +30,7 @@ const TabLayout = () => {
         options={{
           title: i18n.t('common.controls_screen'),
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-key-outline" color={color} />
+            <TabBarIcon name="key-outline" color={color} />
           ),
         }}
       />
@@ -39,7 +39,7 @@ const TabLayout = () => {
         options={{
           title: i18n.t('common.projects_screen'),
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-business-outline" color={color} />
+            <TabBarIcon name="business-outline" color={color} />
           ),
         }}
       />
@@ -48,7 +48,7 @@ const TabLayout = () => {
         options={{
           title: i18n.t('common.settings_screen'),
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="ios-settings-outline" color={color} />
+            <TabBarIcon name="settings-outline" color={color} />
           ),
         }}
       />
