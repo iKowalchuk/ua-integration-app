@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ua-integration",
-      "buildNumber": "12"
+      "buildNumber": "14"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.ua.integration",
-      "versionCode": 12
+      "versionCode": 14
     },
     "web": {
       "bundler": "metro",
