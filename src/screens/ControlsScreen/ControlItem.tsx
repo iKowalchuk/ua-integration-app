@@ -86,7 +86,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         token: authState.session.token,
         command: control.command,
       });
-      setButtonStatus('open');
+      setButtonStatus('opening');
       setShowOpenConfirmActionsheet(false);
     } finally {
       setIsRunCommand(false);
@@ -287,7 +287,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
             <VStack>
               <HStack space="md" justifyContent="space-between">
                 <Box h="$6">
-                  {buttonStatus === 'online' || buttonStatus === 'open' ? (
+                  {buttonStatus === 'online' || buttonStatus === 'opening' ? (
                     <Text color="$green500" size="sm">
                       {i18n.t('status.online')}
                     </Text>
@@ -323,8 +323,8 @@ const ControlItem = ({ control }: ControlItemProps) => {
               isDisabled={buttonStatus !== 'online'}
             >
               <ButtonText>
-                {buttonStatus === 'open'
-                  ? i18n.t('button.opened')
+                {buttonStatus === 'opening'
+                  ? i18n.t('button.opening')
                   : i18n.t('button.open')}
               </ButtonText>
             </Button>

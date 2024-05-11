@@ -1,6 +1,6 @@
 import api from './api';
 
-export type ButtonStatus = 'online' | 'offline' | 'open';
+export type ButtonStatus = 'online' | 'offline' | 'opening';
 
 const parseStatus = (status: string): any => {
   try {
@@ -18,7 +18,7 @@ const transformButtonStatus = (status: string): ButtonStatus => {
   const parsedStatus = parseStatus(status);
 
   if (parsedStatus?.text === 'Відкриття') {
-    return 'open';
+    return 'opening';
   }
 
   return 'offline';

@@ -51,6 +51,7 @@
   },
   "button": {
     "open": "Open",
+    "opening": "Opening...",
     "opened": "Opened",
     "save": "Save",
     "cancel": "Cancel",

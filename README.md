@@ -18,12 +18,12 @@
 ## 🚀 How to start
 
 - Install packages with `yarn`.
-  - If you have native iOS code run `npx pod-install`
+    - If you have native iOS code run `npx pod-install`
 - Run `yarn start` to start the bundler.
 - Open the project in a React runtime to try it:
-  - iOS: [Client iOS](https://itunes.apple.com/app/apple-store/id982107779)
-  - Android: [Client Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample)
-  - Web: Any web browser
+    - iOS: [Client iOS](https://itunes.apple.com/app/apple-store/id982107779)
+    - Android: [Client Android](https://play.google.com/store/apps/details?id=host.exp.exponent&referrer=blankexample)
+    - Web: Any web browser
 
   ## Running/Modifying Native Code
 
@@ -34,22 +34,22 @@
 
   ## Publishing
 
-  - Deploy the native app to the App store and Play store using this
-    guide: [Deployment](https://docs.expo.dev/distribution/app-stores/).
-  - Deploy the website using this guide: [Web deployment](https://docs.expo.dev/distribution/publishing-websites/).
+    - Deploy the native app to the App store and Play store using this
+      guide: [Deployment](https://docs.expo.dev/distribution/app-stores/).
+    - Deploy the website using this guide: [Web deployment](https://docs.expo.dev/distribution/publishing-websites/).
 
   ## 📝 Notes
 
-  - Learn more about [Universal React](https://docs.expo.dev/).
-  - See what API and components are [available in the React runtimes](https://docs.expo.dev/versions/latest/).
-  - Find out more about developing apps and websites: [Guides](https://docs.expo.dev/guides/).
+    - Learn more about [Universal React](https://docs.expo.dev/).
+    - See what API and components are [available in the React runtimes](https://docs.expo.dev/versions/latest/).
+    - Find out more about developing apps and websites: [Guides](https://docs.expo.dev/guides/).
 
   ## 👩‍💻 Built with
 
-  - [React](https://react.dev)
-  - [React Native](https://reactnative.dev)
-  - [Expo](https://expo.dev)
-  - [Expo Router V2](https://blog.expo.dev/introducing-expo-router-v2-3850fd5c3ca1)
-  - [gluestack-ui](https://ui.gluestack.io)
-  - [TypeScript](https://www.typescriptlang.org/)
-  - [Axios](https://axios-http.com)
+    - [React](https://react.dev)
+    - [React Native](https://reactnative.dev)
+    - [Expo](https://expo.dev)
+    - [Expo Router](https://docs.expo.dev/router/introduction)
+    - [gluestack-ui](https://ui.gluestack.io)
+    - [TypeScript](https://www.typescriptlang.org)
+    - [Axios](https://axios-http.com)
