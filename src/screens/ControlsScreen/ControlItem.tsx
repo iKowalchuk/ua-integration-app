@@ -162,7 +162,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         closeOnOverlayClick={!isRunCommand}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent h={180}>
+        <ActionsheetContent maxHeight={180}>
           {isRunCommand ? (
             <Center w="$full" h="$full">
               <Spinner size="large" />

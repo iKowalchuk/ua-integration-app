@@ -4,7 +4,7 @@ import i18n from 'i18n-js';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
-import Colors from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
