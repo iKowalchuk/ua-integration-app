@@ -9,6 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useShallow } from 'zustand/react/shallow';
 
 import LoadingView from '@/components/LoadingView';
+import TabBarLabel from '@/components/TabBarLabel';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ProjectsList from '@/screens/ProjectsScreen/ProjectsList';
 import useProjectsStore from '@/stores/useProjectsStore';
@@ -95,12 +96,24 @@ const Projects = () => {
     <Tab.Navigator initialLayout={{ width }}>
       <Tab.Screen
         name="my"
-        options={{ tabBarLabel: i18n.t('projects.my_label') }}
+        options={{
+          tabBarLabel: ({ color, focused }) => (
+            <TabBarLabel color={color} focused={focused}>
+              {i18n.t('projects.my_label')}
+            </TabBarLabel>
+          ),
+        }}
         children={AuthProjectsComponent}
       />
       <Tab.Screen
         name="other"
-        options={{ tabBarLabel: i18n.t('projects.other_label') }}
+        options={{
+          tabBarLabel: ({ color, focused }) => (
+            <TabBarLabel color={color} focused={focused}>
+              {i18n.t('projects.other_label')}
+            </TabBarLabel>
+          ),
+        }}
         children={NoAuthProjectsComponent}
       />
     </Tab.Navigator>

@@ -8,6 +8,7 @@ import { useShallow } from 'zustand/react/shallow';
 
 import { Control } from '@/api/getControls';
 import LoadingView from '@/components/LoadingView';
+import TabBarLabel from '@/components/TabBarLabel';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ControlsList from '@/screens/ControlsScreen/ControlsList';
 import useControlsStore from '@/stores/useControlsStore';
@@ -112,7 +113,13 @@ const ControlsScreen = () => {
             <Tab.Screen
               key={title}
               name={title}
-              options={{ tabBarLabel: title }}
+              options={{
+                tabBarLabel: ({ children, color, focused }) => (
+                  <TabBarLabel color={color} focused={focused}>
+                    {children}
+                  </TabBarLabel>
+                ),
+              }}
               children={() =>
                 data.length === 0 && title === GROUP_FAVORITES ? (
                   <Center flex={1}>

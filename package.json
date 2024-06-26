@@ -19,7 +19,7 @@
     "@expo/vector-icons": "^14.0.0",
     "@gluestack-style/react": "^1.0.56",
     "@gluestack-ui/config": "^1.1.18",
-    "@gluestack-ui/themed": "^1.1.28",
+    "@gluestack-ui/themed": "^1.1.31",
     "@react-navigation/material-top-tabs": "^6.6.13",
     "@react-navigation/native": "^6.0.2",
     "axios": "^1.6.8",
