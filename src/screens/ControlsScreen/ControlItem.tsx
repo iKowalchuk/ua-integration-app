@@ -23,18 +23,18 @@ import {
 import { useFocusEffect, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
 import {
-  MoreHorizontal as MoreHorizontalIcon,
-  Video as VideoIcon,
   Heart as HeartIcon,
   HeartOff as HeartOffIcon,
+  MoreHorizontal as MoreHorizontalIcon,
   Pencil as PencilIcon,
+  Video as VideoIcon,
 } from 'lucide-react-native';
-import { useState, useRef, useCallback } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { InView } from 'react-native-intersection-observer';
 import { useShallow } from 'zustand/react/shallow';
 
-import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
-import { Control } from '@/api/getControls';
+import getButtonStatus, { type ButtonStatus } from '@/api/getButtonStatus';
+import { type Control } from '@/api/getControls';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
@@ -59,7 +59,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
       favorites: state.favorites,
       toggleFavorite: state.toggleFavorite,
       renameControl: state.renameControl,
-    }))
+    })),
   );
 
   const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
@@ -127,7 +127,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
           clearTimeout(timeoutRef.current);
         }
       };
-    }, [authState, appState, inView])
+    }, [authState, appState, inView]),
   );
 
   if (buttonStatus === null) {

@@ -1,6 +1,11 @@
-import constate from 'constate';
 import { isEmpty } from 'lodash';
-import { useEffect, useState } from 'react';
+import {
+  createContext,
+  type PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import api from '@/api/api';
 import login from '@/api/login';
@@ -38,7 +43,9 @@ interface AuthContextProps {
   onSessionChange: (projectId: ProjectId) => void;
 }
 
-const useAuth = (): AuthContextProps => {
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+
+const AuthProvider = ({ children }: PropsWithChildren) => {
   const [authState, setAuthState] = useState<AuthState>({ type: 'initial' });
   const [sessions, setSessions] = useState<Session[]>([]);
 
@@ -63,12 +70,12 @@ const useAuth = (): AuthContextProps => {
       storage.saveString(PROJECT_ID_KEY, payload.projectId.toString());
 
       const isExistsSession = sessions.some(
-        (session) => session.token === token
+        (session) => session.token === token,
       );
       if (isExistsSession) {
         setSessions((prevSessions) => {
           const newSessions = prevSessions.map((existsSession) =>
-            existsSession.token === token ? session : existsSession
+            existsSession.token === token ? session : existsSession,
           );
 
           storage.save(SESSIONS_KEY, newSessions);
@@ -104,7 +111,7 @@ const useAuth = (): AuthContextProps => {
     } finally {
       setSessions((prevSessions) => {
         const newSessions = prevSessions.filter(
-          (session) => session.projectId !== authState.session.projectId
+          (session) => session.projectId !== authState.session.projectId,
         );
 
         storage.save(SESSIONS_KEY, newSessions);
@@ -137,7 +144,7 @@ const useAuth = (): AuthContextProps => {
 
       if (projectId) {
         const activeSession = sessions.find(
-          (session) => session.projectId === Number(projectId)
+          (session) => session.projectId === Number(projectId),
         );
         if (activeSession) {
           setAuthState({
@@ -178,15 +185,29 @@ const useAuth = (): AuthContextProps => {
 
         return response;
       },
-      (error) => Promise.reject(error)
+      (error) => Promise.reject(error),
     );
 
     return () => {
       api.interceptors.response.eject(interceptorId);
     };
-  }, [authState]);
+  }, [authState, onLogout]);
 
-  return { authState, sessions, onLogin, onLogout, onSessionChange };
+  return (
+    <AuthContext.Provider
+      value={{ authState, sessions, onLogin, onLogout, onSessionChange }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
-export const [AuthProvider, useAuthContext] = constate(useAuth);
+const useAuthContext = (): AuthContextProps => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuthContext must be used within an AuthProvider');
+  }
+  return context;
+};
+
+export { AuthProvider, useAuthContext };

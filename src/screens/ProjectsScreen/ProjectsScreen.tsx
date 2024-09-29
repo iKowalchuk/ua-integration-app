@@ -27,7 +27,7 @@ const Projects = () => {
     useShallow((state) => ({
       projects: state.projects,
       fetchProjects: state.fetchProjects,
-    }))
+    })),
   );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,7 +46,7 @@ const Projects = () => {
   }, []);
 
   const [authProjectsData, noAuthProjectsData] = partition(projects, (item) =>
-    sessions.map((item) => item.projectId).includes(item.id)
+    sessions.map((item) => item.projectId).includes(item.id),
   );
 
   if (isLoading) {
@@ -93,7 +93,13 @@ const Projects = () => {
   );
 
   return (
-    <Tab.Navigator initialLayout={{ width }}>
+    <Tab.Navigator
+      initialLayout={{ width }}
+      screenOptions={{
+        tabBarScrollEnabled: true,
+        tabBarItemStyle: { width: 'auto' },
+      }}
+    >
       <Tab.Screen
         name="my"
         options={{

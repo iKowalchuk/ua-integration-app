@@ -1,9 +1,15 @@
 import { Text } from '@gluestack-ui/themed';
-import React from 'react';
+import React, { type PropsWithChildren } from 'react';
 
-type TabBarLabelProps = { focused: boolean; color: string; children: string };
+type TabBarLabelProps = {
+  color: string;
+  focused: boolean;
+};
 
-const TabBarLabel = ({ children, color }: TabBarLabelProps) => (
+const TabBarLabel = ({
+  color,
+  children,
+}: PropsWithChildren<TabBarLabelProps>) => (
   <Text
     fontSize={14}
     fontWeight={500}
