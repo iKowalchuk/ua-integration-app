@@ -31,6 +31,42 @@ const OperatorLayout = () => {
           title: i18n.t('common.login_screen'),
         }}
       />
+      <Stack.Screen
+        name="account"
+        options={{
+          title: i18n.t('common.account_screen'),
+        }}
+      />
+      <Stack.Screen
+        name="settings"
+        options={{
+          title: i18n.t('common.settings_screen'),
+        }}
+      />
+      <Stack.Screen
+        name="guest-cars"
+        options={{
+          title: i18n.t('common.guest_cars_screen'),
+        }}
+      />
+      <Stack.Screen
+        name="my-cars"
+        options={{
+          title: i18n.t('common.my_cars_screen'),
+        }}
+      />
+      <Stack.Screen
+        name="publications"
+        options={{
+          title: i18n.t('common.publications_screen'),
+        }}
+      />
+      <Stack.Screen
+        name="notifications"
+        options={{
+          title: i18n.t('common.notifications_screen'),
+        }}
+      />
     </Stack>
   );
 };

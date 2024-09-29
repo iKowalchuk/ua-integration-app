@@ -3,8 +3,14 @@
     "login_screen": "Login",
     "controls_screen": "Controls",
     "projects_screen": "Projects",
-    "settings_screen": "Settings",
     "camera_screen": "Camera",
+    "menu_screen": "Menu",
+    "account_screen": "Account",
+    "settings_screen": "Settings",
+    "guest_cars_screen": "Guest cars",
+    "my_cars_screen": "My cars",
+    "publications_screen": "Publications",
+    "notifications_screen": "Notifications",
     "not_found_screen": "Oops!"
   },
   "login": {
@@ -45,6 +51,12 @@
     "settings": "Settings",
     "logout_button": "Log Out"
   },
+  "menu": {
+    "guest_cars": "Guest cars",
+    "my_cars": "My cars",
+    "publications": "Publications",
+    "notifications": "Notifications"
+  },
   "status": {
     "online": "Online",
     "offline": "Offline"
@@ -57,7 +69,8 @@
     "cancel": "Cancel",
     "favorite_add": "Add to favorites",
     "favorite_remove": "Remove from favorites",
-    "rename": "Change name"
+    "rename": "Change name",
+    "add": "Add"
   },
   "404": {
     "this_screen_doesnt_exist": "This screen doesn't exist.",

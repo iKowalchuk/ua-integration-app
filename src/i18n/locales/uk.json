@@ -3,8 +3,14 @@
     "login_screen": "Авторизація",
     "controls_screen": "Управління",
     "projects_screen": "Проекти",
-    "settings_screen": "Налаштування",
     "camera_screen": "Камера",
+    "menu_screen": "Меню",
+    "account_screen": "Обліковий запис",
+    "settings_screen": "Налаштування",
+    "guest_cars_screen": "Гостьові авто",
+    "my_cars_screen": "Мої авто",
+    "publications_screen": "Публікації",
+    "notifications_screen": "Сповіщення",
     "not_found_screen": "Ой!"
   },
   "login": {
@@ -45,6 +51,12 @@
     "settings": "Налаштування",
     "logout_button": "Вийти"
   },
+  "menu": {
+    "guest_cars": "Гостьові авто",
+    "my_cars": "Мої авто",
+    "publications": "Публікації",
+    "notifications": "Сповіщення"
+  },
   "status": {
     "online": "Онлайн",
     "offline": "Офлайн"
@@ -57,7 +69,8 @@
     "cancel": "Скасувати",
     "favorite_add": "Додати в обране",
     "favorite_remove": "Видалити з обраного",
-    "rename": "Змінити назву"
+    "rename": "Змінити назву",
+    "add": "Додати"
   },
   "404": {
     "this_screen_doesnt_exist": "Цей екран не існує.",

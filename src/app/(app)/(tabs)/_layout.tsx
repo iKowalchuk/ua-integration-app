@@ -1,6 +1,8 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Tabs } from 'expo-router';
+import { Button, ButtonIcon, HStack } from '@gluestack-ui/themed';
+import { Tabs, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
+import { CircleUserRoundIcon, SettingsIcon } from 'lucide-react-native';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -17,6 +19,8 @@ const TabBarIcon = (props: {
 };
 
 const TabLayout = () => {
+  const router = useRouter();
+
   const colorScheme = useColorScheme();
 
   return (
@@ -44,11 +48,33 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="menu"
         options={{
-          title: i18n.t('common.settings_screen'),
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="settings-outline" color={color} />
+          title: i18n.t('common.menu_screen'),
+          tabBarIcon: ({ color }) => <TabBarIcon name="menu" color={color} />,
+          headerRight: () => (
+            <HStack space="2xl" pr={16}>
+              <Button
+                size="xs"
+                variant="link"
+                action="secondary"
+                onPress={() => {
+                  router.push('/account');
+                }}
+              >
+                <ButtonIcon as={CircleUserRoundIcon} size="xl" />
+              </Button>
+              <Button
+                size="xs"
+                variant="link"
+                action="secondary"
+                onPress={() => {
+                  router.push('/settings');
+                }}
+              >
+                <ButtonIcon as={SettingsIcon} size="xl" />
+              </Button>
+            </HStack>
           ),
         }}
       />

@@ -1,23 +1,23 @@
 import {
-  Center,
   Box,
   Button,
   ButtonSpinner,
   ButtonText,
-  Heading,
-  VStack,
+  Center,
   FormControl,
-  FormControlLabel,
-  FormControlLabelText,
-  Input,
-  InputField,
   FormControlError,
   FormControlErrorText,
+  FormControlLabel,
+  FormControlLabelText,
+  Heading,
+  Input,
+  InputField,
+  InputIcon,
+  InputSlot,
   Toast,
   ToastTitle,
   useToast,
-  InputSlot,
-  InputIcon,
+  VStack,
 } from '@gluestack-ui/themed';
 import { Stack, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
@@ -25,7 +25,7 @@ import { EyeIcon, EyeOffIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
-import { Project } from '@/api/getProjects';
+import { type Project } from '@/api/getProjects';
 import { useAuthContext } from '@/contexts/AuthContext';
 
 type LoginScreenProps = {
@@ -43,7 +43,7 @@ const LoginScreen = ({ project }: LoginScreenProps) => {
     {
       login: '',
       password: '',
-    }
+    },
   );
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);

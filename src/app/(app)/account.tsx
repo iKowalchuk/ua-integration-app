@@ -1,24 +1,24 @@
 import {
   Avatar,
   AvatarFallbackText,
-  Center,
+  Box,
   Button,
   ButtonSpinner,
   ButtonText,
+  Center,
   Heading,
   Text,
-  Box,
   VStack,
 } from '@gluestack-ui/themed';
 import { nativeApplicationVersion } from 'expo-application';
 import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
-import getUser, { User } from '@/api/getUser';
+import getUser, { type User } from '@/api/getUser';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
 
-const SettingsScreen = () => {
+const Account = () => {
   const { authState, onLogout } = useAuthContext();
 
   const [user, setUser] = useState<User>();
@@ -91,4 +91,4 @@ const SettingsScreen = () => {
   );
 };
 
-export default SettingsScreen;
+export default Account;

@@ -23,11 +23,11 @@ import {
 import { useFocusEffect, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
 import {
-  Heart as HeartIcon,
-  HeartOff as HeartOffIcon,
-  MoreHorizontal as MoreHorizontalIcon,
-  Pencil as PencilIcon,
-  Video as VideoIcon,
+  HeartIcon,
+  HeartOffIcon,
+  MoreHorizontalIcon,
+  PencilIcon,
+  VideoIcon,
 } from 'lucide-react-native';
 import { useCallback, useRef, useState } from 'react';
 import { InView } from 'react-native-intersection-observer';
