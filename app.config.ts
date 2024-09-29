@@ -9,7 +9,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   description: `${Env.NAME} Mobile App`,
   owner: Env.EXPO_ACCOUNT_OWNER,
   scheme: Env.SCHEME,
-  slug: 'ua-integration',
+  slug: 'ua-integration-app',
   version: Env.VERSION.toString(),
   orientation: 'portrait',
   icon: './assets/icon.png',
