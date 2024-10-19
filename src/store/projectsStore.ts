@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import getProjects, { Project } from '@/api/getProjects';
+import getProjects, { type Project } from '@/api/getProjects';
 
 type State = {
   projects: Project[];

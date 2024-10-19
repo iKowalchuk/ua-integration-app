@@ -41,7 +41,7 @@ import Skeleton from '@/components/Skeleton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
 import ControlRenameModal from '@/screens/ControlsScreen/ControlRenameModal';
-import useControlsStore from '@/stores/useControlsStore';
+import controlsStore from '@/store/controlsStore';
 
 type ControlItemProps = {
   control: Control;
@@ -54,7 +54,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
 
   const { appState } = useAppState();
 
-  const { favorites, toggleFavorite, renameControl } = useControlsStore(
+  const { favorites, toggleFavorite, renameControl } = controlsStore(
     useShallow((state) => ({
       favorites: state.favorites,
       toggleFavorite: state.toggleFavorite,

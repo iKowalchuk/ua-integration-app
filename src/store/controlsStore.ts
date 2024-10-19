@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import getControls, { Control } from '@/api/getControls';
-import zustandStorage from '@/stores/zustandStorage';
+import getControls, { type Control } from '@/api/getControls';
+import zustandStorage from '@/store/zustandStorage';
 
 type State = {
   controls: Control[];
@@ -30,7 +30,7 @@ const renameControl = (state: State, controlId: number, name: string) => ({
     [controlId]: name,
   },
   controls: state.controls.map((control) =>
-    control.id === controlId ? { ...control, name } : control
+    control.id === controlId ? { ...control, name } : control,
   ),
 });
 
@@ -73,8 +73,8 @@ const useControlsStore = create<State & Actions>()(
       name: 'controls-storage',
       version: 1,
       storage: createJSONStorage(() => zustandStorage),
-    }
-  )
+    },
+  ),
 );
 
 export default useControlsStore;
