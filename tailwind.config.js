@@ -1,4 +1,4 @@
-const colors = require('./src/theme/colors');
+// const colors = require('./src/ui/colors');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
       fontFamily: {
         inter: ['Inter'],
       },
-      colors,
+      // colors,
     },
   },
   plugins: [],

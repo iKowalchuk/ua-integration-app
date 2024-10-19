@@ -6,7 +6,6 @@
   "scripts": {
     "start": "cross-env EXPO_NO_DOTENV=1 expo start",
     "prebuild": "cross-env EXPO_NO_DOTENV=1 pnpm expo prebuild",
-    "prebuild:clean": "cross-env EXPO_NO_DOTENV=1 pnpm expo prebuild --clean",
     "android": "cross-env EXPO_NO_DOTENV=1 expo run:android",
     "ios": "cross-env EXPO_NO_DOTENV=1 expo run:ios",
     "xcode": "xed -b ios",
@@ -52,10 +51,10 @@
     "@tanstack/react-query": "^5.52.1",
     "app-icon-badge": "^0.0.15",
     "axios": "^1.7.5",
-    "expo": "~51.0.34",
+    "expo": "~51.0.38",
     "expo-application": "~5.9.1",
     "expo-constants": "~16.0.2",
-    "expo-dev-client": "~4.0.27",
+    "expo-dev-client": "~4.0.28",
     "expo-font": "~12.0.10",
     "expo-image": "~1.13.0",
     "expo-linking": "~6.3.1",
@@ -103,7 +102,7 @@
     "@dev-plugins/react-query": "^0.0.7",
     "@expo/config": "~9.0.2",
     "@testing-library/jest-dom": "^6.5.0",
-    "@testing-library/react-native": "^12.6.0",
+    "@testing-library/react-native": "^12.7.2",
     "@types/i18n-js": "^3.8.9",
     "@types/jest": "^29.5.12",
     "@types/lodash.memoize": "^4.1.9",
@@ -142,6 +141,6 @@
   },
   "packageManager": "pnpm@9.8.0",
   "osMetadata": {
-    "initVersion": "6.3.2"
+    "initVersion": "6.3.4"
   }
 }
