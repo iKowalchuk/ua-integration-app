@@ -127,7 +127,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
           clearTimeout(timeoutRef.current);
         }
       };
-    }, [authState, appState, inView]),
+    }, [authState, appState, control, inView]),
   );
 
   if (buttonStatus === null) {

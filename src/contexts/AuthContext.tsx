@@ -2,6 +2,7 @@ import { isEmpty } from 'lodash';
 import {
   createContext,
   type PropsWithChildren,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -96,7 +97,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const onLogout = async () => {
+  const onLogout = useCallback(async () => {
     if (authState.type !== 'authenticated') {
       return;
     }
@@ -122,7 +123,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       setAuthState({ type: 'unauthenticated' });
       storage.remove(PROJECT_ID_KEY);
     }
-  };
+  }, [authState]);
 
   const onSessionChange = (projectId: ProjectId) => {
     const session = sessions.find((session) => session.projectId === projectId);

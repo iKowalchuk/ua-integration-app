@@ -1,7 +1,7 @@
 import React from 'react';
 import { IOFlatList } from 'react-native-intersection-observer';
 
-import { Control } from '@/api/getControls';
+import { type Control } from '@/api/getControls';
 import ControlItem from '@/screens/ControlsScreen/ControlItem';
 
 type ControlsListProps = {

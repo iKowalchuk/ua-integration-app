@@ -43,7 +43,7 @@ const Projects = () => {
     };
 
     getProjectsRequest();
-  }, []);
+  }, [fetchProjects]);
 
   const [authProjectsData, noAuthProjectsData] = partition(projects, (item) =>
     sessions.map((item) => item.projectId).includes(item.id),

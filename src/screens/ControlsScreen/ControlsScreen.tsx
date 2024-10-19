@@ -57,7 +57,7 @@ const ControlsScreen = () => {
     };
 
     getMenuRequest();
-  }, [authState]);
+  }, [authState, fetchControls, fetchProjects]);
 
   const GROUP_FAVORITES = i18n.t('controls.section.favorites');
 
@@ -80,7 +80,7 @@ const ControlsScreen = () => {
     );
 
     return entries.map(([key, value]) => ({ title: key, data: value }));
-  }, [controls, favorites]);
+  }, [GROUP_FAVORITES, controls, favorites]);
 
   if (isLoading) {
     return <LoadingView />;

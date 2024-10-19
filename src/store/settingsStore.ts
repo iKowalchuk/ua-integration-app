@@ -4,6 +4,6 @@ type State = object;
 
 type Actions = object;
 
-const useSettingsStore = create<State & Actions>((set) => ({}));
+const useSettingsStore = create<State & Actions>((_set) => ({}));
 
 export default useSettingsStore;

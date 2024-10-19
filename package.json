@@ -42,7 +42,7 @@
     "@expo/metro-runtime": "^3.2.3",
     "@gluestack-style/react": "^1.0.57",
     "@gluestack-ui/config": "^1.1.20",
-    "@gluestack-ui/themed": "^1.1.53",
+    "@gluestack-ui/themed": "^1.1.54",
     "@gorhom/bottom-sheet": "4.6.3",
     "@hookform/resolvers": "^3.9.0",
     "@react-navigation/material-top-tabs": "^6.6.14",

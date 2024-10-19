@@ -2,7 +2,7 @@ import { Button, ButtonText } from '@gluestack-ui/themed';
 import React from 'react';
 import { FlatList } from 'react-native';
 
-import { Project } from '@/api/getProjects';
+import { type Project } from '@/api/getProjects';
 import { useAuthContext } from '@/contexts/AuthContext';
 
 type ProjectsListProps = {
