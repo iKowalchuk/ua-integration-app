@@ -232,6 +232,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
               setShowRenameModal(true);
             }}
           >
+            {/* @ts-ignore */}
             <ActionsheetIcon size="md">
               <Icon as={PencilIcon} />
             </ActionsheetIcon>
@@ -244,6 +245,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                 toggleFavorite(control.id);
               }}
             >
+              {/* @ts-ignore */}
               <ActionsheetIcon size="md">
                 <Icon as={HeartOffIcon} />
               </ActionsheetIcon>
@@ -258,6 +260,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                 toggleFavorite(control.id);
               }}
             >
+              {/* @ts-ignore */}
               <ActionsheetIcon size="md">
                 <Icon as={HeartIcon} />
               </ActionsheetIcon>

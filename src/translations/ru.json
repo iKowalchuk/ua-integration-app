@@ -1,0 +1,79 @@
+{
+  "404": {
+    "go_to_home_screen": "Перейти на главный экран!",
+    "this_screen_doesnt_exist": "Этого экрана не существует."
+  },
+  "button": {
+    "add": "Добавить",
+    "cancel": "Отмена",
+    "favorite_add": "Добавить в избранное",
+    "favorite_remove": "Удалить из избранного",
+    "open": "Открыть",
+    "opened": "Открыто",
+    "opening": "Открытие...",
+    "rename": "Изменить имя",
+    "save": "Сохранить"
+  },
+  "camera": {
+    "no_signal": "Нет сигнала."
+  },
+  "common": {
+    "account_screen": "Учетная запись",
+    "camera_screen": "Камера",
+    "controls_screen": "Управление",
+    "guest_cars_screen": "Гостевые авто",
+    "login_screen": "Авторизация",
+    "menu_screen": "Меню",
+    "my_cars_screen": "Мои авто",
+    "not_found_screen": "Ой!",
+    "notifications_screen": "Уведомления",
+    "projects_screen": "Проекты",
+    "publications_screen": "Публикации",
+    "settings_screen": "Настройки"
+  },
+  "controls": {
+    "no_favorites": "Ваш список избранных пуст.",
+    "open_confirm": {
+      "subtitle": "Вы уверены, что хотите открыть этот элемент управления?"
+    },
+    "rename_modal": {
+      "name_is_required_error": "Введите имя",
+      "name_label": "Имя",
+      "title": "Изменить имя"
+    },
+    "section": {
+      "favorites": "Избранное"
+    }
+  },
+  "login": {
+    "incorrect_login_or_password_error": "Введен неверный логин или пароль",
+    "loading_label": "Загрузка",
+    "login_button": "Войти",
+    "login_is_required_error": "Введите логин",
+    "login_label": "Логин",
+    "password_is_required_error": "Введите пароль",
+    "password_label": "Пароль",
+    "sign_in_to_continue_subtitle": "Войдите, чтобы продолжить!",
+    "welcome_title": "Добро пожаловать"
+  },
+  "menu": {
+    "guest_cars": "Гостевые авто",
+    "my_cars": "Мои авто",
+    "notifications": "Уведомления",
+    "publications": "Публикации"
+  },
+  "projects": {
+    "my_label": "Мои",
+    "other_label": "Другие",
+    "projects_title": "Проекты",
+    "select_to_continue_subtitle": "Выберите, чтобы продолжить!"
+  },
+  "settings": {
+    "logout_button": "Выйти",
+    "settings": "Настройки"
+  },
+  "status": {
+    "offline": "Оффлайн",
+    "online": "Онлайн"
+  }
+}

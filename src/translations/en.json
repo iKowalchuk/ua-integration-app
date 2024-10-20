@@ -1,0 +1,79 @@
+{
+  "404": {
+    "go_to_home_screen": "Go to home screen!",
+    "this_screen_doesnt_exist": "This screen doesn't exist."
+  },
+  "button": {
+    "add": "Add",
+    "cancel": "Cancel",
+    "favorite_add": "Add to favorites",
+    "favorite_remove": "Remove from favorites",
+    "open": "Open",
+    "opened": "Opened",
+    "opening": "Opening...",
+    "rename": "Change name",
+    "save": "Save"
+  },
+  "camera": {
+    "no_signal": "No signal."
+  },
+  "common": {
+    "account_screen": "Account",
+    "camera_screen": "Camera",
+    "controls_screen": "Controls",
+    "guest_cars_screen": "Guest cars",
+    "login_screen": "Login",
+    "menu_screen": "Menu",
+    "my_cars_screen": "My cars",
+    "not_found_screen": "Oops!",
+    "notifications_screen": "Notifications",
+    "projects_screen": "Projects",
+    "publications_screen": "Publications",
+    "settings_screen": "Settings"
+  },
+  "controls": {
+    "no_favorites": "Your favorites list is empty.",
+    "open_confirm": {
+      "subtitle": "Are you sure you want to open this control?"
+    },
+    "rename_modal": {
+      "name_is_required_error": "Name is required",
+      "name_label": "Name",
+      "title": "Change name"
+    },
+    "section": {
+      "favorites": "Favorites"
+    }
+  },
+  "login": {
+    "incorrect_login_or_password_error": "Incorrect login or password",
+    "loading_label": "Loading",
+    "login_button": "Login",
+    "login_is_required_error": "Login is required",
+    "login_label": "Login",
+    "password_is_required_error": "Password is required",
+    "password_label": "Password",
+    "sign_in_to_continue_subtitle": "Sign in to continue!",
+    "welcome_title": "Welcome"
+  },
+  "menu": {
+    "guest_cars": "Guest cars",
+    "my_cars": "My cars",
+    "notifications": "Notifications",
+    "publications": "Publications"
+  },
+  "projects": {
+    "my_label": "My",
+    "other_label": "Other",
+    "projects_title": "Projects",
+    "select_to_continue_subtitle": "Select to continue!"
+  },
+  "settings": {
+    "logout_button": "Log Out",
+    "settings": "Settings"
+  },
+  "status": {
+    "offline": "Offline",
+    "online": "Online"
+  }
+}

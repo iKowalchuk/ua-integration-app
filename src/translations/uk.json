@@ -1,0 +1,79 @@
+{
+  "404": {
+    "go_to_home_screen": "Перейти до головного екрану!",
+    "this_screen_doesnt_exist": "Цей екран не існує."
+  },
+  "button": {
+    "add": "Додати",
+    "cancel": "Скасувати",
+    "favorite_add": "Додати в обране",
+    "favorite_remove": "Видалити з обраного",
+    "open": "Відкрити",
+    "opened": "Відкрито",
+    "opening": "Відкриття...",
+    "rename": "Змінити назву",
+    "save": "Зберегти"
+  },
+  "camera": {
+    "no_signal": "Немає сигналу."
+  },
+  "common": {
+    "account_screen": "Обліковий запис",
+    "camera_screen": "Камера",
+    "controls_screen": "Управління",
+    "guest_cars_screen": "Гостьові авто",
+    "login_screen": "Авторизація",
+    "menu_screen": "Меню",
+    "my_cars_screen": "Мої авто",
+    "not_found_screen": "Ой!",
+    "notifications_screen": "Сповіщення",
+    "projects_screen": "Проекти",
+    "publications_screen": "Публікації",
+    "settings_screen": "Налаштування"
+  },
+  "controls": {
+    "no_favorites": "Ваш список обраних порожній.",
+    "open_confirm": {
+      "subtitle": "Ви впевнені, що бажаєте відкрити цей елемент керування?"
+    },
+    "rename_modal": {
+      "name_is_required_error": "Введіть назву",
+      "name_label": "Назва",
+      "title": "Змінити назву"
+    },
+    "section": {
+      "favorites": "Обране"
+    }
+  },
+  "login": {
+    "incorrect_login_or_password_error": "Введено неправильний логін або пароль",
+    "loading_label": "Завантаження",
+    "login_button": "Увійти",
+    "login_is_required_error": "Введіть логін",
+    "login_label": "Логін",
+    "password_is_required_error": "Введіть пароль",
+    "password_label": "Пароль",
+    "sign_in_to_continue_subtitle": "Увійдіть, щоб продовжити!",
+    "welcome_title": "Ласкаво просимо"
+  },
+  "menu": {
+    "guest_cars": "Гостьові авто",
+    "my_cars": "Мої авто",
+    "notifications": "Сповіщення",
+    "publications": "Публікації"
+  },
+  "projects": {
+    "my_label": "Мої",
+    "other_label": "Інші",
+    "projects_title": "Проекти",
+    "select_to_continue_subtitle": "Виберіть, щоб продовжити!"
+  },
+  "settings": {
+    "logout_button": "Вийти",
+    "settings": "Налаштування"
+  },
+  "status": {
+    "offline": "Офлайн",
+    "online": "Онлайн"
+  }
+}
