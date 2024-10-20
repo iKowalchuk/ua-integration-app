@@ -12,7 +12,7 @@ import LoadingView from '@/components/LoadingView';
 import TabBarLabel from '@/components/TabBarLabel';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ProjectsList from '@/screens/ProjectsScreen/ProjectsList';
-import projectsStore from '@/store/projectsStore';
+import useProjectsStore from '@/store/projectsStore';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -23,7 +23,7 @@ const Projects = () => {
 
   const { authState, sessions, onSessionChange } = useAuthContext();
 
-  const { projects, fetchProjects } = projectsStore(
+  const { projects, fetchProjects } = useProjectsStore(
     useShallow((state) => ({
       projects: state.projects,
       fetchProjects: state.fetchProjects,
@@ -96,8 +96,11 @@ const Projects = () => {
     <Tab.Navigator
       initialLayout={{ width }}
       screenOptions={{
-        tabBarScrollEnabled: true,
-        tabBarItemStyle: { width: 'auto' },
+        tabBarContentContainerStyle: {
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        },
       }}
     >
       <Tab.Screen

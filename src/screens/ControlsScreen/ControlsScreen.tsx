@@ -11,8 +11,8 @@ import LoadingView from '@/components/LoadingView';
 import TabBarLabel from '@/components/TabBarLabel';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ControlsList from '@/screens/ControlsScreen/ControlsList';
-import controlsStore from '@/store/controlsStore';
-import projectsStore from '@/store/projectsStore';
+import useControlsStore from '@/store/controlsStore';
+import useProjectsStore from '@/store/projectsStore';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -21,7 +21,7 @@ const ControlsScreen = () => {
 
   const { authState } = useAuthContext();
 
-  const { controls, fetchControls, favorites } = controlsStore(
+  const { controls, fetchControls, favorites } = useControlsStore(
     useShallow((state) => ({
       controls: state.controls,
       fetchControls: state.fetchControls,
@@ -29,7 +29,7 @@ const ControlsScreen = () => {
     })),
   );
 
-  const { projects, fetchProjects } = projectsStore(
+  const { projects, fetchProjects } = useProjectsStore(
     useShallow((state) => ({
       projects: state.projects,
       fetchProjects: state.fetchProjects,
