@@ -1,18 +1,18 @@
-import api from './api';
+import { client } from '@/api';
 
 const runCommand = async (payload: {
   apiURL: string;
   token: string;
   command: string;
 }): Promise<void> => {
-  await api.post(
+  await client.post(
     '/api/ios.php',
     {
+      token: payload.token,
       cmd: 'run_cmd',
       name_cmd: payload.command,
-      token: payload.token,
     },
-    { baseURL: payload.apiURL }
+    { baseURL: payload.apiURL },
   );
 };
 

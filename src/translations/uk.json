@@ -17,20 +17,6 @@
   "camera": {
     "no_signal": "Немає сигналу."
   },
-  "common": {
-    "account_screen": "Обліковий запис",
-    "camera_screen": "Камера",
-    "controls_screen": "Управління",
-    "guest_cars_screen": "Гостьові авто",
-    "login_screen": "Авторизація",
-    "menu_screen": "Меню",
-    "my_cars_screen": "Мої авто",
-    "not_found_screen": "Ой!",
-    "notifications_screen": "Сповіщення",
-    "projects_screen": "Проекти",
-    "publications_screen": "Публікації",
-    "settings_screen": "Налаштування"
-  },
   "controls": {
     "no_favorites": "Ваш список обраних порожній.",
     "open_confirm": {
@@ -44,6 +30,19 @@
     "section": {
       "favorites": "Обране"
     }
+  },
+  "error": {
+    "car_number_invalid_error": "Номер авто повинен бути рядком",
+    "car_number_is_required_error": "Введіть номер авто",
+    "hours_invalid_error": "Години повинні бути числом",
+    "hours_is_required_error": "Введіть години",
+    "hours_max_error": "Години повинні бути менше або дорівнювати 99",
+    "hours_min_error": "Години повинні бути більше або дорівнювати 1"
+  },
+  "error_loading_data": "Помилка завантаження даних",
+  "label": {
+    "car_number": "Номер авто",
+    "hours": "Години"
   },
   "login": {
     "incorrect_login_or_password_error": "Введено неправильний логін або пароль",
@@ -62,11 +61,30 @@
     "notifications": "Сповіщення",
     "publications": "Публікації"
   },
+  "no_data_found": "Дані не знайдені",
   "projects": {
     "my_label": "Мої",
     "other_label": "Інші",
     "projects_title": "Проекти",
     "select_to_continue_subtitle": "Виберіть, щоб продовжити!"
+  },
+  "screen": {
+    "account_screen": "Обліковий запис",
+    "camera_screen": "Камера",
+    "controls_screen": "Управління",
+    "guest_car_add_screen": "Додати гостьове авто",
+    "guest_car_edit_screen": "Редагувати гостьове авто",
+    "guest_cars_screen": "Гостьові авто",
+    "login_screen": "Авторизація",
+    "menu_screen": "Меню",
+    "my_car_add_screen": "Додати моє авто",
+    "my_car_edit_screen": "Редагувати моє авто",
+    "my_cars_screen": "Мої авто",
+    "not_found_screen": "Ой!",
+    "notifications_screen": "Сповіщення",
+    "projects_screen": "Проекти",
+    "publications_screen": "Публікації",
+    "settings_screen": "Налаштування"
   },
   "settings": {
     "logout_button": "Вийти",
@@ -75,5 +93,11 @@
   "status": {
     "offline": "Офлайн",
     "online": "Онлайн"
+  },
+  "toast": {
+    "car_added_successfully": "Авто успішно додано",
+    "car_edited_successfully": "Авто успішно відредаговано",
+    "error_adding_car": "Помилка додавання авто",
+    "error_editing_car": "Помилка редагування авто"
   }
 }

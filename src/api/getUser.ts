@@ -1,4 +1,4 @@
-import api from './api';
+import { client } from '@/api';
 
 export type User = {
   id: number;
@@ -10,13 +10,13 @@ const getUser = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<User> => {
-  const { data } = await api.post(
+  const { data } = await client.post(
     '/api/ios.php',
     {
-      cmd: 'user_get_key',
       token: payload.token,
+      cmd: 'user_get_key',
     },
-    { baseURL: payload.apiURL }
+    { baseURL: payload.apiURL },
   );
 
   const res: any = data?.DETAIL_USER || {};

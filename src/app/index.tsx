@@ -4,7 +4,7 @@ import React from 'react';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
 
-const App = () => {
+export default function App() {
   const { authState } = useAuthContext();
 
   if (authState.type === 'unauthenticated') {
@@ -16,6 +16,4 @@ const App = () => {
   }
 
   return <LoadingView />;
-};
-
-export default App;
+}

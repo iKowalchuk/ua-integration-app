@@ -17,7 +17,7 @@ const ControlsList = ({ data }: ControlsListProps) => {
       }}
       data={data}
       renderItem={({ item }) => <ControlItem control={item} />}
-      keyExtractor={(item) => `${item.id}`}
+      keyExtractor={(item) => `item-${item.id}`}
     />
   );
 };

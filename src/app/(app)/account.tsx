@@ -10,9 +10,9 @@ import {
   Text,
   VStack,
 } from '@gluestack-ui/themed';
-import { nativeApplicationVersion } from 'expo-application';
 import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getUser, { type User } from '@/api/getUser';
 import LoadingView from '@/components/LoadingView';
@@ -61,33 +61,32 @@ const Account = () => {
   }
 
   return (
-    <Box flex={1} padding="$4">
-      <Center flex={1}>
-        <Avatar bg="$green500" size="xl">
-          <AvatarFallbackText>{user?.name}</AvatarFallbackText>
-        </Avatar>
-        <Center mt="$2">
-          <Heading size="lg">{user?.name || '-'}</Heading>
-          <Text size="sm">{user?.houseName || '-'}</Text>
+    <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+      <Box flex={1} padding="$4">
+        <Center flex={1}>
+          <Avatar bg="$green500" size="xl">
+            <AvatarFallbackText>{user?.name}</AvatarFallbackText>
+          </Avatar>
+          <Center mt="$2">
+            <Heading size="lg">{user?.name || '-'}</Heading>
+            <Text size="sm">{user?.houseName || '-'}</Text>
+          </Center>
         </Center>
-      </Center>
-      <VStack space="md">
-        <Button
-          mt="$4"
-          size="md"
-          variant="outline"
-          action="negative"
-          onPress={handleLogout}
-          isDisabled={isLogout}
-        >
-          {isLogout && <ButtonSpinner mr="$1" />}
-          <ButtonText>{i18n.t('settings.logout_button')}</ButtonText>
-        </Button>
-        <Text size="xs" textAlign="center">
-          v{nativeApplicationVersion}
-        </Text>
-      </VStack>
-    </Box>
+        <VStack space="md">
+          <Button
+            mt="$4"
+            size="md"
+            variant="outline"
+            action="negative"
+            onPress={handleLogout}
+            isDisabled={isLogout}
+          >
+            {isLogout && <ButtonSpinner mr="$1" />}
+            <ButtonText>{i18n.t('settings.logout_button')}</ButtonText>
+          </Button>
+        </VStack>
+      </Box>
+    </SafeAreaView>
   );
 };
 

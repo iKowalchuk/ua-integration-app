@@ -51,6 +51,7 @@
     "@tanstack/react-query": "^5.52.1",
     "app-icon-badge": "^0.0.15",
     "axios": "^1.7.5",
+    "date-fns": "^4.1.0",
     "expo": "~51.0.38",
     "expo-application": "~5.9.1",
     "expo-constants": "~16.0.2",

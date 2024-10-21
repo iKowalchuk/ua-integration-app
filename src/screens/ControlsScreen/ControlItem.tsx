@@ -29,8 +29,9 @@ import {
   PencilIcon,
   VideoIcon,
 } from 'lucide-react-native';
-import { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { InView } from 'react-native-intersection-observer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useShallow } from 'zustand/react/shallow';
 
 import getButtonStatus, { type ButtonStatus } from '@/api/getButtonStatus';
@@ -49,6 +50,8 @@ type ControlItemProps = {
 
 const ControlItem = ({ control }: ControlItemProps) => {
   const router = useRouter();
+
+  const insets = useSafeAreaInsets();
 
   const { authState } = useAuthContext();
 
@@ -162,7 +165,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         closeOnOverlayClick={!isRunCommand}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent maxHeight={180}>
+        <ActionsheetContent maxHeight={200} pb={insets.bottom}>
           {isRunCommand ? (
             <Center w="$full" h="$full">
               <Spinner size="large" />
@@ -222,7 +225,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         }}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent>
+        <ActionsheetContent pb={insets.bottom}>
           <ActionsheetDragIndicatorWrapper>
             <ActionsheetDragIndicator />
           </ActionsheetDragIndicatorWrapper>

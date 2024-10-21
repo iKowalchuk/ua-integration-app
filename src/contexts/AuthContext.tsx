@@ -8,11 +8,13 @@ import {
   useState,
 } from 'react';
 
-import api from '@/api/api';
+import { client } from '@/api';
 import login from '@/api/login';
 import logout from '@/api/logout';
-import { PROJECT_ID_KEY, SESSIONS_KEY } from '@/constants/App';
 import * as storage from '@/utils/storage';
+
+const PROJECT_ID_KEY = 'projectId';
+const SESSIONS_KEY = 'sessions';
 
 type ApiURL = string;
 type ProjectId = number;
@@ -170,7 +172,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       return;
     }
 
-    const interceptorId = api.interceptors.response.use(
+    const interceptorId = client.interceptors.response.use(
       async (response) => {
         if (response.config.skipAuthInterceptor) {
           return response;
@@ -190,7 +192,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     );
 
     return () => {
-      api.interceptors.response.eject(interceptorId);
+      client.interceptors.response.eject(interceptorId);
     };
   }, [authState, onLogout]);
 

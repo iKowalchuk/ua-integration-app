@@ -32,7 +32,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: i18n.t('common.controls_screen'),
+          title: i18n.t('screen.controls_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="key-outline" color={color} />
           ),
@@ -41,7 +41,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="projects"
         options={{
-          title: i18n.t('common.projects_screen'),
+          title: i18n.t('screen.projects_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="business-outline" color={color} />
           ),
@@ -50,7 +50,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="menu"
         options={{
-          title: i18n.t('common.menu_screen'),
+          title: i18n.t('screen.menu_screen'),
           tabBarIcon: ({ color }) => <TabBarIcon name="menu" color={color} />,
           headerRight: () => (
             <HStack space="2xl" pr={16}>

@@ -1,4 +1,4 @@
-import api from './api';
+import { client } from '@/api';
 
 export type Project = {
   id: number;
@@ -7,7 +7,7 @@ export type Project = {
 };
 
 const getProjects = async (): Promise<Project[]> => {
-  const { data } = await api.post('/api/ios.php', {
+  const { data } = await client.post('/api/ios.php', {
     cmd: 'get_all_projects',
   });
 

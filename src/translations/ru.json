@@ -17,20 +17,6 @@
   "camera": {
     "no_signal": "Нет сигнала."
   },
-  "common": {
-    "account_screen": "Учетная запись",
-    "camera_screen": "Камера",
-    "controls_screen": "Управление",
-    "guest_cars_screen": "Гостевые авто",
-    "login_screen": "Авторизация",
-    "menu_screen": "Меню",
-    "my_cars_screen": "Мои авто",
-    "not_found_screen": "Ой!",
-    "notifications_screen": "Уведомления",
-    "projects_screen": "Проекты",
-    "publications_screen": "Публикации",
-    "settings_screen": "Настройки"
-  },
   "controls": {
     "no_favorites": "Ваш список избранных пуст.",
     "open_confirm": {
@@ -44,6 +30,19 @@
     "section": {
       "favorites": "Избранное"
     }
+  },
+  "error": {
+    "car_number_invalid_error": "Номер авто должен быть строкой",
+    "car_number_is_required_error": "Введите номер авто",
+    "hours_invalid_error": "Количество часов должно быть числом",
+    "hours_is_required_error": "Введите количество часов",
+    "hours_max_error": "Количество часов должно быть не более 99",
+    "hours_min_error": "Количество часов должно быть не менее 1"
+  },
+  "error_loading_data": "Ошибка загрузки данных",
+  "label": {
+    "car_number": "Номер авто",
+    "hours": "Часы"
   },
   "login": {
     "incorrect_login_or_password_error": "Введен неверный логин или пароль",
@@ -62,11 +61,30 @@
     "notifications": "Уведомления",
     "publications": "Публикации"
   },
+  "no_data_found": "Данные не найдены",
   "projects": {
     "my_label": "Мои",
     "other_label": "Другие",
     "projects_title": "Проекты",
     "select_to_continue_subtitle": "Выберите, чтобы продолжить!"
+  },
+  "screen": {
+    "account_screen": "Учетная запись",
+    "camera_screen": "Камера",
+    "controls_screen": "Управление",
+    "guest_car_add_screen": "Добавить гостевое авто",
+    "guest_car_edit_screen": "Редактировать гостевое авто",
+    "guest_cars_screen": "Гостевые авто",
+    "login_screen": "Авторизация",
+    "menu_screen": "Меню",
+    "my_car_add_screen": "Добавить моё авто",
+    "my_car_edit_screen": "Редактировать моё авто",
+    "my_cars_screen": "Мои авто",
+    "not_found_screen": "Ой!",
+    "notifications_screen": "Уведомления",
+    "projects_screen": "Проекты",
+    "publications_screen": "Публикации",
+    "settings_screen": "Настройки"
   },
   "settings": {
     "logout_button": "Выйти",
@@ -75,5 +93,11 @@
   "status": {
     "offline": "Оффлайн",
     "online": "Онлайн"
+  },
+  "toast": {
+    "car_added_successfully": "Авто успешно добавлено",
+    "car_edited_successfully": "Авто успешно отредактировано",
+    "error_adding_car": "Ошибка добавления авто",
+    "error_editing_car": "Ошибка редактирования авто"
   }
 }

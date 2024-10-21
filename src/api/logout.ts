@@ -1,16 +1,16 @@
-import api from './api';
+import { client } from '@/api';
 
 const logout = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<void> => {
-  await api.post(
+  await client.post(
     '/api/ios.php',
     {
-      cmd: 'user_user_del_key',
       token: payload.token,
+      cmd: 'user_user_del_key',
     },
-    { baseURL: payload.apiURL }
+    { baseURL: payload.apiURL },
   );
 };
 

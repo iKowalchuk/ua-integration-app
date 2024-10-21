@@ -17,20 +17,6 @@
   "camera": {
     "no_signal": "No signal."
   },
-  "common": {
-    "account_screen": "Account",
-    "camera_screen": "Camera",
-    "controls_screen": "Controls",
-    "guest_cars_screen": "Guest cars",
-    "login_screen": "Login",
-    "menu_screen": "Menu",
-    "my_cars_screen": "My cars",
-    "not_found_screen": "Oops!",
-    "notifications_screen": "Notifications",
-    "projects_screen": "Projects",
-    "publications_screen": "Publications",
-    "settings_screen": "Settings"
-  },
   "controls": {
     "no_favorites": "Your favorites list is empty.",
     "open_confirm": {
@@ -44,6 +30,19 @@
     "section": {
       "favorites": "Favorites"
     }
+  },
+  "error": {
+    "car_number_invalid_error": "Car number must be a string",
+    "car_number_is_required_error": "Car number is required",
+    "hours_invalid_error": "Hours must be a number",
+    "hours_is_required_error": "Hours is required",
+    "hours_max_error": "Hours must be less than or equal to 99",
+    "hours_min_error": "Hours must be greater than or equal to 1"
+  },
+  "error_loading_data": "Error loading data",
+  "label": {
+    "car_number": "Car number",
+    "hours": "Hours"
   },
   "login": {
     "incorrect_login_or_password_error": "Incorrect login or password",
@@ -62,11 +61,30 @@
     "notifications": "Notifications",
     "publications": "Publications"
   },
+  "no_data_found": "No data found",
   "projects": {
     "my_label": "My",
     "other_label": "Other",
     "projects_title": "Projects",
     "select_to_continue_subtitle": "Select to continue!"
+  },
+  "screen": {
+    "account_screen": "Account",
+    "camera_screen": "Camera",
+    "controls_screen": "Controls",
+    "guest_car_add_screen": "Add guest car",
+    "guest_car_edit_screen": "Edit guest car",
+    "guest_cars_screen": "Guest cars",
+    "login_screen": "Login",
+    "menu_screen": "Menu",
+    "my_car_add_screen": "Add my car",
+    "my_car_edit_screen": "Edit my car",
+    "my_cars_screen": "My cars",
+    "not_found_screen": "Oops!",
+    "notifications_screen": "Notifications",
+    "projects_screen": "Projects",
+    "publications_screen": "Publications",
+    "settings_screen": "Settings"
   },
   "settings": {
     "logout_button": "Log Out",
@@ -75,5 +93,11 @@
   "status": {
     "offline": "Offline",
     "online": "Online"
+  },
+  "toast": {
+    "car_added_successfully": "Car added successfully",
+    "car_edited_successfully": "Car edited successfully",
+    "error_adding_car": "Error adding car",
+    "error_editing_car": "Error editing car"
   }
 }

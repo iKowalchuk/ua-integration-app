@@ -1,5 +1,5 @@
 import { Text } from '@gluestack-ui/themed';
-import { Stack } from 'expo-router';
+import { Link, Stack } from 'expo-router';
 import i18n from 'i18n-js';
 import { TouchableOpacity } from 'react-native';
 
@@ -8,9 +8,11 @@ const MyCars = () => {
     <Stack.Screen
       options={{
         headerRight: () => (
-          <TouchableOpacity>
-            <Text>{i18n.t('button.add')}</Text>
-          </TouchableOpacity>
+          <Link href="/my-car-add" asChild>
+            <TouchableOpacity>
+              <Text color="$blue500">{i18n.t('button.add')}</Text>
+            </TouchableOpacity>
+          </Link>
         ),
       }}
     />

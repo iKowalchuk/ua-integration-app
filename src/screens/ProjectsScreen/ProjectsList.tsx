@@ -16,7 +16,7 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
   return (
     <FlatList
       style={{ paddingHorizontal: 16 }}
-      contentContainerStyle={{ gap: 8, paddingVertical: 16 }}
+      contentContainerStyle={{ paddingVertical: 16, gap: 8 }}
       data={data}
       renderItem={({ item }) => (
         <Button
@@ -30,7 +30,7 @@ const ProjectsList = ({ data, onPress }: ProjectsListProps) => {
           <ButtonText>{item.name}</ButtonText>
         </Button>
       )}
-      keyExtractor={(item) => item.name + item.id}
+      keyExtractor={(item) => `item-${item.name}-${item.id}`}
     />
   );
 };
