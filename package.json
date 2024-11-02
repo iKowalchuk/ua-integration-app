@@ -20,17 +20,17 @@
     "android:production": "cross-env APP_ENV=production pnpm run android",
     "ios:production": "cross-env APP_ENV=production pnpm run ios",
     "build:development:ios": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 eas build --profile development --platform ios",
-    "build:development:android": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 eas build --profile development --platform android ",
+    "build:development:android": "cross-env APP_ENV=development EXPO_NO_DOTENV=1 eas build --profile development --platform android",
     "build:staging:ios": "cross-env APP_ENV=staging EXPO_NO_DOTENV=1 eas build --profile staging --platform ios",
-    "build:staging:android": "cross-env APP_ENV=staging EXPO_NO_DOTENV=1 eas build --profile staging --platform android ",
+    "build:staging:android": "cross-env APP_ENV=staging EXPO_NO_DOTENV=1 eas build --profile staging --platform android",
     "build:production:ios": "cross-env APP_ENV=production EXPO_NO_DOTENV=1 eas build --profile production --platform ios",
-    "build:production:android": "cross-env APP_ENV=production EXPO_NO_DOTENV=1 eas build --profile production --platform android ",
+    "build:production:android": "cross-env APP_ENV=production EXPO_NO_DOTENV=1 eas build --profile production --platform android",
     "prepare": "husky",
     "app-release": "cross-env SKIP_BRANCH_PROTECTION=true np --no-publish --no-cleanup --no-release-draft",
     "version": "pnpm run prebuild && git add .",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "type-check": "tsc  --noemit",
-    "lint:translations": "eslint ./src/translations/ --fix --ext .json  ",
+    "lint:translations": "eslint ./src/translations/ --fix --ext .json",
     "test": "jest --passWithNoTests",
     "check-all": "pnpm run lint && pnpm run type-check && pnpm run lint:translations && pnpm run test",
     "test:ci": "pnpm run test --coverage",
@@ -69,7 +69,7 @@
     "lodash.memoize": "^4.1.2",
     "lucide-react-native": "^0.446.0",
     "moti": "^0.29.0",
-    "nativewind": "4.0.36",
+    "nativewind": "^4.1.21",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-error-boundary": "^4.0.13",
@@ -132,7 +132,7 @@
     "lint-staged": "^15.2.9",
     "np": "^10.0.7",
     "prettier": "^3.3.3",
-    "tailwindcss": "3.3.2",
+    "tailwindcss": "3.4.4",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3"
   },
@@ -142,6 +142,6 @@
   },
   "packageManager": "pnpm@9.8.0",
   "osMetadata": {
-    "initVersion": "6.3.4"
+    "initVersion": "6.4.0"
   }
 }
