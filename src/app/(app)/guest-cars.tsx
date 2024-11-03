@@ -14,6 +14,7 @@ import i18n from 'i18n-js';
 import { EditIcon } from 'lucide-react-native';
 import React from 'react';
 import { FlatList, RefreshControl, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useGuestCars, useRefreshByUser, useRefreshOnFocus } from '@/api';
 import Card from '@/components/Card';
@@ -26,6 +27,8 @@ import { formatDate } from '@/utils/formatDate';
 const EDIT_TIME_MINUTES = 30;
 
 const GuestCars = () => {
+  const insets = useSafeAreaInsets();
+
   const { authState } = useAuthContext();
 
   const { data, isPending, isError, refetch } = useGuestCars({
@@ -56,7 +59,11 @@ const GuestCars = () => {
 
       <FlatList
         style={{ paddingHorizontal: 16 }}
-        contentContainerStyle={{ flex: 1, paddingVertical: 16, gap: 8 }}
+        contentContainerStyle={{
+          paddingVertical: 16,
+          paddingBottom: 16 + insets.bottom,
+          gap: 8,
+        }}
         data={data}
         renderItem={({ item }) => {
           const formattedActualDate = formatDate(
