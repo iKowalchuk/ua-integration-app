@@ -91,6 +91,8 @@
     "settings": "Settings"
   },
   "status": {
+    "active": "Active",
+    "completed": "Completed",
     "offline": "Offline",
     "online": "Online"
   },

@@ -3,11 +3,12 @@ import {
   Button,
   ButtonIcon,
   Center,
+  Divider,
   HStack,
   Text,
   VStack,
 } from '@gluestack-ui/themed';
-import { isBefore } from 'date-fns';
+import { differenceInMinutes } from 'date-fns';
 import { Link, Stack } from 'expo-router';
 import i18n from 'i18n-js';
 import { EditIcon } from 'lucide-react-native';
@@ -18,7 +19,11 @@ import { useGuestCars, useRefreshByUser, useRefreshOnFocus } from '@/api';
 import Card from '@/components/Card';
 import LoadingView from '@/components/LoadingView';
 import { useAuthContext } from '@/contexts/AuthContext';
+import { getCurrentKyivTime } from '@/utils/dateTime';
 import { formatDate } from '@/utils/formatDate';
+
+// Час в хвилинах, протягом якого можна редагувати запис
+const EDIT_TIME_MINUTES = 30;
 
 const GuestCars = () => {
   const { authState } = useAuthContext();
@@ -54,41 +59,64 @@ const GuestCars = () => {
         contentContainerStyle={{ flex: 1, paddingVertical: 16, gap: 8 }}
         data={data}
         renderItem={({ item }) => {
-          const isActualDate = isBefore(new Date(), new Date(item.actualDate));
           const formattedActualDate = formatDate(
-            item.actualDate,
+            item.actualTo,
             'dd.MM.yyyy HH:mm',
           );
+
+          const currentKyivTime = getCurrentKyivTime();
+          const createdAtDate = new Date(item.createdAt);
+          const diffInMinutes = differenceInMinutes(
+            currentKyivTime,
+            createdAtDate,
+          );
+
+          const canEdit =
+            item.status === 'active' && diffInMinutes <= EDIT_TIME_MINUTES;
 
           return (
             <Card>
               <VStack p="$4" space="md">
                 <VStack>
-                  <HStack space="md" justifyContent="space-between">
+                  <HStack space="md" justifyContent="space-between" h={32}>
                     <Box h="$6">
-                      {isActualDate ? (
-                        <Text color="$green500" size="sm">
-                          {formattedActualDate}
-                        </Text>
+                      {item.status === 'active' ? (
+                        <HStack space="xs" alignItems="center">
+                          <Text color="$green500" size="sm">
+                            {i18n.t('status.active')}
+                          </Text>
+                          <Divider h={2.5} w={2.5} />
+                          <Text size="sm" opacity={0.8}>
+                            {formattedActualDate}
+                          </Text>
+                        </HStack>
                       ) : (
-                        <Text color="$red500" size="sm">
-                          {formattedActualDate}
-                        </Text>
+                        <HStack space="xs" alignItems="center">
+                          <Text color="$red500" size="sm">
+                            {i18n.t('status.completed')}
+                          </Text>
+                          <Divider h={2.5} w={2.5} />
+                          <Text size="sm" opacity={0.8}>
+                            {formattedActualDate}
+                          </Text>
+                        </HStack>
                       )}
                     </Box>
 
                     <HStack space="3xl">
-                      <Link
-                        href={{
-                          pathname: '/guest-car-edit',
-                          params: { id: item.id },
-                        }}
-                        asChild
-                      >
-                        <Button size="xs" variant="link">
-                          <ButtonIcon as={EditIcon} size="md" />
-                        </Button>
-                      </Link>
+                      {canEdit ? (
+                        <Link
+                          href={{
+                            pathname: '/guest-car-edit',
+                            params: { id: item.id },
+                          }}
+                          asChild
+                        >
+                          <Button size="xs" variant="link">
+                            <ButtonIcon as={EditIcon} size="md" />
+                          </Button>
+                        </Link>
+                      ) : null}
                     </HStack>
                   </HStack>
                   <Text size="md" fontWeight="$bold" numberOfLines={1}>

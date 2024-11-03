@@ -75,7 +75,7 @@ const GuestCarEdit = () => {
                   Number(
                     (
                       differenceInMinutes(
-                        new Date(guestCar.actualDate),
+                        new Date(guestCar.actualTo),
                         new Date(),
                       ) / 60
                     ).toFixed(2),

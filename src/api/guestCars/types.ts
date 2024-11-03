@@ -1,5 +1,8 @@
-export type GuestCar = {
+export interface GuestCar {
   id: string;
   carNumber: string;
-  actualDate: string;
-};
+  status: 'active' | 'completed';
+  actualTo: string;
+  createdAt: string;
+  completedAt: string | null;
+}

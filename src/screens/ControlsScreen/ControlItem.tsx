@@ -291,7 +291,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         <Card>
           <VStack p="$4" space="md">
             <VStack>
-              <HStack space="md" justifyContent="space-between">
+              <HStack space="md" justifyContent="space-between" h={32}>
                 <Box h="$6">
                   {buttonStatus === 'online' || buttonStatus === 'opening' ? (
                     <Text color="$green500" size="sm">

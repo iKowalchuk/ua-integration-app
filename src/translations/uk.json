@@ -91,6 +91,8 @@
     "settings": "Налаштування"
   },
   "status": {
+    "active": "Активно",
+    "completed": "Завершено",
     "offline": "Офлайн",
     "online": "Онлайн"
   },

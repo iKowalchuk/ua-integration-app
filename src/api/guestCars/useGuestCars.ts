@@ -24,7 +24,10 @@ export const useGuestCars = createQuery<Response, Variables, AxiosError>({
         return response.map((item: any) => ({
           id: item.id,
           carNumber: item.descr_guest,
-          actualDate: item.dt_actual.date,
+          actualTo: item.dt_actual.date,
+          createdAt: item.dt_created.date,
+          completedAt: item.dt_complete?.date || null,
+          status: item.complete ? 'completed' : 'active',
         }));
       }),
 });
