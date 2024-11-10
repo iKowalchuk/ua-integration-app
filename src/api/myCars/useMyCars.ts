@@ -8,14 +8,22 @@ type Response = MyCar[];
 type Variables = { apiURL: string; token: string };
 
 export const useMyCars = createQuery<Response, Variables, AxiosError>({
-  queryKey: ['guestCars'],
+  queryKey: ['myCars'],
   fetcher: (variables) =>
-    client.post(
-      '/api/ios.php',
-      {
-        token: variables.token,
-        cmd: '',
-      },
-      { baseURL: variables.apiURL },
-    ),
+    client
+      .post(
+        '/api/ios.php',
+        {
+          token: variables.token,
+          cmd: '',
+        },
+        { baseURL: variables.apiURL },
+      )
+      .then((response) => response.data?.cmd_result || [])
+      .then((response) =>
+        response.map((item: any) => ({
+          id: item.id,
+          carNumber: item.descr_car,
+        })),
+      ),
 });

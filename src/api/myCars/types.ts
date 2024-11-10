@@ -1,1 +1,4 @@
-export type MyCar = {};
+export type MyCar = {
+  id: string;
+  carNumber: string;
+};

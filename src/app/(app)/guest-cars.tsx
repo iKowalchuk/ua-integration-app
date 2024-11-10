@@ -23,7 +23,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { getCurrentKyivTime } from '@/utils/dateTime';
 import { formatDate } from '@/utils/formatDate';
 
-// Час в хвилинах, протягом якого можна редагувати запис
+// Time in minutes during which the record can be edited
 const EDIT_TIME_MINUTES = 30;
 
 const GuestCars = () => {
@@ -60,6 +60,7 @@ const GuestCars = () => {
       <FlatList
         style={{ paddingHorizontal: 16 }}
         contentContainerStyle={{
+          flexGrow: 1,
           paddingVertical: 16,
           paddingBottom: 16 + insets.bottom,
           gap: 8,
