@@ -17,7 +17,7 @@ const OperatorLayout = () => {
   }
 
   return (
-    <Stack screenOptions={{ headerBackTitleVisible: false }}>
+    <Stack screenOptions={{ headerBackButtonDisplayMode: 'minimal' }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="camera"

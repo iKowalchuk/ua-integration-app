@@ -37,6 +37,11 @@ export const unstable_settings = {
 loadSelectedTheme();
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+// Set the animation options. This is optional.
+SplashScreen.setOptions({
+  duration: 500,
+  fade: true,
+});
 
 export default function RootLayout() {
   const [loaded] = useFonts({

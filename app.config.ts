@@ -31,11 +31,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'automatic',
-  splash: {
-    image: './assets/splash.png',
-    resizeMode: 'cover',
-    backgroundColor: '#2E3C4B',
-  },
+  newArchEnabled: true,
   updates: {
     fallbackToCacheTimeout: 0,
   },
@@ -59,6 +55,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundler: 'metro',
   },
   plugins: [
+    [
+      'expo-splash-screen',
+      {
+        backgroundColor: '#2E3C4B',
+        image: './assets/splash.png',
+        imageWidth: 1284,
+        resizeMode: 'cover',
+      },
+    ],
     [
       'expo-font',
       {
