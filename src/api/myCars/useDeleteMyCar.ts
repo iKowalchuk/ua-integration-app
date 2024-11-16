@@ -10,20 +10,18 @@ type Variables = {
   payload: {
     carId: string;
     carNumber: string;
-    description: string;
   };
 };
 
-export const useEditMyCar = createMutation<Response, Variables, AxiosError>({
+export const useDeleteMyCar = createMutation<Response, Variables, AxiosError>({
   mutationFn: (variables) =>
     client
       .post(
         '/api/ios.php',
         {
           token: variables.token,
-          cmd: 'cmd_edit_auto_user',
+          cmd: 'cmd_delete_auto_user',
           num_auto: variables.payload.carNumber,
-          descr_auto: variables.payload.description,
         },
         { baseURL: variables.apiURL },
       )

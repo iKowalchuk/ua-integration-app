@@ -8,13 +8,7 @@ import {
 } from '@gluestack-ui/themed';
 import { useRouter } from 'expo-router';
 import i18n from 'i18n-js';
-import {
-  BellIcon,
-  CarFrontIcon,
-  CarIcon,
-  ChevronRightIcon,
-  NewspaperIcon,
-} from 'lucide-react-native';
+import { CarFrontIcon, CarIcon, ChevronRightIcon } from 'lucide-react-native';
 import { TouchableOpacity } from 'react-native';
 
 import Card from '@/components/Card';
@@ -66,7 +60,8 @@ const TabMenu = () => {
             </VStack>
           </TouchableOpacity>
         </Card>
-        <Card>
+        {/* TODO: add publications */}
+        {/* <Card>
           <TouchableOpacity
             onPress={() => {
               router.push('/publications');
@@ -106,7 +101,7 @@ const TabMenu = () => {
               </HStack>
             </VStack>
           </TouchableOpacity>
-        </Card>
+        </Card> */}
       </VStack>
     </ScrollView>
   );

@@ -14,9 +14,26 @@ const GuestCarAdd = () => {
 
   const { authState } = useAuthContext();
 
-  const { mutate: addGuestCar, isPending } = useAddGuestCar();
+  const { data: guestCars } = useGuestCars({
+    variables: {
+      // @ts-ignore
+      token: authState.session.token,
+      // @ts-ignore
+      apiURL: authState.session.apiURL,
+    },
+  });
+  const { mutate: addGuestCar, isPending: isAddingGuestCar } = useAddGuestCar();
 
   const handleSubmit = (data: FormType) => {
+    const existingCar = guestCars?.find(
+      (car) => car.carNumber.toLowerCase() === data.carNumber.toLowerCase(),
+    );
+
+    if (existingCar) {
+      showErrorMessage(i18n.t('toast.car_number_exists'));
+      return;
+    }
+
     addGuestCar(
       {
         // @ts-ignore
@@ -42,8 +59,12 @@ const GuestCarAdd = () => {
             }),
           });
         },
-        onError: () => {
-          showErrorMessage(i18n.t('toast.error_adding_car'));
+        onError: (error: any) => {
+          if (error.message === 'car_number_exists') {
+            showErrorMessage(i18n.t('toast.car_number_exists'));
+          } else {
+            showErrorMessage(i18n.t('toast.error_adding_car'));
+          }
         },
       },
     );
@@ -54,8 +75,8 @@ const GuestCarAdd = () => {
       <GuestCarForm
         onSubmit={handleSubmit}
         renderButton={({ onPress }) => (
-          <Button onPress={onPress} isDisabled={isPending}>
-            {isPending && <ButtonSpinner mr="$1" />}
+          <Button onPress={onPress} isDisabled={isAddingGuestCar}>
+            {isAddingGuestCar && <ButtonSpinner mr="$1" />}
             <ButtonText>{i18n.t('button.add')}</ButtonText>
           </Button>
         )}

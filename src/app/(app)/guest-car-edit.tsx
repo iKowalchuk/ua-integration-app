@@ -27,11 +27,23 @@ const GuestCarEdit = () => {
       apiURL: authState.session.apiURL,
     },
   });
-  const { mutate: editGuestCar, isPending } = useEditGuestCar();
+  const { mutate: editGuestCar, isPending: isEditingGuestCar } =
+    useEditGuestCar();
 
-  const guestCar = guestCars?.find((item) => item.id === carId);
+  const guestCar = guestCars?.find((car) => car.id === carId);
 
   const handleSubmit = (data: FormType) => {
+    const existingCar = guestCars?.find(
+      (car) =>
+        car.carNumber.toLowerCase() === data.carNumber.toLowerCase() &&
+        car.id !== carId,
+    );
+
+    if (existingCar) {
+      showErrorMessage(i18n.t('toast.car_number_exists'));
+      return;
+    }
+
     editGuestCar(
       {
         // @ts-ignore
@@ -72,13 +84,11 @@ const GuestCarEdit = () => {
             ? {
                 carNumber: guestCar.carNumber,
                 hours: Math.max(
-                  Number(
-                    (
-                      differenceInMinutes(
-                        new Date(guestCar.actualTo),
-                        new Date(),
-                      ) / 60
-                    ).toFixed(2),
+                  Math.ceil(
+                    differenceInMinutes(
+                      new Date(guestCar.actualTo),
+                      new Date(),
+                    ) / 60,
                   ),
                   0,
                 ),
@@ -87,8 +97,8 @@ const GuestCarEdit = () => {
         }
         onSubmit={handleSubmit}
         renderButton={({ onPress }) => (
-          <Button onPress={onPress} isDisabled={isPending}>
-            {isPending && <ButtonSpinner mr="$1" />}
+          <Button onPress={onPress} isDisabled={isEditingGuestCar}>
+            {isEditingGuestCar && <ButtonSpinner mr="$1" />}
             <ButtonText>{i18n.t('button.save')}</ButtonText>
           </Button>
         )}

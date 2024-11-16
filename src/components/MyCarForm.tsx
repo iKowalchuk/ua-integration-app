@@ -1,3 +1,5 @@
+import { Textarea } from '@gluestack-ui/themed';
+import { TextareaInput } from '@gluestack-ui/themed';
 import {
   FormControl,
   FormControlError,
@@ -21,6 +23,13 @@ const schema = z.object({
       invalid_type_error: 'car_number_invalid_error',
     })
     .min(1, { message: 'car_number_is_required_error' }),
+  description: z
+    .string({
+      required_error: 'description_is_required_error',
+      invalid_type_error: 'description_invalid_error',
+    })
+    .min(1, { message: 'description_is_required_error' })
+    .max(100, { message: 'description_max_error' }),
 });
 
 export type FormType = z.infer<typeof schema>;
@@ -47,7 +56,12 @@ const MyCarForm = ({
 
   return (
     <VStack space="md">
-      <FormControl size="md" isInvalid={!!errors.carNumber} isRequired={true}>
+      <FormControl
+        size="md"
+        isInvalid={!!errors.carNumber}
+        isRequired={true}
+        isDisabled={initialValues !== undefined}
+      >
         <FormControlLabel mb="$1">
           <FormControlLabelText>
             {i18n.t('label.car_number')}
@@ -71,6 +85,34 @@ const MyCarForm = ({
         <FormControlError>
           <FormControlErrorText>
             {i18n.t('error.' + errors?.carNumber?.message)}
+          </FormControlErrorText>
+        </FormControlError>
+      </FormControl>
+
+      <FormControl size="md" isInvalid={!!errors.description} isRequired={true}>
+        <FormControlLabel mb="$1">
+          <FormControlLabelText>
+            {i18n.t('label.description')}
+          </FormControlLabelText>
+        </FormControlLabel>
+        <Controller
+          name="description"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Textarea>
+              <TextareaInput
+                type="text"
+                defaultValue={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                returnKeyType="done"
+              />
+            </Textarea>
+          )}
+        />
+        <FormControlError>
+          <FormControlErrorText>
+            {i18n.t('error.' + errors?.description?.message)}
           </FormControlErrorText>
         </FormControlError>
       </FormControl>

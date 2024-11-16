@@ -2,7 +2,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Button, ButtonIcon, HStack } from '@gluestack-ui/themed';
 import { Tabs, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
-import { CircleUserRoundIcon, SettingsIcon } from 'lucide-react-native';
+import { CircleUserRoundIcon } from 'lucide-react-native';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -64,7 +64,8 @@ const TabLayout = () => {
               >
                 <ButtonIcon as={CircleUserRoundIcon} size="xl" />
               </Button>
-              <Button
+              {/* TODO: add settings */}
+              {/* <Button
                 size="xs"
                 variant="link"
                 action="secondary"
@@ -73,7 +74,7 @@ const TabLayout = () => {
                 }}
               >
                 <ButtonIcon as={SettingsIcon} size="xl" />
-              </Button>
+              </Button> */}
             </HStack>
           ),
         }}

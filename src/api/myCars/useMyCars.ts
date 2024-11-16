@@ -15,7 +15,7 @@ export const useMyCars = createQuery<Response, Variables, AxiosError>({
         '/api/ios.php',
         {
           token: variables.token,
-          cmd: '',
+          cmd: 'cmd_get_auto_user',
         },
         { baseURL: variables.apiURL },
       )
@@ -23,7 +23,8 @@ export const useMyCars = createQuery<Response, Variables, AxiosError>({
       .then((response) =>
         response.map((item: any) => ({
           id: item.id,
-          carNumber: item.descr_car,
+          carNumber: item.number_auto,
+          description: item.descr,
         })),
       ),
 });

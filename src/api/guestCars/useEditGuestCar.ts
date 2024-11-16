@@ -28,5 +28,7 @@ export const useEditGuestCar = createMutation<Response, Variables, AxiosError>({
         },
         { baseURL: variables.apiURL },
       )
+      .then((response) => response.data?.cmd_result || [])
+      .then((response) => response[0])
       .then((_response) => {}),
 });

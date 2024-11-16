@@ -12,8 +12,8 @@ const ControlsList = ({ data }: ControlsListProps) => {
   return (
     <IOFlatList
       contentContainerStyle={{
-        gap: 16,
         padding: 16,
+        gap: 8,
       }}
       data={data}
       renderItem={({ item }) => <ControlItem control={item} />}

@@ -6,6 +6,7 @@
   "button": {
     "add": "Додати",
     "cancel": "Скасувати",
+    "delete": "Видалити",
     "favorite_add": "Додати в обране",
     "favorite_remove": "Видалити з обраного",
     "open": "Відкрити",
@@ -31,9 +32,18 @@
       "favorites": "Обране"
     }
   },
+  "dialog": {
+    "delete_car": {
+      "message": "Ви впевнені, що хочете видалити авто {{carNumber}}?",
+      "title": "Видалити авто"
+    }
+  },
   "error": {
     "car_number_invalid_error": "Номер авто повинен бути рядком",
     "car_number_is_required_error": "Введіть номер авто",
+    "description_invalid_error": "Опис повинен бути рядком",
+    "description_is_required_error": "Введіть опис",
+    "description_max_error": "Опис повинен бути менше або дорівнювати 100 символам",
     "hours_invalid_error": "Години повинні бути числом",
     "hours_is_required_error": "Введіть години",
     "hours_max_error": "Години повинні бути менше або дорівнювати 99",
@@ -42,6 +52,7 @@
   "error_loading_data": "Помилка завантаження даних",
   "label": {
     "car_number": "Номер авто",
+    "description": "Опис",
     "hours": "Години"
   },
   "login": {
@@ -98,8 +109,11 @@
   },
   "toast": {
     "car_added_successfully": "Авто успішно додано",
+    "car_deleted": "Авто видалено",
     "car_edited_successfully": "Авто успішно відредаговано",
+    "car_number_exists": "Авто з таким номером вже існує",
     "error_adding_car": "Помилка додавання авто",
+    "error_deleting_car": "Помилка видалення авто",
     "error_editing_car": "Помилка редагування авто"
   }
 }

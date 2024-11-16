@@ -14,16 +14,33 @@ const MyCarAdd = () => {
 
   const { authState } = useAuthContext();
 
-  const { mutate: addMyCar, isPending } = useAddMyCar();
+  const { data: myCars } = useMyCars({
+    variables: {
+      // @ts-ignore
+      token: authState.session.token,
+      // @ts-ignore
+      apiURL: authState.session.apiURL,
+    },
+  });
+  const { mutate: addMyCar, isPending: isAddingMyCar } = useAddMyCar();
 
   const handleSubmit = (data: FormType) => {
+    const existingCar = myCars?.find(
+      (car) => car.carNumber.toLowerCase() === data.carNumber.toLowerCase(),
+    );
+
+    if (existingCar) {
+      showErrorMessage(i18n.t('toast.car_number_exists'));
+      return;
+    }
+
     addMyCar(
       {
         // @ts-ignore
         token: authState.session.token,
         // @ts-ignore
         apiURL: authState.session.apiURL,
-        payload: { carNumber: data.carNumber },
+        payload: { carNumber: data.carNumber, description: data.description },
       },
       {
         onSuccess: () => {
@@ -54,8 +71,8 @@ const MyCarAdd = () => {
       <MyCarForm
         onSubmit={handleSubmit}
         renderButton={({ onPress }) => (
-          <Button onPress={onPress} isDisabled={isPending}>
-            {isPending && <ButtonSpinner mr="$1" />}
+          <Button onPress={onPress} isDisabled={isAddingMyCar}>
+            {isAddingMyCar && <ButtonSpinner mr="$1" />}
             <ButtonText>{i18n.t('button.add')}</ButtonText>
           </Button>
         )}

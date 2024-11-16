@@ -26,18 +26,33 @@ const MyCarEdit = () => {
       apiURL: authState.session.apiURL,
     },
   });
-  const { mutate: editMyCar, isPending } = useEditMyCar();
+  const { mutate: editMyCar, isPending: isEditingMyCar } = useEditMyCar();
 
-  const myCar = myCars?.find((item) => item.id === carId);
+  const myCar = myCars?.find((car) => car.id === carId);
 
   const handleSubmit = (data: FormType) => {
+    const existingCar = myCars?.find(
+      (car) =>
+        car.carNumber.toLowerCase() === data.carNumber.toLowerCase() &&
+        car.id !== carId,
+    );
+
+    if (existingCar) {
+      showErrorMessage(i18n.t('toast.car_number_exists'));
+      return;
+    }
+
     editMyCar(
       {
         // @ts-ignore
         token: authState.session.token,
         // @ts-ignore
         apiURL: authState.session.apiURL,
-        payload: { carId, carNumber: data.carNumber },
+        payload: {
+          carId,
+          carNumber: data.carNumber,
+          description: data.description,
+        },
       },
       {
         onSuccess: () => {
@@ -70,13 +85,14 @@ const MyCarEdit = () => {
           myCar
             ? {
                 carNumber: myCar.carNumber,
+                description: myCar.description,
               }
             : undefined
         }
         onSubmit={handleSubmit}
         renderButton={({ onPress }) => (
-          <Button onPress={onPress} isDisabled={isPending}>
-            {isPending && <ButtonSpinner mr="$1" />}
+          <Button onPress={onPress} isDisabled={isEditingMyCar}>
+            {isEditingMyCar && <ButtonSpinner mr="$1" />}
             <ButtonText>{i18n.t('button.save')}</ButtonText>
           </Button>
         )}

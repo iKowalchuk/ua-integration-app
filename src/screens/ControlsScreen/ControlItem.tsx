@@ -141,7 +141,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
             <VStack space="md">
               <HStack space="md" justifyContent="space-between">
                 <Skeleton width={64} height={20} borderRadius={5} />
-                <HStack space="3xl">
+                <HStack space="2xl">
                   <Skeleton width={24} height={24} borderRadius={5} />
                   <Skeleton width={24} height={24} borderRadius={5} />
                 </HStack>
@@ -304,7 +304,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                   )}
                 </Box>
 
-                <HStack space="3xl">
+                <HStack space="2xl">
                   <Button size="xs" variant="link" onPress={handleVideoPress}>
                     <ButtonIcon as={VideoIcon} size="xl" />
                   </Button>

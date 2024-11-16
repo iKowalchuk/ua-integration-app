@@ -31,7 +31,12 @@ const GuestCars = () => {
 
   const { authState } = useAuthContext();
 
-  const { data, isPending, isError, refetch } = useGuestCars({
+  const {
+    data: guestCars,
+    isPending: isPendingGuestCars,
+    isError: isErrorGuestCars,
+    refetch: refetchGuestCars,
+  } = useGuestCars({
     variables: {
       // @ts-ignore
       token: authState.session.token,
@@ -40,8 +45,9 @@ const GuestCars = () => {
     },
   });
 
-  useRefreshOnFocus(refetch);
-  const { isRefetchingByUser, refetchByUser } = useRefreshByUser(refetch);
+  useRefreshOnFocus(refetchGuestCars);
+  const { isRefetchingByUser, refetchByUser } =
+    useRefreshByUser(refetchGuestCars);
 
   return (
     <>
@@ -65,7 +71,7 @@ const GuestCars = () => {
           paddingBottom: 16 + insets.bottom,
           gap: 8,
         }}
-        data={data}
+        data={guestCars}
         renderItem={({ item }) => {
           const formattedActualDate = formatDate(
             item.actualTo,
@@ -111,7 +117,7 @@ const GuestCars = () => {
                       )}
                     </Box>
 
-                    <HStack space="3xl">
+                    <HStack space="2xl">
                       {canEdit ? (
                         <Link
                           href={{
@@ -137,11 +143,11 @@ const GuestCars = () => {
         }}
         keyExtractor={(item) => `item-${item.id}`}
         ListEmptyComponent={() => {
-          if (isPending) {
+          if (isPendingGuestCars) {
             return <LoadingView />;
           }
 
-          if (isError) {
+          if (isErrorGuestCars) {
             return (
               <Center flex={1}>
                 <Text>{i18n.t('error_loading_data')}</Text>

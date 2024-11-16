@@ -24,7 +24,7 @@ const schema = z.object({
   hours: z
     .number({
       required_error: 'hours_is_required_error',
-      invalid_type_error: 'hours_invalid_error',
+      invalid_type_error: 'hours_is_required_error',
     })
     .min(1, { message: 'hours_min_error' })
     .max(99, { message: 'hours_max_error' }),
@@ -95,7 +95,7 @@ const GuestCarForm = ({
                 type="text"
                 defaultValue={value ? `${value}` : ''}
                 onChangeText={(value) => {
-                  onChange(value === '' ? undefined : parseInt(value, 10));
+                  onChange(value === '' ? '' : parseInt(value, 10));
                 }}
                 onBlur={onBlur}
                 keyboardType="number-pad"

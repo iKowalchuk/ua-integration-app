@@ -6,6 +6,7 @@
   "button": {
     "add": "Добавить",
     "cancel": "Отмена",
+    "delete": "Удалить",
     "favorite_add": "Добавить в избранное",
     "favorite_remove": "Удалить из избранного",
     "open": "Открыть",
@@ -31,9 +32,18 @@
       "favorites": "Избранное"
     }
   },
+  "dialog": {
+    "delete_car": {
+      "message": "Вы уверены, что хотите удалить авто {{carNumber}}?",
+      "title": "Удалить авто"
+    }
+  },
   "error": {
     "car_number_invalid_error": "Номер авто должен быть строкой",
     "car_number_is_required_error": "Введите номер авто",
+    "description_invalid_error": "Описание должно быть строкой",
+    "description_is_required_error": "Введите описание",
+    "description_max_error": "Описание должно быть не более 100 символов",
     "hours_invalid_error": "Количество часов должно быть числом",
     "hours_is_required_error": "Введите количество часов",
     "hours_max_error": "Количество часов должно быть не более 99",
@@ -42,6 +52,7 @@
   "error_loading_data": "Ошибка загрузки данных",
   "label": {
     "car_number": "Номер авто",
+    "description": "Описание",
     "hours": "Часы"
   },
   "login": {
@@ -98,8 +109,11 @@
   },
   "toast": {
     "car_added_successfully": "Авто успешно добавлено",
+    "car_deleted": "Авто удалено",
     "car_edited_successfully": "Авто успешно отредактировано",
+    "car_number_exists": "Авто с таким номером уже существует",
     "error_adding_car": "Ошибка добавления авто",
+    "error_deleting_car": "Ошибка удаления авто",
     "error_editing_car": "Ошибка редактирования авто"
   }
 }

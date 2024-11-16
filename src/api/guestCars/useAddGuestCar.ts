@@ -27,5 +27,11 @@ export const useAddGuestCar = createMutation<Response, Variables, AxiosError>({
         },
         { baseURL: variables.apiURL },
       )
-      .then((_response) => {}),
+      .then((response) => response.data?.cmd_result || [])
+      .then((response) => response[0])
+      .then((response) => {
+        if (response.result === 'error') {
+          throw new Error('car_number_exists');
+        }
+      }),
 });

@@ -6,6 +6,7 @@
   "button": {
     "add": "Add",
     "cancel": "Cancel",
+    "delete": "Delete",
     "favorite_add": "Add to favorites",
     "favorite_remove": "Remove from favorites",
     "open": "Open",
@@ -31,9 +32,18 @@
       "favorites": "Favorites"
     }
   },
+  "dialog": {
+    "delete_car": {
+      "message": "Are you sure you want to delete car {{carNumber}}?",
+      "title": "Delete Car"
+    }
+  },
   "error": {
     "car_number_invalid_error": "Car number must be a string",
     "car_number_is_required_error": "Car number is required",
+    "description_invalid_error": "Description must be a string",
+    "description_is_required_error": "Description is required",
+    "description_max_error": "Description must be less than or equal to 100 characters",
     "hours_invalid_error": "Hours must be a number",
     "hours_is_required_error": "Hours is required",
     "hours_max_error": "Hours must be less than or equal to 99",
@@ -42,6 +52,7 @@
   "error_loading_data": "Error loading data",
   "label": {
     "car_number": "Car number",
+    "description": "Description",
     "hours": "Hours"
   },
   "login": {
@@ -98,8 +109,11 @@
   },
   "toast": {
     "car_added_successfully": "Car added successfully",
+    "car_deleted": "Car deleted",
     "car_edited_successfully": "Car edited successfully",
+    "car_number_exists": "Car number already exists",
     "error_adding_car": "Error adding car",
+    "error_deleting_car": "Error deleting car",
     "error_editing_car": "Error editing car"
   }
 }
