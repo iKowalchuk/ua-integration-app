@@ -143,6 +143,6 @@
   },
   "packageManager": "pnpm@9.8.0",
   "osMetadata": {
-    "initVersion": "6.4.1"
+    "initVersion": "6.5.0"
   }
 }

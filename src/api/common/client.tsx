@@ -1,5 +1,6 @@
-import { Env } from '@env';
 import axios from 'axios';
+
+import { Env } from '@/lib/env';
 
 const client = axios.create();
 

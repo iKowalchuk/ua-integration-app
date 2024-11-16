@@ -21,8 +21,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { APIProvider } from '@/api';
 import { AuthProvider } from '@/contexts/AuthContext';
-import { loadSelectedTheme } from '@/core';
-import { useThemeConfig } from '@/core/use-theme-config';
+import { loadSelectedTheme } from '@/lib';
+import { useThemeConfig } from '@/lib/use-theme-config';
 
 export {
   // Catch any errors thrown by the Layout component.

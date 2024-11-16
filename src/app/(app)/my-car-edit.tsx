@@ -6,8 +6,8 @@ import { showMessage } from 'react-native-flash-message';
 
 import { queryClient, useEditMyCar, useMyCars } from '@/api';
 import MyCarForm, { type FormType } from '@/components/MyCarForm';
+import { showErrorMessage } from '@/components/ui';
 import { useAuthContext } from '@/contexts/AuthContext';
-import { showErrorMessage } from '@/ui';
 
 const MyCarEdit = () => {
   const navigation = useNavigation();
