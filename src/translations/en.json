@@ -41,13 +41,16 @@
   "error": {
     "car_number_invalid_error": "Car number must be a string",
     "car_number_is_required_error": "Car number is required",
+    "car_number_max_error": "Car number must be less than or equal to {{max}}",
+    "car_number_min_error": "Car number must be greater than or equal to {{min}}",
     "description_invalid_error": "Description must be a string",
     "description_is_required_error": "Description is required",
-    "description_max_error": "Description must be less than or equal to 100 characters",
+    "description_max_error": "Description must be less than or equal to {{max}}",
+    "description_min_error": "Description must be greater than or equal to {{min}}",
     "hours_invalid_error": "Hours must be a number",
     "hours_is_required_error": "Hours is required",
-    "hours_max_error": "Hours must be less than or equal to 99",
-    "hours_min_error": "Hours must be greater than or equal to 1"
+    "hours_max_error": "Hours must be less than or equal to {{max}}",
+    "hours_min_error": "Hours must be greater than or equal to {{min}}"
   },
   "error_loading_data": "Error loading data",
   "label": {

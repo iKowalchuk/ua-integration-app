@@ -41,13 +41,16 @@
   "error": {
     "car_number_invalid_error": "Номер авто повинен бути рядком",
     "car_number_is_required_error": "Введіть номер авто",
+    "car_number_max_error": "Номер авто повинен бути менше або дорівнювати {{max}}",
+    "car_number_min_error": "Номер авто повинен бути більше або дорівнювати {{min}}",
     "description_invalid_error": "Опис повинен бути рядком",
     "description_is_required_error": "Введіть опис",
-    "description_max_error": "Опис повинен бути менше або дорівнювати 100 символам",
+    "description_max_error": "Опис повинен бути менше або дорівнювати {{max}}",
+    "description_min_error": "Опис повинен бути більше або дорівнювати {{min}}",
     "hours_invalid_error": "Години повинні бути числом",
     "hours_is_required_error": "Введіть години",
-    "hours_max_error": "Години повинні бути менше або дорівнювати 99",
-    "hours_min_error": "Години повинні бути більше або дорівнювати 1"
+    "hours_max_error": "Години повинні бути менше або дорівнювати {{max}}",
+    "hours_min_error": "Години повинні бути більше або дорівнювати {{min}}"
   },
   "error_loading_data": "Помилка завантаження даних",
   "label": {

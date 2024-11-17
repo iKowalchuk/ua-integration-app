@@ -14,20 +14,27 @@ import React, { type ReactNode } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+const CAR_NUMBER_MIN = 8;
+const CAR_NUMBER_MAX = 8;
+
+const HOURS_MIN = 1;
+const HOURS_MAX = 99;
+
 const schema = z.object({
   carNumber: z
     .string({
       required_error: 'car_number_is_required_error',
       invalid_type_error: 'car_number_invalid_error',
     })
-    .min(1, { message: 'car_number_is_required_error' }),
+    .min(CAR_NUMBER_MIN, { message: 'car_number_min_error' })
+    .max(CAR_NUMBER_MAX, { message: 'car_number_max_error' }),
   hours: z
     .number({
       required_error: 'hours_is_required_error',
       invalid_type_error: 'hours_is_required_error',
     })
-    .min(1, { message: 'hours_min_error' })
-    .max(99, { message: 'hours_max_error' }),
+    .min(HOURS_MIN, { message: 'hours_min_error' })
+    .max(HOURS_MAX, { message: 'hours_max_error' }),
 });
 
 export type FormType = z.infer<typeof schema>;
@@ -77,7 +84,10 @@ const GuestCarForm = ({
         />
         <FormControlError>
           <FormControlErrorText>
-            {i18n.t('error.' + errors?.carNumber?.message)}
+            {i18n.t('error.' + errors?.carNumber?.message, {
+              min: CAR_NUMBER_MIN,
+              max: CAR_NUMBER_MAX,
+            })}
           </FormControlErrorText>
         </FormControlError>
       </FormControl>
@@ -106,7 +116,10 @@ const GuestCarForm = ({
         />
         <FormControlError>
           <FormControlErrorText>
-            {i18n.t('error.' + errors?.hours?.message)}
+            {i18n.t('error.' + errors?.hours?.message, {
+              min: HOURS_MIN,
+              max: HOURS_MAX,
+            })}
           </FormControlErrorText>
         </FormControlError>
       </FormControl>

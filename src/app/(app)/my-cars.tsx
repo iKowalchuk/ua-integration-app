@@ -19,7 +19,7 @@ import { Link, Stack } from 'expo-router';
 import i18n from 'i18n-js';
 import { EditIcon, TrashIcon } from 'lucide-react-native';
 import { useState } from 'react';
-import { FlatList, RefreshControl, TouchableOpacity } from 'react-native';
+import { FlatList, RefreshControl } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -105,9 +105,11 @@ const MyCars = () => {
           headerRight: () =>
             canAddMoreCars ? (
               <Link href="/my-car-add" asChild>
-                <TouchableOpacity>
-                  <Text color="$blue500">{i18n.t('button.add')}</Text>
-                </TouchableOpacity>
+                <Button variant="link" action="secondary">
+                  <ButtonText color="$blue500">
+                    {i18n.t('button.add')}
+                  </ButtonText>
+                </Button>
               </Link>
             ) : null,
         }}

@@ -41,13 +41,16 @@
   "error": {
     "car_number_invalid_error": "Номер авто должен быть строкой",
     "car_number_is_required_error": "Введите номер авто",
+    "car_number_max_error": "Номер авто должен быть меньше или равен {{max}}",
+    "car_number_min_error": "Номер авто должен быть больше или равен {{min}}",
     "description_invalid_error": "Описание должно быть строкой",
     "description_is_required_error": "Введите описание",
-    "description_max_error": "Описание должно быть не более 100 символов",
+    "description_max_error": "Описание должно быть меньше или равно {{max}}",
+    "description_min_error": "Описание должно быть больше или равно {{min}}",
     "hours_invalid_error": "Количество часов должно быть числом",
     "hours_is_required_error": "Введите количество часов",
-    "hours_max_error": "Количество часов должно быть не более 99",
-    "hours_min_error": "Количество часов должно быть не менее 1"
+    "hours_max_error": "Количество часов должно быть меньше или равно {{max}}",
+    "hours_min_error": "Количество часов должно быть больше или равно {{min}}"
   },
   "error_loading_data": "Ошибка загрузки данных",
   "label": {
