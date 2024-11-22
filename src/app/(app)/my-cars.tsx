@@ -17,7 +17,7 @@ import {
 import { ButtonSpinner } from '@gluestack-ui/themed';
 import { Link, Stack } from 'expo-router';
 import i18n from 'i18n-js';
-import { EditIcon, TrashIcon } from 'lucide-react-native';
+import { CirclePlusIcon, EditIcon, TrashIcon } from 'lucide-react-native';
 import { useState } from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { showMessage } from 'react-native-flash-message';
@@ -105,10 +105,8 @@ const MyCars = () => {
           headerRight: () =>
             canAddMoreCars ? (
               <Link href="/my-car-add" asChild>
-                <Button variant="link" action="secondary">
-                  <ButtonText color="$blue500">
-                    {i18n.t('button.add')}
-                  </ButtonText>
+                <Button size="xs" variant="link">
+                  <ButtonIcon as={CirclePlusIcon} size="xl" />
                 </Button>
               </Link>
             ) : null,

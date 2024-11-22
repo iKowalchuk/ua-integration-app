@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   ButtonIcon,
-  ButtonText,
   Center,
   Divider,
   HStack,
@@ -12,7 +11,7 @@ import {
 import { differenceInMinutes } from 'date-fns';
 import { Link, Stack } from 'expo-router';
 import i18n from 'i18n-js';
-import { EditIcon } from 'lucide-react-native';
+import { CirclePlusIcon, EditIcon } from 'lucide-react-native';
 import React from 'react';
 import { FlatList, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -56,8 +55,8 @@ const GuestCars = () => {
         options={{
           headerRight: () => (
             <Link href="/guest-car-add" asChild>
-              <Button variant="link" action="secondary">
-                <ButtonText color="$blue500">{i18n.t('button.add')}</ButtonText>
+              <Button size="xs" variant="link">
+                <ButtonIcon as={CirclePlusIcon} size="xl" />
               </Button>
             </Link>
           ),
