@@ -31,12 +31,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   orientation: 'portrait',
   icon: './assets/icon.png',
   userInterfaceStyle: 'automatic',
-  newArchEnabled: true,
+  newArchEnabled: false,
   updates: {
     fallbackToCacheTimeout: 0,
   },
   assetBundlePatterns: ['**/*'],
   ios: {
+    config: {
+      usesNonExemptEncryption: false,
+    },
     supportsTablet: true,
     bundleIdentifier: Env.BUNDLE_ID,
   },
