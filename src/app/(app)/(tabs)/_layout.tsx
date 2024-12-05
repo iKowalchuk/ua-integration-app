@@ -1,6 +1,8 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Tabs } from 'expo-router';
+import { Button, ButtonIcon, HStack } from '@gluestack-ui/themed';
+import { Link, Tabs } from 'expo-router';
 import i18n from 'i18n-js';
+import { CircleUserRoundIcon } from 'lucide-react-native';
 import React from 'react';
 import { useColorScheme } from 'react-native';
 
@@ -28,7 +30,7 @@ const TabLayout = () => {
       <Tabs.Screen
         name="index"
         options={{
-          title: i18n.t('common.controls_screen'),
+          title: i18n.t('screen.controls_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="key-outline" color={color} />
           ),
@@ -37,18 +39,31 @@ const TabLayout = () => {
       <Tabs.Screen
         name="projects"
         options={{
-          title: i18n.t('common.projects_screen'),
+          title: i18n.t('screen.projects_screen'),
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="business-outline" color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="menu"
         options={{
-          title: i18n.t('common.settings_screen'),
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="settings-outline" color={color} />
+          title: i18n.t('screen.menu_screen'),
+          tabBarIcon: ({ color }) => <TabBarIcon name="menu" color={color} />,
+          headerRight: () => (
+            <HStack space="2xl" pr={16}>
+              <Link href="/account" asChild>
+                <Button size="xs" variant="link" action="secondary">
+                  <ButtonIcon as={CircleUserRoundIcon} size="xl" />
+                </Button>
+              </Link>
+              {/* TODO: add settings */}
+              {/* <Link href="/settings" asChild>
+                <Button size="xs" variant="link" action="secondary">
+                  <ButtonIcon as={SettingsIcon} size="xl" />
+                </Button>
+              </Link> */}
+            </HStack>
           ),
         }}
       />

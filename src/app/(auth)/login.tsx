@@ -1,6 +1,6 @@
 import { Redirect, useLocalSearchParams } from 'expo-router';
 
-import { Project } from '@/api/getProjects';
+import { type Project } from '@/api/getProjects';
 import LoginScreen from '@/screens/LoginScreen';
 
 const Login = () => {

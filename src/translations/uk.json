@@ -1,0 +1,122 @@
+{
+  "404": {
+    "go_to_home_screen": "Перейти до головного екрану!",
+    "this_screen_doesnt_exist": "Цей екран не існує."
+  },
+  "button": {
+    "add": "Додати",
+    "cancel": "Скасувати",
+    "delete": "Видалити",
+    "favorite_add": "Додати в обране",
+    "favorite_remove": "Видалити з обраного",
+    "open": "Відкрити",
+    "opened": "Відкрито",
+    "opening": "Відкриття...",
+    "rename": "Змінити назву",
+    "save": "Зберегти"
+  },
+  "camera": {
+    "no_signal": "Немає сигналу."
+  },
+  "controls": {
+    "no_favorites": "Ваш список обраних порожній.",
+    "open_confirm": {
+      "subtitle": "Ви впевнені, що бажаєте відкрити цей елемент керування?"
+    },
+    "rename_modal": {
+      "name_is_required_error": "Введіть назву",
+      "name_label": "Назва",
+      "title": "Змінити назву"
+    },
+    "section": {
+      "favorites": "Обране"
+    }
+  },
+  "dialog": {
+    "delete_car": {
+      "message": "Ви впевнені, що хочете видалити авто {{carNumber}}?",
+      "title": "Видалити авто"
+    }
+  },
+  "error": {
+    "car_number_invalid_error": "Номер авто повинен бути рядком",
+    "car_number_is_required_error": "Введіть номер авто",
+    "car_number_max_error": "Номер авто повинен бути менше або дорівнювати {{max}}",
+    "car_number_min_error": "Номер авто повинен бути більше або дорівнювати {{min}}",
+    "description_invalid_error": "Опис повинен бути рядком",
+    "description_is_required_error": "Введіть опис",
+    "description_max_error": "Опис повинен бути менше або дорівнювати {{max}}",
+    "description_min_error": "Опис повинен бути більше або дорівнювати {{min}}",
+    "hours_invalid_error": "Години повинні бути числом",
+    "hours_is_required_error": "Введіть години",
+    "hours_max_error": "Години повинні бути менше або дорівнювати {{max}}",
+    "hours_min_error": "Години повинні бути більше або дорівнювати {{min}}"
+  },
+  "error_loading_data": "Помилка завантаження даних",
+  "label": {
+    "car_number": "Номер авто",
+    "description": "Опис",
+    "hours": "Години"
+  },
+  "login": {
+    "incorrect_login_or_password_error": "Введено неправильний логін або пароль",
+    "loading_label": "Завантаження",
+    "login_button": "Увійти",
+    "login_is_required_error": "Введіть логін",
+    "login_label": "Логін",
+    "password_is_required_error": "Введіть пароль",
+    "password_label": "Пароль",
+    "sign_in_to_continue_subtitle": "Увійдіть, щоб продовжити!",
+    "welcome_title": "Ласкаво просимо"
+  },
+  "menu": {
+    "guest_cars": "Гостьові авто",
+    "my_cars": "Мої авто",
+    "notifications": "Сповіщення",
+    "publications": "Публікації"
+  },
+  "no_data_found": "Дані не знайдені",
+  "projects": {
+    "my_label": "Мої",
+    "other_label": "Інші",
+    "projects_title": "Проекти",
+    "select_to_continue_subtitle": "Виберіть, щоб продовжити!"
+  },
+  "screen": {
+    "account_screen": "Обліковий запис",
+    "camera_screen": "Камера",
+    "controls_screen": "Управління",
+    "guest_car_add_screen": "Додати гостьове авто",
+    "guest_car_edit_screen": "Редагувати гостьове авто",
+    "guest_cars_screen": "Гостьові авто",
+    "login_screen": "Авторизація",
+    "menu_screen": "Меню",
+    "my_car_add_screen": "Додати моє авто",
+    "my_car_edit_screen": "Редагувати моє авто",
+    "my_cars_screen": "Мої авто",
+    "not_found_screen": "Ой!",
+    "notifications_screen": "Сповіщення",
+    "projects_screen": "Проекти",
+    "publications_screen": "Публікації",
+    "settings_screen": "Налаштування"
+  },
+  "settings": {
+    "logout_button": "Вийти",
+    "settings": "Налаштування"
+  },
+  "status": {
+    "active": "Активно",
+    "completed": "Завершено",
+    "offline": "Офлайн",
+    "online": "Онлайн"
+  },
+  "toast": {
+    "car_added_successfully": "Авто успішно додано",
+    "car_deleted": "Авто видалено",
+    "car_edited_successfully": "Авто успішно відредаговано",
+    "car_number_exists": "Авто з таким номером вже існує",
+    "error_adding_car": "Помилка додавання авто",
+    "error_deleting_car": "Помилка видалення авто",
+    "error_editing_car": "Помилка редагування авто"
+  }
+}

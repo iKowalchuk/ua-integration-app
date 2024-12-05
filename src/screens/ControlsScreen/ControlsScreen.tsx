@@ -6,13 +6,13 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useWindowDimensions } from 'react-native';
 import { useShallow } from 'zustand/react/shallow';
 
-import { Control } from '@/api/getControls';
+import { type Control } from '@/api/getControls';
 import LoadingView from '@/components/LoadingView';
 import TabBarLabel from '@/components/TabBarLabel';
 import { useAuthContext } from '@/contexts/AuthContext';
 import ControlsList from '@/screens/ControlsScreen/ControlsList';
-import useControlsStore from '@/stores/useControlsStore';
-import useProjectsStore from '@/stores/useProjectsStore';
+import useControlsStore from '@/store/controlsStore';
+import useProjectsStore from '@/store/projectsStore';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -26,14 +26,14 @@ const ControlsScreen = () => {
       controls: state.controls,
       fetchControls: state.fetchControls,
       favorites: state.favorites,
-    }))
+    })),
   );
 
   const { projects, fetchProjects } = useProjectsStore(
     useShallow((state) => ({
       projects: state.projects,
       fetchProjects: state.fetchProjects,
-    }))
+    })),
   );
 
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +57,7 @@ const ControlsScreen = () => {
     };
 
     getMenuRequest();
-  }, [authState]);
+  }, [authState, fetchControls, fetchProjects]);
 
   const GROUP_FAVORITES = i18n.t('controls.section.favorites');
 
@@ -75,12 +75,12 @@ const ControlsScreen = () => {
             [groupName]: [...(acc[groupName] || []), { groupName, ...other }],
           });
         },
-        {}
-      )
+        {},
+      ),
     );
 
     return entries.map(([key, value]) => ({ title: key, data: value }));
-  }, [controls, favorites]);
+  }, [GROUP_FAVORITES, controls, favorites]);
 
   if (isLoading) {
     return <LoadingView />;
@@ -89,7 +89,7 @@ const ControlsScreen = () => {
   const currentProject = projects.find(
     (item) =>
       authState.type === 'authenticated' &&
-      authState.session.projectId === item.id
+      authState.session.projectId === item.id,
   );
 
   return (

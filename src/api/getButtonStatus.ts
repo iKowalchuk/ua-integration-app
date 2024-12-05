@@ -1,4 +1,4 @@
-import api from './api';
+import { client } from '@/api';
 
 export type ButtonStatus = 'online' | 'offline' | 'opening';
 
@@ -29,14 +29,14 @@ const getButtonStatus = async (payload: {
   token: string;
   command: string;
 }): Promise<ButtonStatus> => {
-  const { data } = await api.post(
+  const { data } = await client.post(
     '/api/ios.php',
     {
+      token: payload.token,
       cmd: 'get_status_button',
       p_cmd_in: payload.command,
-      token: payload.token,
     },
-    { baseURL: payload.apiURL }
+    { baseURL: payload.apiURL },
   );
 
   const res: string = data?.cmd_result[0]?.status || '';

@@ -1,4 +1,4 @@
-import api from './api';
+import { client } from '@/api';
 
 export type Control = {
   id: number;
@@ -11,13 +11,13 @@ const getControls = async (payload: {
   apiURL: string;
   token: string;
 }): Promise<Control[]> => {
-  const { data } = await api.post(
+  const { data } = await client.post(
     '/api/ios.php',
     {
-      cmd: 'get_my_menu',
       token: payload.token,
+      cmd: 'get_my_menu',
     },
-    { baseURL: payload.apiURL }
+    { baseURL: payload.apiURL },
   );
 
   const res: any[] = data?.cmd_result || [];

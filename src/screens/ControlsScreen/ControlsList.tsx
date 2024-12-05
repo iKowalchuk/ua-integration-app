@@ -1,7 +1,7 @@
 import React from 'react';
 import { IOFlatList } from 'react-native-intersection-observer';
 
-import { Control } from '@/api/getControls';
+import { type Control } from '@/api/getControls';
 import ControlItem from '@/screens/ControlsScreen/ControlItem';
 
 type ControlsListProps = {
@@ -12,12 +12,12 @@ const ControlsList = ({ data }: ControlsListProps) => {
   return (
     <IOFlatList
       contentContainerStyle={{
-        gap: 16,
         padding: 16,
+        gap: 8,
       }}
       data={data}
       renderItem={({ item }) => <ControlItem control={item} />}
-      keyExtractor={(item) => `${item.id}`}
+      keyExtractor={(item) => `item-${item.id}`}
     />
   );
 };

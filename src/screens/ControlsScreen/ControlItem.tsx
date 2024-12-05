@@ -23,25 +23,26 @@ import {
 import { useFocusEffect, useRouter } from 'expo-router';
 import i18n from 'i18n-js';
 import {
-  MoreHorizontal as MoreHorizontalIcon,
-  Video as VideoIcon,
-  Heart as HeartIcon,
-  HeartOff as HeartOffIcon,
-  Pencil as PencilIcon,
+  HeartIcon,
+  HeartOffIcon,
+  MoreHorizontalIcon,
+  PencilIcon,
+  VideoIcon,
 } from 'lucide-react-native';
-import { useState, useRef, useCallback } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { InView } from 'react-native-intersection-observer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useShallow } from 'zustand/react/shallow';
 
-import getButtonStatus, { ButtonStatus } from '@/api/getButtonStatus';
-import { Control } from '@/api/getControls';
+import getButtonStatus, { type ButtonStatus } from '@/api/getButtonStatus';
+import { type Control } from '@/api/getControls';
 import runCommand from '@/api/runCommand';
 import Card from '@/components/Card';
 import Skeleton from '@/components/Skeleton';
 import { useAuthContext } from '@/contexts/AuthContext';
 import useAppState from '@/hooks/useAppState';
 import ControlRenameModal from '@/screens/ControlsScreen/ControlRenameModal';
-import useControlsStore from '@/stores/useControlsStore';
+import useControlsStore from '@/store/controlsStore';
 
 type ControlItemProps = {
   control: Control;
@@ -49,6 +50,8 @@ type ControlItemProps = {
 
 const ControlItem = ({ control }: ControlItemProps) => {
   const router = useRouter();
+
+  const insets = useSafeAreaInsets();
 
   const { authState } = useAuthContext();
 
@@ -59,7 +62,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
       favorites: state.favorites,
       toggleFavorite: state.toggleFavorite,
       renameControl: state.renameControl,
-    }))
+    })),
   );
 
   const [buttonStatus, setButtonStatus] = useState<ButtonStatus | null>(null);
@@ -127,7 +130,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
           clearTimeout(timeoutRef.current);
         }
       };
-    }, [authState, appState, inView])
+    }, [authState, appState, control, inView]),
   );
 
   if (buttonStatus === null) {
@@ -138,7 +141,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
             <VStack space="md">
               <HStack space="md" justifyContent="space-between">
                 <Skeleton width={64} height={20} borderRadius={5} />
-                <HStack space="3xl">
+                <HStack space="2xl">
                   <Skeleton width={24} height={24} borderRadius={5} />
                   <Skeleton width={24} height={24} borderRadius={5} />
                 </HStack>
@@ -162,7 +165,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         closeOnOverlayClick={!isRunCommand}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent maxHeight={180}>
+        <ActionsheetContent maxHeight={200} pb={insets.bottom}>
           {isRunCommand ? (
             <Center w="$full" h="$full">
               <Spinner size="large" />
@@ -222,7 +225,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         }}
       >
         <ActionsheetBackdrop />
-        <ActionsheetContent>
+        <ActionsheetContent pb={insets.bottom}>
           <ActionsheetDragIndicatorWrapper>
             <ActionsheetDragIndicator />
           </ActionsheetDragIndicatorWrapper>
@@ -232,6 +235,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
               setShowRenameModal(true);
             }}
           >
+            {/* @ts-ignore */}
             <ActionsheetIcon size="md">
               <Icon as={PencilIcon} />
             </ActionsheetIcon>
@@ -244,6 +248,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                 toggleFavorite(control.id);
               }}
             >
+              {/* @ts-ignore */}
               <ActionsheetIcon size="md">
                 <Icon as={HeartOffIcon} />
               </ActionsheetIcon>
@@ -258,6 +263,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                 toggleFavorite(control.id);
               }}
             >
+              {/* @ts-ignore */}
               <ActionsheetIcon size="md">
                 <Icon as={HeartIcon} />
               </ActionsheetIcon>
@@ -285,7 +291,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
         <Card>
           <VStack p="$4" space="md">
             <VStack>
-              <HStack space="md" justifyContent="space-between">
+              <HStack space="md" justifyContent="space-between" h={32}>
                 <Box h="$6">
                   {buttonStatus === 'online' || buttonStatus === 'opening' ? (
                     <Text color="$green500" size="sm">
@@ -298,7 +304,7 @@ const ControlItem = ({ control }: ControlItemProps) => {
                   )}
                 </Box>
 
-                <HStack space="3xl">
+                <HStack space="2xl">
                   <Button size="xs" variant="link" onPress={handleVideoPress}>
                     <ButtonIcon as={VideoIcon} size="xl" />
                   </Button>

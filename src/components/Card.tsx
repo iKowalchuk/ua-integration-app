@@ -1,11 +1,7 @@
 import { Box } from '@gluestack-ui/themed';
-import { ReactNode } from 'react';
+import { type PropsWithChildren } from 'react';
 
-type CardProps = {
-  children: ReactNode;
-};
-
-const Card = ({ children }: CardProps) => {
+const Card = ({ children }: PropsWithChildren) => {
   return (
     <Box
       bg="$white"

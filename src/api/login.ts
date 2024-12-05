@@ -1,7 +1,7 @@
 import { isEmpty } from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
-import api from './api';
+import { client } from '@/api';
 
 type Login = {
   token: string;
@@ -14,7 +14,7 @@ const login = async (payload: {
 }): Promise<Login> => {
   const token = uuidv4();
 
-  const { data } = await api.post(
+  const { data } = await client.post(
     '/api/ios.php',
     {
       token,
@@ -24,7 +24,7 @@ const login = async (payload: {
     {
       baseURL: payload.apiURL,
       skipAuthInterceptor: true, // custom option to skip the auth interceptor
-    }
+    },
   );
 
   if (isEmpty(data) || isEmpty(data.DETAIL_USER)) {

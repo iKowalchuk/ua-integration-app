@@ -17,12 +17,12 @@ const OperatorLayout = () => {
   }
 
   return (
-    <Stack screenOptions={{ headerBackTitleVisible: false }}>
+    <Stack screenOptions={{ headerBackButtonDisplayMode: 'minimal' }}>
       <Stack.Screen name="projects" options={{ headerShown: false }} />
       <Stack.Screen
         name="login"
         options={{
-          title: i18n.t('common.login_screen'),
+          title: i18n.t('screen.login_screen'),
         }}
       />
     </Stack>
