@@ -160,7 +160,7 @@
     }
   },
   "osMetadata": {
-    "initVersion": "7.0.1"
+    "initVersion": "7.0.2"
   },
   "pnpm": {
     "patchedDependencies": {
