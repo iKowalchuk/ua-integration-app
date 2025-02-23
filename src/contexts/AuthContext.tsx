@@ -73,12 +73,12 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       storage.saveString(PROJECT_ID_KEY, payload.projectId.toString());
 
       const isExistsSession = sessions.some(
-        (session) => session.token === token,
+        (session) => session.token === token
       );
       if (isExistsSession) {
         setSessions((prevSessions) => {
           const newSessions = prevSessions.map((existsSession) =>
-            existsSession.token === token ? session : existsSession,
+            existsSession.token === token ? session : existsSession
           );
 
           storage.save(SESSIONS_KEY, newSessions);
@@ -114,7 +114,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     } finally {
       setSessions((prevSessions) => {
         const newSessions = prevSessions.filter(
-          (session) => session.projectId !== authState.session.projectId,
+          (session) => session.projectId !== authState.session.projectId
         );
 
         storage.save(SESSIONS_KEY, newSessions);
@@ -147,7 +147,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
       if (projectId) {
         const activeSession = sessions.find(
-          (session) => session.projectId === Number(projectId),
+          (session) => session.projectId === Number(projectId)
         );
         if (activeSession) {
           setAuthState({
@@ -172,7 +172,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       return;
     }
 
-    const interceptorId = client.interceptors.response.use(
+    const authInterceptor = client.interceptors.response.use(
       async (response) => {
         if (response.config.skipAuthInterceptor) {
           return response;
@@ -188,11 +188,11 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 
         return response;
       },
-      (error) => Promise.reject(error),
+      (error) => Promise.reject(error)
     );
 
     return () => {
-      client.interceptors.response.eject(interceptorId);
+      client.interceptors.response.eject(authInterceptor);
     };
   }, [authState, onLogout]);
 

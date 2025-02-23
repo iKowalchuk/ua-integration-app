@@ -37,11 +37,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ['**/*'],
   ios: {
-    config: {
-      usesNonExemptEncryption: false,
-    },
     supportsTablet: true,
     bundleIdentifier: Env.BUNDLE_ID,
+    config: {
+      usesNonExemptEncryption: false, // Avoid the export compliance warning on the app store
+    },
   },
   experiments: {
     typedRoutes: true,

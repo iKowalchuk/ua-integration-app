@@ -24,7 +24,7 @@ const login = async (payload: {
     {
       baseURL: payload.apiURL,
       skipAuthInterceptor: true, // custom option to skip the auth interceptor
-    },
+    }
   );
 
   if (isEmpty(data) || isEmpty(data.DETAIL_USER)) {

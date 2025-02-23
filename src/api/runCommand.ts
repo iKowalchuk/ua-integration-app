@@ -12,7 +12,7 @@ const runCommand = async (payload: {
       cmd: 'run_cmd',
       name_cmd: payload.command,
     },
-    { baseURL: payload.apiURL },
+    { baseURL: payload.apiURL }
   );
 };
 
